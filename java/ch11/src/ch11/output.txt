@@ -1,0 +1,6 @@
+#abc
+#Fri May 29 15:20:34 KST 2020
+size=10
+language=\uD55C\uAE00
+timeout=30
+capacity=10
