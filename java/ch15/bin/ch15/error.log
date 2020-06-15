@@ -1,0 +1,20 @@
+파일에 예외 메시지 저장===================
+
+Wed Jun 10 16:02:25 KST 2020
+
+java.lang.Exception: 파일에 예외 메시지 저장
+	at ch15.FileOutputStreamEx2.secondMethod(FileOutputStreamEx2.java:19)
+	at ch15.FileOutputStreamEx2.firstMethod(FileOutputStreamEx2.java:14)
+	at ch15.FileOutputStreamEx2.main(FileOutputStreamEx2.java:10)
+===================
+
+파일에 예외 메시지 저장===================
+
+Wed Jun 10 17:38:07 KST 2020
+
+java.lang.Exception: 파일에 예외 메시지 저장
+	at ch15.FileOutputStreamEx2.secondMethod(FileOutputStreamEx2.java:19)
+	at ch15.FileOutputStreamEx2.firstMethod(FileOutputStreamEx2.java:14)
+	at ch15.FileOutputStreamEx2.main(FileOutputStreamEx2.java:10)
+===================
+
