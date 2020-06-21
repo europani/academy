@@ -17,10 +17,10 @@ public class Client {
 
 	public void connect() {
 		String serverIp = "127.0.0.1";
-		int port = 7777;
+		int port = 1234;
 		try {
 			socket = new Socket(serverIp, port);
-			System.out.println(socket.getInetAddress() + " 서버에 연결되었습니다.");
+			System.out.println(socket.getInetAddress() + ":" + socket.getPort() + " 서버에 연결되었습니다.");
 
 			out = new PrintWriter(socket.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -30,8 +30,8 @@ public class Client {
 		}
 	}
 
-	void sendToServer(String name) throws IOException { 
-		out.println(name);
+	void sendToServer(String name) throws IOException { 	
+		out.println(name);		// Client -> Server
 		
 		try { 	// Server -> Client
 			String line = in.readLine();
@@ -76,10 +76,6 @@ public class Client {
 				
 				break;
 			case "5":
-//				if (Member.isLogin == true) {
-//					System.out.println("이미 로그인 되어있습니다.");
-//					break;
-//				}
 				System.out.println("======로그인======[이전메뉴 : 0]");
 				System.out.println("ID를 입력해주세요.");
 				input = sc.nextLine();
@@ -87,7 +83,6 @@ public class Client {
 				System.out.println("password를 입력해주세요.");
 				input += " " + sc.nextLine();
 				sendToServer("login 5;" + input);
-				
 				break;
 			case "0":
 				System.out.println("프로그램을 종료합니다.");
@@ -125,29 +120,26 @@ public class Client {
 
 			if (input.equals("1")) {
 				sendToServer("buyAll 2_1"); 
-				buyBookClient();
 			}
 			if (input.equals("2")) {
 				System.out.println("책제목을 입력해주세요.");
 				input = sc.nextLine();
 				sendToServer("buyTitle 2_2;" + input); 	
-				buyBookClient();
 			}
 			if (input.equals("3")) {
 				System.out.println("카테고리를 입력해주세요.");
 				System.out.println("[문학, 교육, 인문, 경제, 사회, 에세이, 자기계발, 여행, 자연과학]");
 				input = sc.nextLine();
 				sendToServer("buyCategory 2_3;" + input);
-				buyBookClient();				
 			}
 			if (input.equals("0"))
 				return;
+			buyBookClient();
 		}
 	
 
 	public void history() throws IOException {
 		sendToServer("history 3");
-
 	}
 
 	public static void main(String[] args) {

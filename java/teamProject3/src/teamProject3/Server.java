@@ -38,11 +38,11 @@ public class Server {
 	public static void main(String[] args) {
 		Server s = new Server();
 		try {
-			ServerSocket server = new ServerSocket(7777);
+			ServerSocket server = new ServerSocket(1234);
 			while (true) {
 				System.out.println("클라이언트 연결 대기중");
 				Socket socket = server.accept();
-				System.out.println(socket.getInetAddress() + "클라이언트가 연결되었습니다.");
+				System.out.println(socket.getInetAddress() + ":" + socket.getPort() + " 클라이언트가 연결되었습니다.");
 				new ServerThread(socket, s.list, s.map).start();
 			}
 		} catch (IOException e) {
@@ -97,30 +97,30 @@ class ServerThread extends Thread {
 	}
 
 	public void sendClient(String menu) throws IOException {
-		if (menu.contains("check")) {
-			if (menu.contains("All")) {
-			} else if (menu.contains("Category")) {
+		if (menu.contains("check")) {				// 1
+			if (menu.contains("All")) {				// 1_1
+			} else if (menu.contains("Category")) {	// 1_2
 				sort("category");
-			} else if (menu.contains("Date")) {
+			} else if (menu.contains("Date")) {		// 1_3
 				sort("idate");
 			}
 			out.println(printString(list));
-		} else if (menu.contains("buy")) {
-			if (menu.contains("All")) {
+		} else if (menu.contains("buy")) {			// 2
+			if (menu.contains("All")) {				// 2_1
 				out.println(printString(list));
-			} else if (menu.contains("Title")) {
+			} else if (menu.contains("Title")) {	// 2_2
 				printSort("Title");
-			} else if (menu.contains("Category")) {
+			} else if (menu.contains("Category")) {	// 2_3
 				printSort("Category");
 			}
 			makeWishList();
-		} else if (menu.equals("history")) {
+		} else if (menu.equals("history")) {		// 3
 			printWishlist();
-		} else if (menu.equals("signUp")) {
+		} else if (menu.equals("signUp")) {			// 4
 			id = option.substring(0, option.indexOf(" "));
 			password = option.substring(option.indexOf(" ") + 1);
-			m.signUp(id, password);
-		} else if (menu.equals("login")) {
+			m.signUp(id, password);	
+		} else if (menu.equals("login")) {			// 5
 			id = option.substring(0, option.indexOf(" "));
 			password = option.substring(option.indexOf(" ") + 1);
 			m.login(id, password);
