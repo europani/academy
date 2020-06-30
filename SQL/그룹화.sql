@@ -86,7 +86,7 @@ SELECT deptno, position, COUNT(*), SUM(pay)
 FROM professor
 GROUP BY CUBE(deptno, position);
 
-================ Question =================
+--------------------- Question ------------------------
 SELECT deptno,
   count(decode(JOB, 'CLERK', 1)) AS CLERK,
   count(decode(JOB, 'MANAGER', 1)) AS MANAGER,
@@ -129,21 +129,6 @@ SELECT count(birthday),
   count(decode(to_char(birthday, 'mm'), '12', 1)) AS "12월"
 FROM student;
 
-SELECT count(birthday),
-  count(decode(to_char(birthday, 'mm'), '01', 1)) AS "1월",
-  count(decode(to_char(birthday, 'mm'), '02', 1)) AS "2월",
-  count(decode(to_char(birthday, 'mm'), '03', 1)) AS "3월",
-  count(decode(to_char(birthday, 'mm'), '04', 1)) AS "4월",
-  count(decode(to_char(birthday, 'mm'), '05', 1)) AS "5월",
-  count(decode(to_char(birthday, 'mm'), '06', 1)) AS "6월",
-  count(decode(to_char(birthday, 'mm'), '07', 1)) AS "7월",
-  count(decode(to_char(birthday, 'mm'), '08', 1)) AS "8월",
-  count(decode(to_char(birthday, 'mm'), '09', 1)) AS "9월",
-  count(decode(to_char(birthday, 'mm'), '10', 1)) AS "10월",
-  count(decode(to_char(birthday, 'mm'), '11', 1)) AS "11월",
-  count(decode(to_char(birthday, 'mm'), '12', 1)) AS "12월"
-FROM student;
-
 select DEPTNO, 
   NVL(SUM(DECODE(job, 'CLERK', SAL)), 0) as CLERK,
   NVL(SUM(DECODE(job, 'MANAGER', SAL)), 0) as MANAGER,
@@ -159,7 +144,6 @@ GROUP BY ROLLUP(deptno)
 ORDER BY 1;
 
 SELECT trunc((ROWNUM-1)/3), mod((ROWNUM-1), 3), profno, NAME FROM professor;
-SELECT trunc((ROWNUM-1)/3), mod(ROWNUM, 3), NAME FROM professor;
 
 SELECT trunc((ROWNUM-1)/3) AS NO,
   NVL(MAX(decode(mod((ROWNUM-1), 3), 0, profno||NAME)), '******') AS 사번1이름1,
@@ -179,8 +163,8 @@ SELECT
   max(DECODE(DAY, '토', num_day)) AS 토
 FROM cal
 GROUP BY WEEK
-ORDER BY week;
-======================================================
+order by WEEK;
+----------------------------------------------------------------
 
 -- LISTAGG --
 SELECT deptno, LISTAGG(NAME, ', ') WITHIN GROUP(ORDER BY hiredate) AS listagg
@@ -190,7 +174,7 @@ GROUP BY deptno;
 SELECT rank('송도권') WITHIN GROUP(ORDER BY NAME) AS rank
 FROM professor;
 
-SELECT name, pay, 
+select name, PAY, 
   RANK() OVER(ORDER BY pay) AS "rank asc",
   RANK() OVER(ORDER BY pay DESC) AS "rank desc"
 FROM professor;
@@ -199,10 +183,10 @@ SELECT empno, ename, sal, rank() OVER(ORDER BY sal) AS 순위
 FROM emp
 where deptno = 10;
 
-SELECT empno, ename, sal, deptno, rank() OVER (partition by deptno ORDER BY sal DESC) AS rank
+SELECT empno, ename, sal, deptno, rank() OVER (PARTITION BY deptno ORDER BY sal DESC) AS rank
 FROM emp;
 
-SELECT empno, ename, sal, deptno, JOB, rank() OVER (PARTITION BY deptno, JOB ORDER BY sal DESC) AS rank
+SELECT empno, ename, sal, deptno, job, rank() OVER (PARTITION BY deptno, job ORDER BY sal DESC) AS rank
 FROM emp;
 
 SELECT p_date, p_code, p_qty, p_total,
