@@ -9,12 +9,12 @@ FROM student
 group by rollup(grade);
 
 -- 2 --
-SELECT NVL(to_char(deptno), '전체합계') AS 부서, NVL(JOB, '부서합계') AS JOB, to_char(avg(sal), '9,999') AS 급여평균
+SELECT to_char(deptno) AS 부서, decode(JOB, null, decode(deptno, null, '전체합계', '부서합계'), job) AS JOB, to_char(avg(sal), '9,999') AS 급여평균
 FROM emp
 GROUP BY ROLLUP(deptno, JOB);
 
 -- 3 --
-SELECT to_char(deptno) AS 부서, NVL(JOB, '부분합계') AS JOB, to_char(avg(sal), '9,999') AS 급여평균
+SELECT to_char(deptno) AS 부서, DECODE(JOB, null, decode(deptno, null, '총합계', '부분합계'), job) AS JOB, to_char(avg(sal), '9,999') AS 급여평균
 FROM emp
 GROUP BY cube(deptno, JOB);
 
@@ -53,6 +53,6 @@ FROM emp
 order by 3;
 
 -- 10 --
-SELECT p_date, p_code, p_qty, p_total, rownum, sum(p_total) OVER (partition by p_code ORDER BY rownum) AS 누계
+SELECT p_date, p_code, p_qty, p_total, ROWNUM, sum(p_total) over(PARTITION by p_code order by rownum) AS 누계
 FROM panmae
-where p_code IN (100, 101);
+ORDER BY p_code;
