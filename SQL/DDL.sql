@@ -2,7 +2,7 @@
 CREATE TABLE ddl_test (
   NO NUMBER(3),
   NAME VARCHAR2(10),
-  birth date default sysdate);
+  birth DATE DEFAULT SYSDATE);
   
 CREATE TABLE exddl01 (
   employee_id NUMBER(6),
