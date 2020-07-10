@@ -110,3 +110,60 @@ END;
 exec emp_pro01(10);
 ROLLBACK;
 /
+
+-- 문제) 묵시적 커서 이용 --
+CREATE OR REPLACE PROCEDURE emp4_del(
+  v_empno  emp4.empno%TYPE)
+IS
+BEGIN
+  DELETE FROM emp4 WHERE empno = v_empno;
+  IF (SQL%notfound) THEN
+    dbms_output.put_line(v_empno || ' 사번이 없습니다.');
+  ELSE
+    dbms_output.put_line(v_empno || ' 삭제 되었습니다.');
+  END IF;
+END;
+/
+-- 사용자 정의 예외처리 이용 --
+CREATE OR REPLACE PROCEDURE emp4_del(
+  v_empno  emp4.empno%TYPE)
+IS
+  no_data exception;
+BEGIN
+  DELETE FROM emp4 WHERE empno = v_empno;
+  IF (SQL%notfound) THEN
+    raise no_data;
+  ELSE
+    dbms_output.put_line(v_empno || ' 삭제 되었습니다.');
+  END IF;
+exception
+  when no_data then
+    dbms_output.put_line(v_empno || ' 사번이 없습니다.');
+END;
+/
+
+CREATE OR REPLACE PROCEDURE print_emp(
+  v_empno   emp.empno%TYPE)
+IS
+  v_ename   emp.ename%TYPE;
+  v_dname   dept.dname%TYPE;
+  v_sal     emp.sal%TYPE;
+  v_comm    emp.comm%TYPE;
+BEGIN
+  SELECT e.ename, d.dname, e.sal, nvl(e.comm, 0)
+  into v_ename, v_dname, v_sal, v_comm
+  FROM emp e, dept d
+  WHERE e.deptno = d.deptno
+  AND e.empno = v_empno;
+
+    dbms_output.put_line('사번: ' || v_empno);
+    dbms_output.put_line('이름: ' || v_ename);
+    dbms_output.put_line('부서명: ' || v_dname);
+    dbms_output.put_line('급여: ' || v_sal);
+    dbms_output.put_line('상여금: ' || v_comm);
+exception
+  WHEN no_data_found THEN
+    dbms_output.put_line('사원이 존재하지 않습니다.');
+END;
+/
+exec print_emp(7369);
