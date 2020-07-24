@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="button_a">ButtonA</button>
+    <button id="button_b">ButtonB</button>
+    <h1><span id="counter_a">0</span></h1>
+    <h1><span id="counter_b">0</span></h1>
+    <h1><span id = 'sum'>0</span></h1>
+
+
+
+    <script>
+        let buttonA = document.querySelector('#button_a');
+        let buttonB = document.querySelector('#button_b');
+        let counterA = document.querySelector('#counter_a');
+        let counterB = document.querySelector('#counter_b');
+        let sumNum = document.querySelector('#sum');
+
+        function sum() {
+            let numA = counterA.innerHTML;
+            let numB = counterB.innerHTML;
+             sumNum.innerHTML = parseInt(numA) + parseInt(numB);
+        }
+
+        buttonA.onclick = function () {
+            counterA.innerHTML = parseInt(counterA.innerHTML)+1;
+            sum();
+        }
+        buttonB.onclick = function () {
+            counterB.innerHTML = parseInt(counterB.innerHTML)+2;
+            sum();
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>

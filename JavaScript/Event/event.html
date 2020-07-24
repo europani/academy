@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>abc</h1>
+    
+
+    <script>
+            let h1 = document.querySelector('h1');
+            function whenClick() {
+                alert('CLICK');
+             } 
+            // 1. header.onclick = whenClick;
+            // 2.
+            // header.addEventListener('click', whenClick);
+            // 3.
+            document.querySelector('h1').onclick = function () {
+                alert('누름');
+            }
+            document.querySelector('h1').onmouseout = function () {
+                this.style.backgroundColor = 'red';
+            }
+            document.querySelector('h1').onmouseover = function () {
+                this.style.backgroundColor = 'orange';
+            }
+            document.querySelector('h1').onwheel = function () {
+                this.style.backgroundColor = 'blue';
+            }
+            document.querySelector('h1').ondrag = function () {
+                this.style.backgroundColor = 'green';
+            }
+
+    </script>
+</body>
+</html>
