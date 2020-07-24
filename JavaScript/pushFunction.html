@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let student0 = { 이름: '윤인성', 국어: 87, 수학: 98, 영어: 88, 과학: 95 };
+        let student1 = { 이름: '연하진', 국어: 92, 수학: 98, 영어: 96, 과학: 98 };
+        let student2 = { 이름: '구지연', 국어: 76, 수학: 96, 영어: 94, 과학: 90 };
+        let student3 = { 이름: '나선주', 국어: 98, 수학: 92, 영어: 96, 과학: 92 };
+        let student4 = { 이름: '윤아린', 국어: 95, 수학: 98, 영어: 98, 과학: 98 };
+        let student5 = { 이름: '윤명월', 국어: 64, 수학: 88, 영어: 92, 과학: 92 };
+        let student6 = { 이름: '김미화', 국어: 82, 수학: 86, 영어: 98, 과학: 88 };
+        let student7 = { 이름: '김연화', 국어: 88, 수학: 74, 영어: 78, 과학: 92 };
+        let student8 = { 이름: '박아현', 국어: 97, 수학: 92, 영어: 88, 과학: 95 };
+        let student9 = { 이름: '서준서', 국어: 45, 수학: 52, 영어: 72, 과학: 78 };
+
+        let students = [];
+        students.push(student0);
+        students.push(student1);
+        students.push(student2);
+        students.push(student3);
+        students.push(student4);
+        students.push(student5);
+        students.push(student6);
+        students.push(student7);
+        students.push(student8);
+        students.push(student9);
+
+        // document.write(students[1].과학);
+        output = '';
+        for (const i in students) {
+             output += students[i].국어 + '<br>';
+        }
+        document.write(output);
+
+        for (const i in students) {
+            students[i].getSum = function () {
+                return this.국어 + this.수학 + this.영어 + this.과학;
+            };
+            students[i].getAvg = function () {
+                return this.getSum() / 4;
+            }       
+        }
+        
+        output = '';
+        for (const i in students) {
+          output += students[i].이름 + ' : 총점 - ' + students[i].getSum() + ', 평균 - ' + students[i].getAvg() + '<br>';     
+        }
+        document.write(output);
+
+
+
+
+</script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class Person {      // Person constructor
+            constructor(name) {
+                this.name = name;
+            }
+        }
+        class Unikys extends Person {   // Unikys constructor
+            constructor(name) {
+                super(name);
+            }
+        }
+
+        let unikys = new Unikys('김자바');
+        document.write(unikys.name + '<br>');
+        document.write(unikys instanceof Unikys);
+        document.write(unikys instanceof Person);
+        document.write(unikys.constructor);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

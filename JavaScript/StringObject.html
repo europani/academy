@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let stringFromLiteral = 'Hello World..!';
+        let stringFromConstructor = new String('Hello World..!');
+
+        let output = '';
+        output += typeof(stringFromLiteral) + '<br>';
+        output += typeof(stringFromConstructor) + '<br>';
+        document.write(output);
+
+        let string = 'abcdefg' + '<br>';
+
+        document.write(string.toUpperCase());
+
+        output = '';
+        output += 'anchor : ' + string.anchor() + '<br>';
+        output += 'big : ' + string.big() + '<br>';
+        output += 'blink : ' + string.blink() + '<br>';
+        output += 'fixed : ' + string.fixed() + '<br>';
+        output += 'string : ' + string.fontcolor('Red') + '<br>';
+        output += 'fontsize : ' + string.fontsize(15) + '<br>';
+        output += 'italics : ' + string.italics() + '<br>';
+        output += 'link : ' + string.link('http://www.naver.com/') + '<br>';
+        output += 'strike : ' + string.strike() + '<br>';
+        output += 'sub : ' + string.sub() + '<br>';
+        output += 'sup : ' + string.sup() + '<br>';
+        document.write(output + '<br>');
+
+        output = 'Hello World..!';
+        output = output.toLowerCase().substring(0, 10).anchor('name');
+        document.write(output + '<br>')
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

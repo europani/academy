@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+         let intervalID = setInterval(function () {
+        document.write('<p>' + new Date() + '</p>');
+    }, 1000);
+    setTimeout(function () {
+        clearInterval(intervalID);
+    }, 10000);
+
+       alert('a');  // 1
+       setTimeout(function () {
+        alert('b'); // 3
+       }, 0)
+       alert('c');  // 2
+       
+       setTimeout(function () {     // 2 (X)
+           alert('먼저 실행되는 아래 while문이 무한 루프, 현제 패이지 setTimeout 실행 X')
+       }, 0);
+       while (true) {}      // 1
+       
+        for (let i = 0; i < 3; i++) {
+            setTimeout(function () {
+                alert(i);  
+            }, 0);
+        }
+
+
+        for (let i = 0; i < 3; i++) {
+            (function (closed_i) {
+                setTimeout(function () {
+                    alert(closed_i);
+                }, 0);
+            })(i)
+        }
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

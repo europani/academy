@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            border : 1px solid red;
+            color: blue;
+        }
+
+    </style>
+    <script>
+    // 1
+    let money = 900000;
+    let input = Number(prompt('저금할 금액을 입력하세요.', ''));
+
+    money += input;
+    if (money > 1000000) {
+        document.write('100만원 초과 참잘했어요.');
+    } else {
+        document.write('아쉽습니다. 노력하세요.');
+    }
+
+    // 2
+    document.write('<br>');
+    let avgSell = 1500;
+    let q4sell = Number(prompt('4분기 판매량을 입력하세요.', ''));
+    if (q4sell > avgSell) {
+        document.write('판매량이 평균이상 입니다.');
+    } else {
+        document.write('판매량이 평균이하 입니다.');
+    }
+
+    // 3
+    document.write('<br>');
+    let age = Number(prompt('당신의 나이를 입력하세요.', ''));
+    let ageGroup = Math.floor(age/10)*10;
+
+    let a = age/10;
+    document.write('나의 나이는 ' + age + '이고 ' + ageGroup + '대 입니다.');
+
+
+    // 4
+    document.write('<br>');
+    let str = "";
+
+    str = "<table> <tr> <td>JSP</td> <td>JAVASCRIPT</td> <td>HTML</td> </tr> </table>";
+    document.write(str);
+
+    // 5
+    let height = 5;
+
+for (let i = 0; i < height; i++) {
+    for (let j = 0; j < 8-i; j++) {
+        document.write(" ");
+    }
+    for (let j = 0; j <= i+1; j++) {
+        document.write("*");    
+    }
+    for (let j = 0; j < i; j++) {
+        document.write("*");    
+    }
+    document.write("<br>");
+        
+}
+for (let i = 0; i < 7; i++) {
+    for (let j = 0; j <= i+1; j++) {
+        document.write(" ");
+    }
+    for (let j = 0; j <height-1-i; j++) {
+        document.write("*");    
+    }
+    for (let j = 0; j < height-2-i; j++) {
+        document.write("*");    
+    }
+    document.write("<br>");      
+}
+
+</script>
+    </head>
+<body>
+
+    
+    
+</body>
+</html>

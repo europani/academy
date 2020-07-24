@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let array1 = Array(2, 3);
+        let array2 = Array(10);
+        let array3 = Array(1,2,3,4);
+    
+        document.write(array1 +"<br>" +  array2 + "<br>" + array3 + "<br>");
+        document.write(typeof(array1) +" " +  typeof(array2) + " " + typeof(array3) + "<br>");
+        document.write(array1.length + " "+ array2.length + " "+ array3.length + "<br>" );
+
+        function sumAll() {
+            var returnValue = 0;
+            for (const i in arguments) {
+               returnValue += arguments[i];
+            }
+            return returnValue;
+            // alert(typeof(arguments) + " : " +  arguments.length);
+        }
+        document.write(sumAll(1, 2, 3, 4, 5));
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

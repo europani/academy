@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let person = {
+            name : '윤인성',
+            eat : function (food) {
+                document.write(this.name + '이(가) ' + food + '를 먹다.');
+            }
+        }
+        person.eat('햄버거');
+
+        let product = {
+            name : 'Main product',
+            price : '$1500',
+            langauge : 'Korean',
+            supportOS : 'win 64bit',
+            subscription : true
+        };
+        document.write('<br>')
+
+        let output = '';
+        for (const key in product) {
+            output += '●' + key + ' : ' + product[key] + '<br>';
+        }
+        document.write(output);
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

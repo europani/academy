@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #main {
+            width: 500px;
+            height: 500px;
+            border: 2px solid grey;
+            position: absolute;
+
+        }
+        #ball {
+            position: absolute;
+            width : 50px;
+            height: 50px;
+            border-radius: 100%;
+
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div id="main"></div>
+
+    <script>
+        let balls = [];
+        let colors = ['red', 'blue', 'green', 'skyblue', 'orange', 'yellow'];
+
+        function makeRandom(num) {
+            return parseInt(Math.random()* num);
+        }
+
+        let addObject = setInterval(() => {
+            let d = document.createElement('div');
+            document.querySelector('#main').appendChild(d);
+            balls.push(d);
+            d.id = 'ball';
+            d.style.left = makeRandom(450) + 'px'
+            d.style.top = makeRandom(5) + 'px';
+            d.style.backgroundColor = colors[makeRandom(colors.length)];
+
+        }, 1000);
+
+        let moveObject = setInterval(() => {
+            for (const i in balls) {
+                let y = parseInt(balls[i].style.top);
+                balls[i].style.top = y + makeRandom(30) + 'px';
+                if (y > 400) {
+                    document.querySelector('#main').removeChild(balls[i]);
+                    delete balls[i];
+                }       
+            }
+
+        }, 300);
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+    </script>
+</body>
+</html>

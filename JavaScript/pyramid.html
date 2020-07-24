@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script>
+    let output = '';
+
+    for (let i = 1; i <= 20; i++) {
+         output += '*';   
+         document.write(output, "<br>");
+    }  
+    document.write("<br>");
+
+    const input = Number(prompt('숫자를 입력하세요.', ''));
+    const bottom = 2*input-1;
+    let middle = bottom/2;
+    let output2 = '';
+    for (let i = 0; i < input; i++) {
+        for (let j = 0; j < bottom; j++) {         
+            if (middle-i <= j && j <= middle+i) {
+               output2 += "*";
+            } else {
+               output2 += "&nbsp";     
+            }
+        }
+        output2 += "<br>"
+        document.write(output2);
+        output2 = '';
+        
+      
+    }
+    
+
+        
+</script>
+</head>
+<body>
+    
+</body>
+</html>

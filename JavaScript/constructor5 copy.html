@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function Person() {
+            this.name = 'anonymous';
+        }
+        function Unikys() {
+            this.name = 'Unikys';
+        }
+
+        let person = new Person();
+        let unikys = Object.create(person, {
+            hobby : {
+                value : 'nap'
+            }
+        });
+
+        document.write(Object.keys(person) + ' : '+ person.name + '<br>');
+        document.write(unikys.name);
+
+       
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

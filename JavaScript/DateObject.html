@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let date = new Date();
+        document.write(date + "<br>");
+        date = new Date('December 9, 1991');
+        date = new Date('December 9, 1991 02:24:23');
+        document.write(date + "<br>");
+        date = new Date(1991, 12, 9, 2, 24, 23, 1);
+        document.write(date + "<br>");
+
+        let date2 = new Date();
+        date2.setDate(date2.getDate() + 7);
+        document.write(date2 + '<br>');
+
+        let date3 = new Date(1991, 12, 9);
+        let output = '';
+        output += '★toDateString : ' + date3.toDateString() + '<br>';
+        output += '★toLocaleString : ' + date3.toLocaleString() + '<br>';
+        output += '★toLocaleDateString : ' + date3.toLocaleDateString() + '<br>';
+        output += '★toLocaleTimeString : ' + date3.toLocaleTimeString() + '<br>';
+        output += '★toString : ' + date3.toString() + '<br>';
+        output += '★toTimeString : ' + date3.toTimeString() + '<br>';
+        output += '★toUTCString : ' + date3.toUTCString() + '<br>';
+
+        document.write(output);
+       
+
+        let now = new Date();
+        let before = new Date('December 9, 1991');
+
+        // interval 구하기
+        let interval = now.getTime() - before.getTime();
+        interval = Math.floor(interval / (1000*60*60*24));
+        document.write(interval + '일 <br>');
+
+        // interval 구하기 2
+        Date.prototype.getInterval = function (otherDate) {
+            let interval;
+            if (this > otherDate) {
+                interval = this.getTime() - otherDate.getTime();
+            } else {
+                interval = otherDate.getTime() - this.getTime();
+            }
+            return Math.floor(interval / (1000 * 60 * 60 * 24));
+        }
+
+        now = new Date();
+        before = new Date('December 9, 1991');
+        document.write(now.getInterval(before) + '일 <br>');
+
+        
+        // 요일 구하기
+        let week = ['일', '월', '화', '수', '목', '금', '토'];
+
+        Date.prototype.getWeek = function () {
+            let day = this.getDay();
+            return week[day]
+        }
+        document.write(new Date().getWeek() + '요일 입니다. <br>');
+
+        
+       
+     
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // prompt()
+    let input = prompt('메시지를 입력하세요.', '여기에 입력해주세요');
+    document.write("<h1>" + input + "</h1>");
+
+    // confirm()
+    let input2 = confirm('수락하시겠습니까?')
+    document.write("<h1>" + input2 + "</h1>");
+
+    //eval()
+    let willEval = '';
+    willEval += 'let number = 10;';
+    willEval += 'document.write(number);';
+
+    eval(willEval);
+    document.write("<br>");
+
+    // inFinite(), inNaN()
+    let number1 = 10/0;     // 무한
+    let number2 = 10/'A';   // NaN
+
+    document.write(number1 + " : " + number2);
+    document.write("<br>");
+    document.write(isFinite(number1)  + ' ' + isNaN(number2));
+    document.write("<br>");
+
+    // NaN == NaN
+    if (NaN == NaN) {
+        document.write('NaN == NaN');
+    } else {
+        document.write('NaN != NaN');
+        
+    }
+    document.write("<br>");
+
+    // 돈, parseInt(), parseFloat()
+    let won = Number('1000원');
+    let dollar = Number('$1.2');
+    document.write(won + " : " + dollar);
+    document.write("<br>");
+
+    won = '1000원';
+    dollar ='1.2$';
+    document.write(parseInt(won) + " : " + parseInt(dollar));
+    document.write("<br>");
+    document.write(parseFloat(won) + " : " + parseFloat(dollar));
+
+    // setTimeout(), setInterval()
+    setTimeout(function () {
+      alert('3초가 지났습니다.');
+    }, 3000);
+    setInterval(function () {
+      alert('3초가 지났습니다.');
+    }, 3000);
+
+    // clearTimeout(), clearInterval()
+    let intervalID = setInterval(function () {
+        document.write('<p>' + new Date() + '</p>');
+    }, 1000);
+    setTimeout(function () {
+        clearInterval(intervalID);
+    }, 10000);
+
+  
+</script>   
+</body>
+</html>

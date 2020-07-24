@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            let clock = document.createElement('h1');
+            clock.id = 'clock';
+            document.body.appendChild(clock);
+
+            setInterval(() => {
+                let now = new Date();
+                clock.innerHTML = now.toString();
+            }, 1000);
+
+
+
+
+
+
+
+        }
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

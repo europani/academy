@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function Person() {
+            this.name = 'anonymous';
+            this.sayHello = function () {
+                alert('Hello, my name is ' + this.name);
+            };
+        }
+        function Unikys() {
+            this.name = 'Unikys';
+
+        }
+        Unikys.prototype = new Person();
+
+        let unikys = new Unikys();
+        unikys.sayHello();
+        document.write(unikys instanceof Unikys);
+        document.write(unikys instanceof Person);
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

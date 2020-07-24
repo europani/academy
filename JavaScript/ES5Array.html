@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // indexOf(), lastIndexOf()
+        var array = [1, 2, 3, 4, 5, 5, 4, 3, 2, 1];
+
+        var output1 = array.indexOf(1);
+        var output2 = array.indexOf(8);
+        var output3 = array.lastIndexOf(1);
+        var output4 = array.lastIndexOf(8);
+
+        document.write(output1 + '<br>');
+        document.write(output2 + '<br>');
+        document.write(output3 + '<br>');
+        document.write(output4 + '<br>');
+
+
+        // forEach()
+        var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        var sum = 0;
+        var output = '';
+        array.forEach(function (element, index, array) {
+            sum += element;
+            output += index + ' : ' + element + ' -> ' + sum + '<br>';
+        })
+        document.write(output);
+
+        // filter()
+        array = array.filter(function (element, index, array) {
+            return element <= 5;
+        });
+        document.write(array + '<br>');
+
+
+        // every(), some()
+        var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        function lessThanFive(element, index, array) {
+            return element < 5;
+        }
+        function lessThanTwenty(element, index, array) {
+            return element < 20;
+        }
+        var output1 = array.every(lessThanFive);
+        var output2 = array.every(lessThanTwenty);
+        var output3 = array.some(lessThanFive);
+        var output4 = array.some(lessThanTwenty);
+
+        document.write(output1 + '<br>');
+        document.write(output2 + '<br>');
+        document.write(output3 + '<br>');
+        document.write(output4 + '<br>');
+
+
+        // map()
+        var output = array.map(function (element) {
+            return element *2;
+        })
+        document.write(output + '<br>');
+
+
+        // reduce()
+        var array = [1, 2, 3, 4, 5];
+        var result = array.reduce(function (previousValue, currentValue, index, array) {
+            // output += previousValue + ' : ' + currentValue + ' : ' + index + '<br>';
+            return previousValue + currentValue;
+        })
+        document.write(result);
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

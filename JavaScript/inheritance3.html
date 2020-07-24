@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let object = Object.create({}, {
+            name : {
+                value : 'RintIanTta',
+                enumerable : true
+            },
+            gender : {
+                value : 'Male',
+                enumerable : true
+            }
+        });
+        let person = Object.create(object, {
+            region : {
+                value : 'Seoul',
+                enumerable : true
+            },
+            hobby : {
+                value : 'Guitar',
+                enumerable : true
+            }
+        });
+
+        document.write(Object.getOwnPropertyNames(person) + '<br>');
+        document.write(Object.keys(person) + '<br>');
+        document.write(person.name + ' : ' + person.gender);
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

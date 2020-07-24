@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function Person() {
+            this.name = 'anonymous';
+        }
+        function Unikys() {
+            this.name = 'Unikys';
+        }
+
+        Unikys.prototype = Object.create(Person.prototype, {
+            constructor : {
+                value : Unikys
+            }
+        });
+        let unikys = new Unikys();
+
+        document.write(unikys instanceof Unikys);
+        document.write(unikys instanceof Person);
+        document.write(unikys instanceof Object);
+        console.log(unikys.constructor);
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

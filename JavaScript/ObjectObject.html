@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let primitiveNumber = 273;
+        let objectNumber = new Number(273);
+
+        let output = '';
+        output += typeof(primitiveNumber) + ' : ' + primitiveNumber + '<br>' ;
+        output += typeof(objectNumber) + ' : ' + objectNumber + '<br>' ;
+        document.write(output);
+        
+        primitiveNumber.method = function () {  // 기본형에 함수를 넣을수 X
+            return 'Primivite Method';
+        }
+        // document.write(primitiveNumber.method());
+
+        Number.prototype.method = function () { // Object의 prototype에 함수를 넣으면 기본형에서도 사용 O
+            return 'Method on Prototype';
+        }
+        output = '';
+        output += primitiveNumber.method() + '<br>';
+        output += objectNumber.method() + '<br>';
+        document.write(output);
+
+        // toString()
+        let object = new Object();
+        alert(object.constructor);
+        alert(object.toString());
+
+        let student = {
+            name : '김자바',
+            grade : 1,
+            toString : function () {
+                return this.name + ' : ' + this.grade + '<br>';
+            }
+        }
+        document.write(student);
+
+        function Student(name, grade) {
+            this.name = name;
+            this.grade = grade;
+
+            Student.prototype.toString = function () {
+                return this.name + ' : ' + this.grade + '<br>';
+            }
+        }
+
+        student = new Student('박자바', 3);
+        document.write(student);
+
+        // typeof()
+        let numberFromLiteral = 273;        // number
+        let numberFromObject = new Number(273); // object
+
+        if (typeof(numberFromLiteral) == 'number') {   // O
+            document.write('numberFromLiteral은 숫자입니다. <br>');  
+        }  if (typeof(numberFromObject) == 'number') {  // X
+            document.write('numberFromObject는 숫자입니다. <br>');
+        }  if (typeof(numberFromObject) == 'object') {  // O
+           document.write('numberFromObject는 object입니다. <br>');
+        }
+
+        if(typeof(numberFromLiteral.constructor == Number)) {
+            document.write('numberFromLiteral은 숫자입니다. <br>')
+        } if(typeof(numberFromObject.constructor == Number)) {
+            document.write('numberFromObject은 숫자입니다. <br>')
+        }          
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

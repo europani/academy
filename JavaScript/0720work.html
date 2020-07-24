@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let count = 0;
+        // 1
+        function myFun() {
+            return 'hello' + ++count + '<br>';
+        }
+        theFun = function () {
+            return 'bye' + ++count+ '<br>';
+        }
+
+        document.write(myFun());
+        document.write(theFun());
+        document.write(myFun());
+        document.write(theFun());
+
+        // 2
+        function myFnc(name, city) {
+            return '안녕하세요. ' + name + '입니다. 사는곳은 ' + city + '입니다.';
+        }
+        document.write(myFnc('홍당무', '서울'));
+
+        // 3
+        function login() {
+            let id = 'abc';
+            let pw = '123';
+
+            let inputId = prompt('아이디를 입력해주세요.');
+            let inputPw = prompt('비밀번호를 입력해주세요.');
+
+            if (id == inputId) {
+                if (pw == inputPw) {
+                    document.write(id + '님 방문을 환영합니다.')
+                } else {
+                    document.write('잘못된 비밀번호 입니다.')
+                }
+            } else {
+                    document.write('존재하지 않는 아이디입니다.')
+            }
+        }
+        login();
+
+        // 4
+        function testAvg() {
+            let korean = prompt('국어점수를 입력해주세요.');
+            let math = prompt('수학점수를 입력해주세요.');
+
+            return (korean+math) /2;
+        }
+        testAvg();
+
+        // 5
+        function restaurant() {
+            if (arguments.length == 0) {
+                document.write('손님이 없습니다.');
+            } else if (arguments.length == 1) {
+                document.write(arguments[0] + ' 손님 한분만 계십니다.');
+            } else {
+                for (const i in arguments) {
+                    document.write(arguments[i] + ',');
+                    }
+                document.write('의 이름으로 3좌석이 예약 되었습니다.');
+                }
+        }
+        restaurant();
+        restaurant('김자바');
+        restaurant('홍길동', '김자바', '나자바');
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

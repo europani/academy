@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function Rectangle(w, h) {
+            let width = w;
+            let height = h;
+       
+        this.getWidth = function () {
+            return width;
+        }
+        this.getHeight = function () {
+            return height;
+        }
+        this.setWidth = function (value) {
+            if (value < 0) {
+                throw '길이는 음수일 수 없습니다.';
+            } else {
+                width = value;
+            }
+        };
+
+        this.setHeight = function (value) {
+            if (value < 0) {
+                throw '길이는 음수일 수 없습니다.';
+            } else {
+                height = value;
+            }
+        };
+
+        Rectangle.prototype.getArea = function () {
+            return this.getWidth() * this.getHeight();
+        };
+    }
+    </script>
+    <script>
+        function Square(length) {
+            this.base = Rectangle;
+            this.base(length, length);
+      
+        Square.prototype = Rectangle.prototype;
+
+        let rectangle = new Rectangle(5, 7);
+        let suqare = new Square(5);
+
+        document.write(rectangle.getArea() + Square.getArea);
+
+    }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

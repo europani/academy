@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let output = 'a';
+        function test(name) {
+            let output = 'Hello' + name + '..!';
+        }
+        alert(output);
+
+        // 클로저
+        function outerFunction(name) {
+            let output2 = 'Hello' + name + '..!';
+            return function () {
+                alert(output2);
+            }
+        }
+        outerFunction('RINO')();
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

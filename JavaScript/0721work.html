@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 1.
+        function Person(name, blog) {
+            this.name = name;
+            this.blog = blog;
+        }
+            Person.prototype.getName = function () { return name;   }
+            Person.prototype.introduce = function () { return 'Hi! my name is ' + name + ', please visit my blog' + blog;   }
+
+        let person = [];
+        person.push(new Person('unikys', 'unikys.tistory.com'));
+        person.push(new Person('김자바', 'https://blog.naver.com/sample1'));
+       
+       
+        // 2.
+        function Animal(name) {
+            this.name = name;
+        }
+        Animal.prototype.cry = function () {}
+
+        let dog = new Animal('dog');
+        dog.cry = function () {
+            return '멍멍';
+        }
+        let cat = new Animal('cat');
+        cat.cry = function () {
+            return '야옹';
+        }
+        let bird = new Animal('bird');
+        bird.cry = function () {
+            return '짹짹';
+        }
+
+        // 3.
+        function Product(month, con, car, qty) {
+            this.month = month;
+            this.con = con;
+            this.car = car;
+            this.qty = qty;
+
+            this.report = function () {
+                if (arguments.length == 1) {
+                    let inputMonth = arguments[0];
+                    if (inputMonth = month) {
+                        return toString();
+                    }
+                } else  if (arguments.length == 2) {
+                    let month = arguments[0];
+                    let con = arguments[1];
+                    return ;
+                } else {
+                    l
+                }
+            }
+        }
+
+        Product.prototype.toString = function () {
+            return month + con + car + qty;
+        }
+   
+        
+
+        let product = [];
+        product.push(new Product(1, '생산', '아반떼', 1));
+        product.push(new Product(3, '생산', '아반떼', 3));
+        product.push(new Product(2, '판매', '그랜져', 5));
+        product.push(new Product(6, '판매', '밴즈', 2));
+        product.push(new Product(5, '반품', '아우디', 2));
+        product.push(new Product(7, '반품', 'BMW', 8));
+        product.push(new Product(2, '생산', 'BMW', 8));
+        product.push(new Product(3, '판매', '밴즈', 7));
+        product.push(new Product(1, '반품', '아반떼', 5));
+        product.push(new Product(7, '생산', '아우디', 3));
+
+
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

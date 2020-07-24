@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+
+        // id로 사용    
+        let header1 = document.querySelector('#header_1');
+        let header2 = document.querySelector('#header_2');
+        let sentence = 'with querySelector()';
+
+        // header1.innerHTML = sentence;
+        // header2.innerHTML = sentence;
+        
+        
+        // tag로 사용
+        let h1 = document.querySelectorAll('h1');
+
+        // for (const key in h1) {  // for in문
+        //     h1[key].innerHTML = sentence;       
+        // }
+        h1.forEach(function (v) {   // forEach()
+            v.innerHTML = sentence;
+        })
+        
+
+        // style속성 접근
+        let header = document.querySelector('header');  // 태그여야지만 style속성 접근가능
+        header.style.color = 'orange';
+        
+
+        }
+
+    </script>
+</head>
+<body>
+    <h1 id="header_1">Header</h1>
+    <h1 id="header_2">Header</h1>
+    <header>Header</header>
+    
+    
+</body>
+</html>

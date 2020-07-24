@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 함수 선언문
+        function callFunctionTenTimes(otherFunction) {
+            for (let i = 0; i < 10; i++) {
+                otherFunction();
+            }
+        }
+
+        callFunctionTenTimes( function () {
+            document.write('Hello World..!' + '<br>');
+            }
+        )
+
+
+        // 함수 표현식
+        function callTenTimes(otherFunction) {
+            for (let i = 0; i < 10; i++) {
+                otherFunction();
+        }
+        }
+        let callback = function () {
+            document.write('함수호출 ');
+        }
+        callTenTimes(callback);
+
+        // return이 function일때
+        document.write('<br>');
+        function returnFunction() {
+            return function () {
+                document.write('Hello Function...!');
+            }
+        }
+        returnFunction()();
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

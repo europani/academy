@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, td {
+            text-align: center;
+            border: 1px none black;
+            border-collapse: collapse;
+            padding : 0 150px;
+            font-weight : bold;
+        }
+        #two {
+            background-color: red;
+        }
+        .three {
+            background-color: green;
+        }
+        td {
+            background-color: blue;
+        }
+        #gugudan {
+            border: 1px solid red;
+            border-collapse: collapse;
+            padding: 10px;   
+            background-color: transparent;
+            font-weight: normal;
+        }
+    </style>
+    <script>
+        // 1
+        for (let i = 1; i <= 10; i++) {
+           document.write(i + "<br>");
+           if (i > 5) {
+               break;
+           } 
+        }
+        document.write('=== The End ===');
+
+        // 2
+        let answer = prompt('정말로 회원을 탈퇴하시겠습니까?');
+        if (answer === 'yes') {
+            document.write('탈퇴 처리 되었습니다!');
+        } else {
+            document.write('탈퇴 취소되었습니다!');
+            
+        }
+
+        // 3
+        let str = "<table> <tr><td>1</td></tr>  <tr><td id = 'two'>2</td></tr> <tr><td class = 'three'>3</td></tr> <tr><td id = 'two'>4</td></tr>  <tr><td>5</td></tr> <tr><td id = 'two'>6</td></tr> <tr><td>7</td></tr> <tr><td id = 'two'>8</td></tr>  <tr><td class = 'three'>9</td></tr> <tr><td id = 'two'>10</td></tr>";
+        document.write(str);
+        
+        // 4
+        let gugudan = '<table id = "gugudan">';
+
+            for (let i = 2; i <= 9; i+=3) {
+                for (let j = 2; j <= 9; j++) {
+                    if (i < 8) {
+                    gugudan += '<tr><td id = "gugudan">' + i + '*' + j + ' = ' + (i*j) + '</td>' + '<td id = "gugudan">' + (i+1) + '*' + j + ' = ' + ((i+1)*j) + '</td>' + '<td id = "gugudan">' + (i+2) + '*' + j + ' = ' + ((i+2)*j) + '</td></tr>'
+                    } else if (i >= 8) {
+                    gugudan += '<tr><td id = "gugudan">' + i + '*' + j + ' = ' + (i*j) + '</td>' + '<td id = "gugudan">' + (i+1) + '*' + j + ' = ' + ((i+1)*j) +'</td></tr>'
+                    }
+                }
+            }
+        gugudan += '</table>';
+
+        document.write(gugudan);
+
+        // 5
+        let name = prompt('이름을 입력해주세요.');
+        document.write(name + "님 반갑습니다! 방문을 환영합니다.");
+
+        // 6
+        let id = 'easy1004';
+        let pw = '112233';
+
+        let inputId = prompt('아이디를 입력해주세요.');
+        let inputPw = prompt('비밀번호를 입력해주세요.');
+        if (id === inputId) {
+            if (pw == inputPw) {
+                document.write(inputId + "님 반갑습니다.");
+            } else {
+                document.write('비밀번호가 일치하지 않습니다.')
+            }
+        } else {
+            document.write('아이디가 일치하지 않습니다.')
+        }
+
+        // 7
+        let dns = prompt('DNS를 입력해주세요.');
+        if (dns === '네이버') {
+            document.write(dns + " - www.naver.com");
+        } else if (dns === '다음') {
+            document.write(dns + " - www.daum.net");
+        } else if (dns === '네이트') {
+            document.write(dns + " - www.nate.com");
+        } else if (dns === '구글') {
+            document.write(dns + " - www.google.com");
+        } else {
+            document.write('존재하지 않습니다.');
+        }
+    </script>
+</head>
+<body>
+    
+    
+</body>
+</html>

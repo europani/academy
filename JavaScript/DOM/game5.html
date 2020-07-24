@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #frame {
+        height: 550px;
+        width: 700px;
+        border: 2px solid grey;
+        position: absolute;
+    }
+    h1 {
+        position: absolute;
+    }
+
+
+</style>
+<body>
+    <div id="frame"></div>
+
+    <script>
+        function nextRandomInteger(limit) {     // 랜덤 정수
+            return Math.round(Math.random() * limit);
+        }
+        let alpahbat = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        function randomAlphabet() {             // 랜덤 알파벳
+            return alpahbat.charAt(nextRandomInteger(25));
+        }
+
+        function randomSpeed(maxSpeed) {        // +- 랜덤 속도  
+            return Math.random() * maxSpeed - Math.random() * maxSpeed;
+        }
+    </script>
+    <script>
+        let canvasWidth = 700;
+        let canvasHeight = 500;
+
+        function MovingText() {
+            this.x = nextRandomInteger(canvasWidth);
+            this.y = nextRandomInteger(canvasHeight);
+            this.vX = randomSpeed(10);
+            this.vY = randomSpeed(10);
+
+            this.body = document.createElement('h1');
+            this.body.innerHTML = randomAlphabet();
+            this.body.style.position = 'absolute';
+            document.body.appendChild(this.body);
+        }
+
+        MovingText.prototype.move = function () {
+            if (this.x < 0 || this.x > canvasWidth) {
+                this.vX *= -1;
+            } if (this.y < 0 || this.y > canvasHeight) {
+                this.vY *= -1;
+            }
+
+            this.x += this.vX;
+            this.y += this.vY;
+            this.body.style.left = this.x + 'px';
+            this.body.style.top = this.y + 'px';
+        
+        }
+
+        // 실행
+        let colors = ['red', 'green', 'blue'];
+        let movingTexts = [];
+        for (let i = 0; i < 100; i++) {     // 100개 객체 생성
+            movingTexts.push(new MovingText());
+            
+        }
+        setInterval(() => {
+            for (const i in movingTexts) {
+                movingTexts[i].move();
+            }
+        }, 20);
+
+
+    </script>
+</body>
+</html>

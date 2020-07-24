@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let object = {
+            name : 'RintIanTta',
+            gender : 'Male'
+        };
+        document.write(JSON.stringify(object) + '<br>');    // JSON -> object 
+        document.write(JSON.parse(JSON.stringify(object)) + '<br>');    // JSON -> object -> JSON
+
+
+        let date = new Date();
+        document.write(JSON.stringify(date.toJSON()));
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

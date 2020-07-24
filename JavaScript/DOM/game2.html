@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+     #main {
+            width: 500px;
+            height: 500px;
+            border: 2px solid grey;
+            position: absolute;
+
+        }
+       
+        #vball {
+            border-radius: 100%;
+            background-color: #ff0;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+        }
+
+        #hball {
+            border-radius: 100%;
+            background-color: #f00;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+        }
+
+        #content {
+            position: absolute;
+            top : 510px;
+        }
+
+</style>
+<body>
+    <div id="main"></div>
+    <div id="vball"></div>
+    <div id="hball"></div>
+    <div id="content"></div>
+
+
+    <script>
+        let main = document.querySelector('#main');
+        let vball = document.getElementById('vball');
+        let hball = document.getElementById('hball');
+
+        let dtop = 0;
+        let dleft = 0;
+        let vIsReverse = false;
+        let hIsReverse = false;
+
+        setInterval(() => {
+            if (vIsReverse == false) {
+             dtop += 5;    
+             vball.style.top = dtop+ 'px';
+            } else if (vIsReverse == true) {
+             dtop -= 5;    
+             vball.style.top = dtop+ 'px';
+            }
+            if (dtop == 450 || dtop == 0)
+                vIsReverse ^= true;
+
+        }, 50);
+        setInterval(() => {
+            if (hIsReverse == false) {
+             dleft += 5;    
+             hball.style.left = dleft+ 'px';
+            } else if (hIsReverse == true) {
+             dleft -= 5;    
+             hball.style.left = dleft+ 'px';
+            }
+            if (dleft == 450 || dleft == 0)
+                hIsReverse ^= true;
+
+        }, 40);
+        let body = document.querySelector('body');
+        let content = document.querySelector('#content');
+        
+
+        function changeColor() {
+            let newDiv = document.createElement('div');
+            newDiv.innerHTML = this.id + "'s changed!";
+            content.appendChild(newDiv);
+            if (this.style.backgroundColor === 'red') {
+                this.style.backgroundColor = 'blue';
+            } else {
+                this.style.backgroundColor = 'red';
+            }
+
+            if (this == vball) {
+                vIsReverse ^= true;
+            } else {
+                hIsReverse ^= true;
+
+            }
+
+        }
+
+        vball.addEventListener('click', changeColor);
+        hball.addEventListener('click', changeColor);
+
+    </script>
+</body>
+</html>

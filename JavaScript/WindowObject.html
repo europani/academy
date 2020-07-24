@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // open()
+        var output = '';
+
+        for (const key in window) {
+            output += '★' + key + ' : ' + window[key] + '<br>'       ;
+        }
+        document.write(output);
+
+        window.open('http://www.naver.com', 'child', 'width = 600, height = 600', true);
+
+        let child = window.open('', '', 'width = 300, height = 200');
+        child.document.write('<h1>hiii</h1>');
+
+        window.onload = function () {
+            alert('3초후에 닫힙니다.!');
+           window.setTimeout( function () {
+                window.close();
+           }, 3000); 
+        };
+        
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

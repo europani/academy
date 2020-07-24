@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        let child = window.open('', '', 'width = 300, height = 200');
+        let width = screen.width;
+        let height = screen.height;
+
+        child.moveTo(0, 0);
+        child.resizeTo(width, height);
+
+        setInterval(() => {
+            child.resizeBy(-20, -20);
+            child.moveBy(10, 10);
+        }, 2000);
+        
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

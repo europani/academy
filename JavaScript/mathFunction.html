@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function pythagoras(width, height) {
+            function square(x) {
+                return x*x;
+            }
+            return Math.sqrt(square(width) + square(height));
+        }
+        document.write(pythagoras(3, 4));
+
+        function square(width, height, hypotenuse) {
+            if (width * width + height * height == hypotenuse * hypotenuse) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        document.write(square(4, 8, 3));
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

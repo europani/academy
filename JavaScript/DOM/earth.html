@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="sun">@</h1>
+    <h1 id="earth">O</h1>
+    <h1 id="moon">*</h1>
+    <script>
+       
+            let sun = document.getElementById('sun');
+            let earth = document.getElementById('earth');
+            let moon = document.getElementById('moon');
+
+            sun.style.position = 'absolute';
+            earth.style.position = 'absolute';
+            moon.style.position = 'absolute';
+            
+            sun.style.top = 200 + 'px';
+            sun.style.left = 250 + 'px';
+
+            let earthAngle = 0;
+            let moonAngle = 0;
+
+            setInterval(() => {
+                let earthLeft = 250+ 150* Math.cos(earthAngle);
+                let earthTop = 200+ 150* Math.sin(earthAngle);
+                let moonLeft = earthLeft + 50* Math.cos(moonAngle);
+                let moonTop = earthTop + 50* Math.sin(moonAngle);
+
+                // 위치 이동
+                earth.style.left = earthLeft + 'px';
+                earth.style.top = earthTop + 'px';
+                moon.style.left = moonLeft + 'px';
+                moon.style.top = moonTop + 'px';
+
+                // 각도 변경
+                earthAngle += 0.1;
+                moonAngle += 0.3;
+
+            }, 50);
+
+
+
+    </script>
+</body>
+</html>

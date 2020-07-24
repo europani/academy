@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let student = {};
+
+        student.이름 = '윤인성',
+        student.취미 = '악기',
+        student.특기 = '프로그래밍',
+        student.장래희망 = '생명공학자';
+
+        student.toString = function () {
+            let output = '';
+            for (const key in this) {
+                if (key != 'toString') {    //toString 출력X
+                    output += key + ' : ' + this[key] + '<br>';
+                }       
+            }
+            return output;
+        }
+        document.write(student.toString());
+        delete(student.장래희망);
+        student.특기 = '놀기';
+        student['특기2'] = '놀지않기';
+        document.write(student);
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

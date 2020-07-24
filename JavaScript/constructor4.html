@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function Rectangle(width, height) {
+            this.width = width;
+            this.height = height;
+        }
+        Rectangle.prototype.getArea = function () {
+            return this.width * this.height;
+        }
+
+        let rectangle = new Rectangle(5, 7);
+        document.write(rectangle.getArea());
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

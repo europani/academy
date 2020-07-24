@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let object = {};
+        Object.defineProperty(object, 'name', {
+            value : 'RintIanTta',
+            writable : false,
+            enumerable : false,
+            
+        });
+
+        object.name = 'Other';
+        // for (const i in object) {
+        //  alert(i + ': ' + object[i]);   
+        // }
+        alert(object.name);
+
+
+        let object2 = {};
+        Object.defineProperty(object2, 'name', {
+            get : function () {
+                return value; 
+            },
+            set : function (newValue) {
+                value = newValue;
+            }
+        });
+
+        object2.name = 'ALPHA'; // setter
+        document.write(object2.name);   // getter
+
+        let object3 = {};
+        Object.defineProperty(object3, 'name', {
+            get : function () {
+                return value; 
+            },
+            set : function (newValue) {
+                value = newValue;
+            },
+            configurable : true,
+            enumerable : false
+        });
+
+        Object.defineProperty(object3, 'name', {
+            enumerable : true
+        });
+
+        for (const i in object3) {
+            alert(i + ' : ' + object3[i]);
+        }
+
+        let object4 = {};
+
+        Object.defineProperties(object4, {
+            name : {
+                value : 'RintIanTta',
+                enumerable : true
+            },
+            gender : {
+                value : 'Male'
+            }
+        });
+        for (const i in object4) {
+            alert(i + ' : ' + object4[i]);
+        }
+
+        let object5 = Object.create({}, {
+            name : {
+                value : 'RintIanTta',
+                enumerable : true
+            },
+            gender : {
+                value : 'Male'
+            }
+        });
+        document.write(Object.keys(object5));
+
+        // isExtensible, preventExtension
+        let object6 = {};
+        object6.gender = 'male';
+        Object.defineProperty(object6, 'name', {
+            value : 'RintIanTta',
+            writable : true
+        });
+
+        document.write(Object.isExtensible(object6));
+        // Object.preventExtensions(object6);
+        document.write(Object.isExtensible(object6));
+        
+        object6.dream = '생명공학자';
+        Object.defineProperty(object6, 'hobby', {
+            value : 'guitar'
+        });
+        
+        alert(Object.keys(object6));
+
+
+        // isSealed, seal
+        let object7 = {
+            name : 'RintIanTta',
+            gender : 'Male'
+        };
+        Object.seal(object7);
+        delete object7.name;        // 삭제 X
+        document.write('object7.name' + ' : ' + object7.name);
+
+
+        // keys, getOwnPropertynames
+        let object8 = {
+            name : 'RintIanTta'
+        };
+        Object.defineProperty(object8, 'gender', {
+            value : 'Male'
+        });
+
+        document.write(Object.keys(object8));
+        document.write(Object.getOwnPropertyNames(object8));
+
+
+        // getOwnPropertyDescriptor
+        let descriptors = [];
+        descriptors.push(Object.getOwnPropertyDescriptor(object8, 'name'));
+        descriptors.push(Object.getOwnPropertyDescriptor(object8, 'gender'));
+
+        let output = '';
+        for (const i in descriptors) {
+            let item = descriptors[i];
+            for (const key in item) {
+                    output += key + ' : ' + item[key] + '<br>';
+               
+            }
+            output += '---------------------<br>';
+        }
+        
+        document.write(output);
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let child = window.open('', '', 'width = 300, height = 200');
+        child.moveTo(0, 0);
+
+        setInterval(function () {
+            child.moveBy(10,10);
+        }, 1000);
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

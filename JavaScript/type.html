@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let x = 5;
+        let y = 'five';
+        let isTrue = true;
+        let empty = null;
+        let nothing;
+        let sym = Symbol('me');
+        let fun = function() {
+        }
+
+        console.log("let x = 5 : " + typeof(x));                // 숫자
+        console.log("let y = 'five' : " + typeof(y));           // 문자
+        console.log("let isTrue = true : " + typeof(isTrue));   // 불리언
+        console.log("let empty = null : " + typeof(empty));     // object(null)
+        console.log("let fun = function() : " + typeof(fun));   // function
+        console.log("let sym = Symbol('me') : " + typeof(sym)); // symbol
+        console.log("let nothing : " + typeof(nothing));        // undefined
+
+        console.log(typeof ('string'));
+        console.log(typeof (273));
+        console.log(typeof (true));
+        console.log(typeof (function () {}));
+        console.log(typeof ({}));
+        console.log(typeof (alpha));
+       
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
