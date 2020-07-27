@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+</head>
+<body>
+    <div id="root">
+        <div>Darjeeling</div>
+        <div>Assam</div>
+        <div>Kerala</div>
+
+    </div>
+
+    <script>
+        let $nodes = $('#root').children();
+        alert('Number of Nodes is '+ $nodes.length);
+        let txt = '';
+        $('#root').children().each( function () {
+            txt += $(this).text();
+        });
+        alert(txt);
+    </script>
+</body>
+</html>

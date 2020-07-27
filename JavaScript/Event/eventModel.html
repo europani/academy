@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="myHeader">click</h1>
+
+    <script>
+            let header = document.querySelector('#myHeader');
+
+            let handler = function () {
+                alert('클릭됨');
+                this.style.color = 'red';
+                header.removeEventListener('click', handler);
+            };
+            header.addEventListener('click', handler);
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="my_form" >
+        <label for="name">이름</label><br>
+        <input type="text" name="name" id="name"><br>
+        <label for="pass">비밀번호</label><br>
+        <input type="password" name="pass" id="pass"><br>
+        <label for="pass_check">비밀번호 확인</label><br>
+        <input type="password" id="pass_check"><br>
+        <input type="submit" value="제출">
+    </form>
+
+    <script>
+        document.querySelector('#my_form').onsubmit = function () {
+            const pass = document.querySelector('#pass').value;
+            const passCheck = document.querySelector('#pass_check').value;
+
+            if (pass === passCheck) {
+                alert('성공');
+            } else {
+                alert('실패');
+            }
+
+            // alert('아직 서버로 연결 할 수 없습니다.');
+            // return false;
+        }
+
+    </script>
+</body>
+</html>

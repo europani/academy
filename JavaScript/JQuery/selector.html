@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+</head>
+<body>
+    <select>
+        <option>Apple</option>
+        <option>Bag</option>
+        <option>Cat</option>
+        <option>Dog</option>
+        <option>Elephant</option>
+    </select>
+    
+    <script>
+        setTimeout(() => {
+            let value = $('select > option:selected').val();
+            alert(value);
+        }, 5000);
+
+
+    </script>
+</body>
+</html>

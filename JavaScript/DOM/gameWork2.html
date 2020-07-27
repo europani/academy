@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .barrier {
+            position: absolute;
+        }
+
+        #frame {
+            width: 600px;
+            height: 390px;
+            border : 1px solid grey;
+            position : absolute;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="frame"></div>
+
+    <script>
+        const color = ['red', 'orange', 'green', 'blue', 'skyblue'];
+        function makeRandom(number) {
+            return Math.round(Math.random()*number);
+        }
+
+        setInterval(() => {
+        let barrier = document.createElement('div');
+        barrier.className = 'barrier';
+        barrier.style.backgroundColor = color[makeRandom(5)];
+        barrier.style.width = 20 + 'px';
+        barrier.style.height = makeRandom(300) + 'px';
+
+        barrier.style.top = 400 - parseInt(barrier.style.height) + 'px'
+        barrier.style.left = 600 - parseInt(barrier.style.width) + 'px'
+
+        document.body.appendChild(barrier);
+
+        }, 2500);
+
+        setInterval(() => {
+            let barriers = document.querySelectorAll('.barrier');
+
+
+            for (let i = 0; i < barriers.length; i++) {
+                let x = parseInt(barriers[i].style.left);
+                barriers[i].style.left = x - 20 + 'px'; 
+
+            }
+
+        }, 500);
+    </script>
+</body>
+</html>

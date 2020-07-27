@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #ball1, #ball2 {
+            background-color: red;
+            border-radius: 100%;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+        }
+
+        #frame {
+            width: 500px;
+            height: 500px;
+            border : 1px solid grey;
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="frame"></div>
+    <div id="ball1"></div>
+    <div id="ball2"></div>
+    
+    <script>
+        const ball1 = document.querySelector('#ball1');
+        const ball2 = document.querySelector('#ball2');
+        let way = 1;
+
+        function makeRandom(number) {
+            return Math.round(Math.random()*number);
+        }
+
+        ball1.style.top = makeRandom(50) + 'px';
+        ball1.style.left = makeRandom(500) + 'px';
+        ball2.style.top = makeRandom(50) + 'px';
+        ball2.style.left = makeRandom(500) + 'px';
+
+        setInterval(() => {
+            way *= (-1);  
+
+            ball1.style.top = parseInt(ball1.style.top) + (makeRandom(30))+ 'px'
+            ball1.style.left = parseInt(ball1.style.left) +(makeRandom(30)*way)+ 'px'
+            ball2.style.top = parseInt(ball2.style.top) + (makeRandom(30))+ 'px'
+            ball2.style.left = parseInt(ball2.style.left) + (makeRandom(30)*way)+ 'px'
+        }, 1000);
+    </script>
+</body>
+</html>

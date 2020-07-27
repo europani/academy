@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="header">
+        <p id="paragraph" />Paragraph
+    </h1>
+    <script>
+        document.querySelector('#header').onclick = function () {
+            alert('header');
+        }
+        document.querySelector('#paragraph').onclick = function (event) {
+            alert('paragraph');
+            event.cancelBubble = true;
+        }
+
+
+
+    </script>
+</body>
+</html>
