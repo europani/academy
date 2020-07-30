@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+    <style>
+        #canvas {
+            border : 1px solid grey;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="500" height="300" />
+
+    <script>
+        let canvas = document.querySelector('#canvas');
+        let context = canvas.getContext('2d');
+
+        $(canvas).toggle(function (event) {
+            let position = $(this).offset();
+            let x = event.pageX - position.left;
+            let y = event.pageY - position.top;
+            context.beginPath();
+            context.moveTo(x, y);
+        }, function (event) {
+            let position = $(this).offset();
+            let x = event.pageX - position.left;
+            let y = event.pageY - position.top;
+            context.lineTo(x, y);
+            context.stroke();
+        });
+
+    </script>
+</body>
+</html>

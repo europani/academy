@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+</head>
+<body>
+    <h3>Header-0</h3>
+    <h3>Header-1</h3>
+    <h3>Header-2</h3>
+    <h3>Header-3</h3>
+    <h3>Header-4</h3>
+    <h3>Header-5</h3>
+
+    <script>
+        $('h3').filter(':even').css({
+            backgroundColor : 'black',
+            color :'white'
+        })
+
+        $('h3').filter(function (index) {
+            return index % 3 == 0;
+        }).css({
+            backgroundColor:'red',
+            color :'white'
+        })
+
+
+    </script>
+</body>
+</html>

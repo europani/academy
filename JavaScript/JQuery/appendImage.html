@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+    <script src="jquery.innerfade.js"></script>
+</head>
+<body>
+    <ul id="inner_fade">
+        <li><img src="image/Chrysanthemum.jpg"></li>
+        <li><img src="image/Desert.jpg"></li>
+        <li><img src="image/Hydrangeas.jpg"></li>
+        <li><img src="image/Jellyfish.jpg"></li>
+        <li><img src="image/Koala.jpg"></li>
+    </ul>
+    <script>
+        $('#inner_fade').innerfade({
+            animationtype : 'fade',
+            speed : 750,
+            timeout : 3000,
+            type : 'random',
+            containerheight : '350px'
+
+        });
+
+       
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+</head>
+<body>
+    <div>
+        <p>지금 내 생각을</p>
+        <h1>150</h1>
+        <textarea cols="70" rows="15"></textarea>
+    </div>
+
+    <script>
+        $('textarea').keyup(function () {
+            let inputLength = $(this).val().length;
+            let remain = 150 - inputLength;
+
+            $('h1').html(remain);
+            if (remain >= 0) {
+                $('h1').css('color', 'black');
+            } else {
+                $('h1').css('color', 'red');
+                
+            }
+        });
+
+
+    </script>
+</body>
+</html>

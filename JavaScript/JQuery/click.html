@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin : 5px 2px;
+            float: left;
+        }
+        div {
+            border : 5px solid black;
+            border-radius: 10px;
+
+        }
+
+
+
+    </style>
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+</head>
+<body>
+    <div>
+        <h1>Header 1</h1>
+        <p>Paragraph</p>
+    </div>
+    <div>
+        <h1>Header 2</h1>
+        <p>Paragraph</p>
+    </div>
+    <div>
+        <h1>Header 3</h1>
+        <p>Paragraph</p>
+    </div>
+    
+    <script>
+        $('div').click( function () {
+            let header = $('h1', this).text();
+            let paragraph = $('p', this).text();
+            alert(header + '\n' + paragraph);
+        });
+
+
+
+
+    </script>
+</body>
+</html>

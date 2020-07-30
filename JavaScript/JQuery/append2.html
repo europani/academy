@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    
+    <script>
+        let h1 = '<h1>Header1</h1>'
+        let h2 = '<h2>Header2</h2>'
+
+        $('body').append(h1, h2, h1, h2);
+
+        let content = [
+        {name : '윤인성', region : '서울특별시 강서구'},
+        {name : '윤하린', region : '서울특별시 광진구'},
+        {name : '윤인아', region : '미국 메사추세츠'}
+        ];
+
+        $('div').append( function (index) {
+            let item = content[index];
+            let input = '';
+
+            input += '<h1>' + item.name + '</h1>';
+            input += '<h2>' + item.region + '</h2>';
+            return input;
+        })
+
+
+    </script>
+</body>
+</html>
