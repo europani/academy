@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<link rel="stylesheet" href="main.css">
+<style type="text/css">
+div {
+	position: absolute;
+}
+
+#main {
+	width: 600px;
+	height: 400px;
+	border: 1px solid blue;
+	overflow: hidden;
+}
+
+input {
+	position: absolute;
+	top: 510px;
+	left: 10px;
+	size: 200px;
+}
+
+
+#ball {
+     text-align : center;
+     border-radius :  100%;
+     width : 50px;
+     height : 50px;
+     position : absolute;
+  
+     z-index : 900;
+     background-color : green;
+     transform : all 0.4s ease-out;
+ 
+  -webkit-transition: background-color 0.1s;
+  -moz-transition: background-color 0.1s;
+  -o-transition: background-color 0.1s;
+  transition: background-color 0.1s;
+}
+</style>
+<script>
+ 
+ 
+
+ 
+ var colors = ['red', 'blue', 'green', 'grey', 'orange', 'black']
+ var worlds = [];
+ 
+ window.onload=function() {
+	 var tong = document.createElement("div");
+	 var textNode = document.createTextNode('나');
+	 tong.appendChild(textNode);
+	 tong.id="ball";
+	 tong.style.top="350px";
+	 tong.style.left="300px";
+	 tong.onclick= function(e) {
+		 
+	   var start =setInterval(() => {
+			var top =  parseInt(tong.style.top);
+			top -=5;
+			tong.style.top=top+'px';
+		}, 20); 
+	
+	   
+	    setTimeout(() => {
+			clearTimeout(start);
+			
+			 var end = 	setInterval(() => {
+					var top =  parseInt(tong.style.top);
+					top +=5;
+					tong.style.top=top+'px';
+				}, 20);
+			    
+			    setTimeout(() => {
+					clearTimeout(end);
+				}, 600);
+		}, 600);
+	    
+	    
+	    
+	  }
+	 
+	 
+	  document.getElementById("main").appendChild(tong);
+	  
+	 setInterval(createMode, 5000);
+	 setInterval(moveMode, 100);
+	
+	 
+ }
+ 
+  
+  function MovingH1() {
+     // 위치와 속도 속성
+     this.block = document.createElement('div');
+     this.x=600;
+     this.y=0;
+     this.vX = 10;
+     this.vY = 0;
+     // 문서 객체를 생성합니다.
+     this.height=random(100);
+     this.block.style.position = 'absolute';
+     this.block.style.width = '20px';
+     this.block.style.height = this.height+'px';
+     this.block.style.backgroundColor = colors[random(5)];
+     // 문서 객체를 document.body에 추가합니다.
+     document.getElementById("main").appendChild(this.block);
+    
+     
+     
+ }
+
+ MovingH1.prototype.move = function () {
+	 this.x -=10;
+     this.y=400-this.height;
+     // 화면에 이동 표시
+     this.block.style.left = this.x + 'px';
+     this.block.style.top = this.y+'px';
+     
+   //  console.log(this.x+","+this.y);
+     
+ };
+ MovingH1.prototype.remove = function () {
+     // 범위 검사
+     console.log('remove'+this.num)
+	 document.getElementById("main").removeChild(this.h1);
+     
+ };
+ 
+ 
+ 
+ 
+ function createMode() { worlds.push(new MovingH1());}
+ 
+ function moveMode() {
+	 for (var i in worlds) {
+		  worlds[i].move();
+		  if (worlds[i].x<0) { 
+				 document.getElementById("main").removeChild(worlds[i].block);
+				 delete (worlds[i])
+			 }
+		 } 
+ }
+	 
+
+ 
+ function random(num) {
+	 var num1 = Math.random()* num;
+	 num1 = parseInt(num1);
+	// console.log(num1);
+	 return num1;
+ }
+ 
+ 
+ 
+ function randomData() {
+	 var num1 = Math.random()* 3;
+	 num1 = parseInt(num1);
+	 var num2 = Math.random()* datas[num1].length;
+	 num2 = parseInt(num2);
+	// console.log(num1+","+num2);
+	// console.log(datas[num1][num2]);
+	 return datas[num1][num2];
+	 
+ }
+ 
+ function deleteMode(str) {
+	
+	
+	 for (var i in worlds) {
+		
+		 worlds[i].move();
+		
+		 if (worlds[i].h1.innerHTML == str) { 
+			 document.getElementById("main").removeChild(worlds[i].block);
+			 delete (worlds[i])
+			 
+		 }
+		 
+		 
+	 }
+	
+ }
+ 
+ 
+ 
+ </script>
+
+<!-- 생성자 함수 -->
+<script>
+ // MovingText의 생성자 함수
+ 
+ 
+</script>
+<!-- window.onload -->
+
+
+</head>
+<body>
+	<div id="main"></div>
+	
+</body>
+</html>
