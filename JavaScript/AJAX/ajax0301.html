@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<input type="button" value="Json read" onclick = "load('test0301.json')" />
+<div id="area"></div>
+
+<script type="text/javascript">
+	let httpRequest = null;
+	function load(url) {
+		httpRequest = new XMLHttpRequest();
+		httpRequest.onreadystatechange = CallBack;
+		httpRequest.open("get", url, true);
+		httpRequest.send()
+	}
+	
+	function CallBack() {
+		if (httpRequest.readyState == 4) {
+			if (httpRequest.status == 200) {
+				alert(httpRequest.responseText);
+				
+				let item = JSON.parse(httpRequest.responseText);
+				let willOut = '';
+				for (var i = 0; i < item.length; i++) {
+					willOut += '<table><tr>';
+					willOut += '<td>' + item[i].author.book + '</td><td>' + item[i].author.pubDate + '</td>';
+					willOut += '</tr></table>';
+				}
+					document.querySelector('#area').innerHTML = willOut;
+			}
+			else {
+				alert('fail : ' + httpRequest.status);
+			}
+		}
+	}
+</script>
+</body>
+</html>

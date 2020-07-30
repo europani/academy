@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="httpRequest.js"></script>
+</head>
+<body>
+<form name="f" method="post">
+	    <input type="text" name = "name" />
+	    <input type="button" value="입력" onclick="helloToServer()"/>
+</form>
+<div id="demo"></div>
+<script>
+	function helloToServer() {
+		let params = "name=" + encodeURIComponent(document.f.name.value);
+		sendRequest("test0401.jsp", params, loadedJsp, "post");	          
+	};
+	
+	function loadedJsp() {
+		 if (this.readyState == 4 && this.status == 200) {
+             document.querySelector('#demo').innerHTML = this.responseText;
+    	}
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="f" method="post">
+	    <input type="text" name = "name" />
+	    <input type="button" value="입력" onclick="helloToServer()"/>
+    </form>
+    <div id="demo"></div>
+    <script>
+        function helloToServer() {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+	            if (this.readyState == 4 && this.status == 200) {
+	                 document.querySelector('#demo').innerHTML = this.responseText;
+            }
+        };
+        let param = "?name=" + encodeURIComponent(document.f.name.value);	// encodeURIComponent -> 한글 깨지지 않게해줌
+        xhttp.open("get", "test0201.jsp" + param, true);
+        xhttp.send();
+        }
+
+
+
+    </script>
+</body>
+</html>

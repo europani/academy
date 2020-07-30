@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="httpRequest.js"></script>
+<style type="text/css">
+	* {
+		font-size : 30px;
+		color : red;
+	}
+</style>
+</head>
+<body>
+	<div id="maxtemp"></div>
+
+
+<script>
+	function loadList() {
+		sendRequest("getMaxTemperature.jsp", null, loadedList, "get")
+	}
+	function loadedList() {
+		if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+			let csvStr = httpRequest.responseText;
+			let temperatureStrs = csvStr.split(",");
+			let temperatures = new Array(temperatureStrs.length);
+			let max = 0;
+			for (var i = 0; i < temperatureStrs.length; i++) {
+				temperatures[i] = parseFloat(temperatureStrs[i]);
+				if (max < temperatures[i]) {
+					max = temperatures[i];
+				}
+			}
+			
+			let maxtemp = document.querySelector('#maxtemp');
+			maxtemp.innerHTML = "<Strong>" + max + "</strong>";
+		} else {
+			/* alert(httpRequest.readyState + ', '+ httpRequest.status); */
+		}
+	}
+	
+	loadList(); 
+</script>
+</body>
+</html>

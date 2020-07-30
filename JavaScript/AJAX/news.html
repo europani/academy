@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="httpRequest.js"></script>
+</head>
+<body>
+    <div id="newsList"></div>
+    <script>
+        function loadNews() {
+            sendRequest("getNewsTitles.jsp", null, loadedNews, "GET");
+        }
+        function loadedNews() {
+            if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+                let newsList = document.querySelector('#newsList');
+                newsList.innerHTML = httpRequest.responseText;
+            }
+        }
+
+        loadNews();
+    </script>
+</body>
+</html>
