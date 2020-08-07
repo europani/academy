@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<input type="button" value="쿠키생성" onclick="setCookie('a1', 1)">
+<input type="button" value="쿠키확인" onclick="alert(getCookie('a1'))">
+<input type="button" value="쿠키삭제" onclick="setCookie('a1', '', -1)">
+<div id="a1"></div>
+
+
+<script type="text/javascript">
+	function setCookie(cName, cDay) {
+		let expire = new Date();
+		let inn = document.getElementById(cName);
+		alert("ok : " + inn.innerHTML);
+		expire.setDate(expire.getDate() + cDay);
+		cookies = cName + '=' + escape(inn.innerHTML) + '; path=/';
+		if (typeof cDay != 'undefined') {
+			cookies += '; expires=' + expire.toGMTString() + ';';
+			document.cookie = cookies;
+			document.innerHTML += document.cookie;
+			alert(cookies);
+		}
+	}
+
+	function getCookie(cName) {
+		cName = cName + '=';
+		let cookieData = document.cookie;
+		alert(cookieData);
+		let start = cookieData.indexOf(cName);
+		let cValue = '';
+		if (start != -1) {
+			start += cName.length;
+			let end = cookieData.indexOf(';', start);
+			if (end == -1) {
+				end = cookieData.length;
+			}
+			cValue = cookieData.substring(start, end);
+			
+		}
+			return unescape(cValue);
+	}
+	
+	function init() {
+		let inn = document.querySelector('#a1');
+		inn.innerHTML = getCookie('a1');
+		
+	}
+
+debugger;
+init();
+</script>
+</body>
+</html>
