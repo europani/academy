@@ -22,8 +22,8 @@
 	try {
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String user = "scott";
-		String password = "1111";
-		String sql = "INSERT INTO professor VALUE (?, ?, ?, ?, ?, ?, null, ?, null, null)";
+		String password = "1234";
+		String sql = "INSERT INTO professor VALUES (?, ?, ?, ?, ?, ?, null, ?, null, null)";
 
 		conn = DriverManager.getConnection(url, user, password);
 		pstmt = conn.prepareStatement(sql);
@@ -52,6 +52,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+Professor 테이블에 INSERT 되었습니다.
+교수번호 : <%=profno %><br>
+교수명 : <%=name %><br>
+직책 : <%=position %><br>
+id : <%=id %><br>
+입사일 : <%=hiredate %><br>
+부서코드 : <%=deptno %><br>
+pay : <%=pay %><br>
 </body>
 </html>

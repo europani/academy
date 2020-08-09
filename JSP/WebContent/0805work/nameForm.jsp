@@ -7,10 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Get Servlet 방식</h1>
-<form method="post" action="getServlet">
-msg : <input name="msg">
-<input type="submit" value="제출하기">
+<form method="post" action="selectStudent2.jsp">
+	<input type="text" name="name" placeholder="이름을 입력해주세요." ><br>
+	<input type="submit" value="제출하기">
 </form>
 </body>
 </html>

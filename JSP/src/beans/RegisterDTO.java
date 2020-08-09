@@ -2,7 +2,7 @@ package beans;
 
 import java.util.Date;
 
-public class RegisterBean {
+public class RegisterDTO {
 	
 	private int empno;
 	private String ename;
@@ -61,7 +61,4 @@ public class RegisterBean {
 	public void setDeptno(int deptno) {
 		this.deptno = deptno;
 	}
-	
-	
-
 }

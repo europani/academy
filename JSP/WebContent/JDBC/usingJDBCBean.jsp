@@ -1,5 +1,5 @@
-<%@page import="JDBC.RegisterMgr"%>
-<%@page import="beans.RegisterBean"%>
+<%@page import="JDBC.RegisterDAO"%>
+<%@page import="beans.RegisterDTO"%>
 <%@page import="java.util.Vector"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
@@ -25,12 +25,12 @@
 		<td><Strong>DEPTNO</Strong></td>
 	</tr>
 	<%
-		RegisterMgr regMgr = new RegisterMgr();
-		Vector<RegisterBean> vlist = regMgr.getRegisterList();
+		RegisterDAO regMgr = new RegisterDAO();
+		Vector<RegisterDTO> vlist = regMgr.getRegisterList();
 		int counter = vlist.size();
 		for (int i=0; i < vlist.size(); i++) {
-			RegisterBean regBean = vlist.get(i);
-%>
+			RegisterDTO regBean = vlist.get(i);
+	%>
 	<tr>
 		<td><%=regBean.getEmpno() %></td>
 		<td><%=regBean.getEname() %></td>

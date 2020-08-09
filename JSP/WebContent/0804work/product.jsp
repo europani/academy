@@ -8,6 +8,7 @@
 </head>
 <body>
 <form method="post" action="action2.jsp">
+<input type="hidden" name="name" value="입력되어 있지">
 itemcode : <input type="text" name="itemcode"><p>
 specification : <input type="text" name="specification"><p>
 qty : <input type="text" name="qty"><p>

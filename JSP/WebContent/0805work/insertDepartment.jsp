@@ -44,6 +44,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+Department 테이블에 INSERT 되었습니다.
 부서번호 : <%=deptno %><br>
 부서이름 : <%=dname %><br>
 </body>

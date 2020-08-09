@@ -7,16 +7,16 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Vector;
 
-import beans.RegisterBean;
+import beans.RegisterDTO;
 
-public class RegisterMgr {
+public class RegisterDAO {
 	
 	private final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	private final String USER = "scott";
-	private final String PASS = "1111";
+	private final String PASS = "1234";
 	
-	public RegisterMgr() {
+	public RegisterDAO() {
 		try {
 			Class.forName(JDBC_DRIVER);
 		} catch (Exception e) {
@@ -24,12 +24,12 @@ public class RegisterMgr {
 		}
 	}
 	
-	public Vector<RegisterBean> getRegisterList() {
+	public Vector<RegisterDTO> getRegisterList() {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		
-		Vector<RegisterBean> vlist = new Vector<RegisterBean>();
+		Vector<RegisterDTO> vlist = new Vector<RegisterDTO>();
 		String sql = "SELECT * FROM emp";
 		
 		try {
@@ -38,16 +38,16 @@ public class RegisterMgr {
 			rs = stmt.executeQuery(sql);
 			
 			while (rs.next()) {
-				RegisterBean bean = new RegisterBean();
-				bean.setEmpno(rs.getInt("empno"));
-				bean.setEname(rs.getString("ename"));
-				bean.setJob(rs.getString("job"));
-				bean.setMgr(rs.getInt("mgr"));
-				bean.setHiredate(rs.getDate("hiredate"));
-				bean.setSal(rs.getInt("sal"));
-				bean.setComm(rs.getInt("comm"));
-				bean.setDeptno(rs.getInt("deptno"));
-				vlist.addElement(bean);
+				RegisterDTO dto = new RegisterDTO();
+				dto.setEmpno(rs.getInt("empno"));
+				dto.setEname(rs.getString("ename"));
+				dto.setJob(rs.getString("job"));
+				dto.setMgr(rs.getInt("mgr"));
+				dto.setHiredate(rs.getDate("hiredate"));
+				dto.setSal(rs.getInt("sal"));
+				dto.setComm(rs.getInt("comm"));
+				dto.setDeptno(rs.getInt("deptno"));
+				vlist.addElement(dto);
 				
 			}
 				
