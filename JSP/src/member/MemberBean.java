@@ -9,7 +9,7 @@ public class MemberBean {
 	private String email;
 	private String zipcode;
 	private String address;
-	private String hobby;
+	private String[] hobby;
 	private String job;
 	
 	public String getId() {
@@ -60,10 +60,10 @@ public class MemberBean {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getHobby() {
+	public String[] getHobby() {
 		return hobby;
 	}
-	public void setHobby(String hobby) {
+	public void setHobby(String[] hobby) {
 		this.hobby = hobby;
 	}
 	public String getJob() {

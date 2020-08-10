@@ -1,3 +1,4 @@
+
 <%@page import="JDBC.RegisterDAO"%>
 <%@page import="beans.RegisterDTO"%>
 <%@page import="java.util.Vector"%>

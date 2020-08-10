@@ -9,13 +9,14 @@
 </head>
 <body bgcolor="#FFFFCC">
 <form name="regFrm" method="post" action="memberProc.jsp">
+	<input type="text" name="idCheckOk" value="no">
 	<table align="center" border="0" cellspacing="0" cellpadding="5">
 		<tr>
 			<td bgcolor="#996600" colspan="3" align="center"><font color="#FFFFFF">회원 가입</font></td>
 		</tr>
 		<tr>
 			<td>아이디</td>
-			<td><input name="id"><input type="button" value="ID중복확인" onclick=""></td>
+			<td><input name="id"><input type="button" value="ID중복확인" onclick="idCheck(this.form.id.value)"></td>
 			<td>아이디를 적어 주세요.</td>
 		</tr>
 		<tr>
@@ -25,7 +26,7 @@
 		</tr>
 		<tr>
 			<td>패스워드 확인</td>
-			<td><input name="pwd"></td>
+			<td><input name="repwd"></td>
 			<td>패스워드를 확인합니다.</td>
 		</tr>
 		<tr>
@@ -50,12 +51,12 @@
 		</tr>
 		<tr>
 			<td>우편번호</td>
-			<td><input name="zipcode"><input type="button" value="우편번호찾기" onclick=""></td>
+			<td><input id="sample4_postcode" name="zipcode" size="5"><input type="button" value="우편번호찾기" onclick="sample4_execDaumPostcode()"></td>
 			<td>우편번호를 검색하세요.</td>
 		</tr>
 		<tr>
 			<td>주소</td>
-			<td><input name="address" size="50"></td>
+			<td><input id="sample4_roadAddress" name="address" size="50"></td>
 			<td>주소를 적어 주세요.</td>
 		</tr>
 		<tr>
@@ -94,5 +95,60 @@
 		</tr>
 	</table>
 </form>
+
+<script type="text/javascript">
+	function idCheck(id) {
+		frm = document.regFrm;
+		if (id=="") {
+			alert("아이디를 입력해주세요.");
+			fmr.id.focus();
+			return;
+		}
+		url = "idCheck.jsp?id=" + encodeURIComponent(id);
+		window.open(url, "IDCheck", "width=300,height=150");
+	}
+	
+	function zipCheck() {
+		url = "zipSearch.jsp?search=n";
+		window.open(url, "ZipCodeSearch", "width=500,height=300,scrollbars=yes");
+	}
+
+
+</script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+    function sample4_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample4_postcode').value = data.zonecode;
+                document.getElementById("sample4_roadAddress").value = roadAddr;
+            }
+        }).open();
+        
+    }
+</script>
 </body>
 </html>
