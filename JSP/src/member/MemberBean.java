@@ -1,5 +1,7 @@
 package member;
 
+import java.util.Arrays;
+
 public class MemberBean {
 	private String id;
 	private String pwd;
@@ -11,6 +13,7 @@ public class MemberBean {
 	private String address;
 	private String[] hobby;
 	private String job;
+	private String newhobby;		// String[] hobby -> String
 	
 	public String getId() {
 		return id;
@@ -60,11 +63,12 @@ public class MemberBean {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String[] getHobby() {
-		return hobby;
-	}
 	public void setHobby(String[] hobby) {
-		this.hobby = hobby;
+		String str = "";
+		for (int i = 0; i < hobby.length; i++) {
+			str += hobby[i] + ",";
+		}
+		this.newhobby = str;
 	}
 	public String getJob() {
 		return job;
@@ -72,13 +76,16 @@ public class MemberBean {
 	public void setJob(String job) {
 		this.job = job;
 	}
+	public String getNewhobby() {
+		return newhobby;
+	}
+	public void setNewhobby(String newhobby) {
+		this.newhobby = newhobby;
+	}
 	@Override
 	public String toString() {
 		return "MemberBean [id=" + id + ", pwd=" + pwd + ", name=" + name + ", gender=" + gender + ", birthday="
-				+ birthday + ", email=" + email + ", zipcode=" + zipcode + ", address=" + address + ", hobby=" + hobby
-				+ ", job=" + job + "]";
+				+ birthday + ", email=" + email + ", zipcode=" + zipcode + ", address=" + address + ", hobby="
+				+ Arrays.toString(hobby) + ", job=" + job + ", newhobby=" + newhobby + "]";
 	}
-	
-	
-	
 }

@@ -5,6 +5,7 @@
 <jsp:useBean id="mgr" class="member.MemberMgr" />
 <jsp:setProperty name="bean" property="*" />
 <%
+	
 	boolean result = mgr.insertMember(bean);
 	String msg = "회원가입에 실패 하였습니다.";
 	String location = "member.jsp";

@@ -29,7 +29,7 @@
 <script type="text/javascript">
 	 function idCheckOr(chk) {
 		if (!chk) {
-			opener.document.regFrm.idCheckOk.value = 'yes';
+			opener.document.regFrm.idCheckOk.value = 'yes';		// 창을 열은 주체 : opener
 		} else {
 			opener.document.regFrm.idCheckOk.value = 'no';
 			opener.document.regFrm.id.value = '';

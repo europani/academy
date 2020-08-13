@@ -1,5 +1,19 @@
+<%@page import="member.MemberBean"%>
+<%@page import="member.MemberMgr"%>
+<%@page import="java.util.Vector"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+<%
+	request.setCharacterEncoding("EUC-KR");
+%>
+<%
+	String id = (String)session.getAttribute("idKey");
+		
+	MemberMgr mgr = new MemberMgr();
+	MemberBean mem = mgr.getMember(id);
+	
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,16 +22,14 @@
 <link href="style.css" rel="stylesheet">
 </head>
 <body bgcolor="#FFFFCC">
-<form name="regFrm" method="post" action="memberProc.jsp">
-	<input type="hidden" name="idCheckOk" value="no">
+<form name="updateFrm" method="post" action="updateProc.jsp">
 	<table align="center" border="0" cellspacing="0" cellpadding="5">
 		<tr>
-			<td bgcolor="#996600" colspan="3" align="center"><font color="#FFFFFF">회원 가입</font></td>
+			<td bgcolor="#996600" colspan="3" align="center"><font color="#FFFFFF">회원 정보 수정</font></td>
 		</tr>
 		<tr>
 			<td>아이디</td>
-			<td><input name="id"><input type="button" value="ID중복확인" onclick="idCheck(this.form.id.value)"></td>
-			<td>아이디를 적어 주세요.</td>
+			<td><input type="hidden" name="id" value="<%=id%>"><%=id%></td>
 		</tr>
 		<tr>
 			<td>패스워드</td>
@@ -31,42 +43,45 @@
 		</tr>
 		<tr>
 			<td>이름</td>
-			<td><input name="name"></td>
+			<td><input name="name" value="<%=mem.getName()%>"></td>
 			<td>이름을 적어 주세요.</td>
 		</tr>
 		<tr>
 			<td>성별</td>
-			<td>남<input type="radio" name="gender" value="1">여<input type="radio" name="gender" value="2"></td>
+			<td>
+				남<input type="radio" name="gender" value="1" <%=mem.getGender().equals("1")? "checked":"" %>>
+				여<input type="radio" name="gender" value="2" <%=mem.getGender().equals("2")? "checked":"" %>>
+			</td>
 			<td>성별을 선택 하세요.</td>
 		</tr>
 		<tr>
 			<td>생년월일</td>
-			<td><input name="birthday" size="5"> ex)830815</td>
+			<td><input name="birthday" size="5" value="<%=mem.getBirthday()%>"> ex)830815</td>
 			<td>성별을 선택 하세요.</td>
 		</tr>
 		<tr>
 			<td>Email</td>
-			<td><input type="email" name="email"></td>
+			<td><input type="email" name="email" value="<%=mem.getEmail() %>"></td>
 			<td>이메일을 적어 주세요.</td>
 		</tr>
 		<tr>
 			<td>우편번호</td>
-			<td><input id="sample4_postcode" name="zipcode" size="5"><input type="button" value="우편번호찾기" onclick="sample4_execDaumPostcode()"></td>
+			<td><input id="sample4_postcode" name="zipcode" size="5" value="<%=mem.getZipcode()%>"><input type="button" value="우편번호찾기" onclick="sample4_execDaumPostcode()"></td>
 			<td>우편번호를 검색하세요.</td>
 		</tr>
 		<tr>
 			<td>주소</td>
-			<td><input id="sample4_roadAddress" name="address" size="50"></td>
+			<td><input id="sample4_roadAddress" name="address" size="50" value="<%=mem.getAddress()%>"></td>
 			<td>주소를 적어 주세요.</td>
 		</tr>
 		<tr>
 			<td>취미</td>
 			<td>
-				인터넷<input type="checkbox" name="hobby" value="internet">
-				여행<input type="checkbox" name="hobby" value="travel">
-				게임<input type="checkbox" name="hobby" value="game">
-				영화<input type="checkbox" name="hobby" value="movie">
-				운동<input type="checkbox" name="hobby" value="exercise">
+				인터넷<input type="checkbox" name="hobby" value="internet" <%= mem.getNewhobby().contains("internet")? "checked" : "" %>>
+				여행<input type="checkbox" name="hobby" value="travel" <%= mem.getNewhobby().contains("travel")? "checked" : "" %>>
+				게임<input type="checkbox" name="hobby" value="game" <%= mem.getNewhobby().contains("game")? "checked" : "" %>>
+				영화<input type="checkbox" name="hobby" value="movie" <%= mem.getNewhobby().contains("movie")? "checked" : "" %>>
+				운동<input type="checkbox" name="hobby" value="exercise" <%= mem.getNewhobby().contains("exercise")? "checked" : "" %>>
 			</td>
 			<td>취미를 선택하세요.</td>
 		</tr>
@@ -84,37 +99,20 @@
 					<option value="무직">무직</option>
 				</select>					
 			</td>
+			<script>
+				document.updateFrm.job.value='<%=mem.getJob()%>';		/* JS가 알아서해줌 */
+			</script>
 			<td>직업을 선택하세요.</td>
 		</tr>
 		<tr>
 			<td colspan="3" align="center">
-				<input type="button" value="회원가입" onclick="inputCheck()">
+				<input type="button" value="정보수정" onclick="inputCheck2()">
 				<input type="reset" value="다시쓰기">
-				<input type="button" value="로그인" onclick="location.href = 'login.jsp'">
+				<input type="button" value="뒤로가기" onclick="history.back()">
 			</td>
 		</tr>
 	</table>
 </form>
-
-<script type="text/javascript">
-	function idCheck(id) {
-		frm = document.regFrm;
-		if (id=="") {
-			alert("아이디를 입력해주세요.");
-			frm.id.focus();
-			return;
-		}
-		url = "idCheck.jsp?id=" + encodeURIComponent(id);
-		window.open(url, "IDCheck", "width=300,height=150");
-	}
-	
-	function zipCheck() {
-		url = "zipSearch.jsp?search=n";
-		window.open(url, "ZipCodeSearch", "width=500,height=300,scrollbars=yes");
-	}
-
-
-</script>
 <script src="javascript.js" type="text/javascript"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
