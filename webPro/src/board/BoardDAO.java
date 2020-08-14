@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BoardDAO {
 	
@@ -30,7 +32,7 @@ public class BoardDAO {
 	}
 
 	public void insertArticle(BoardDTO article, String boardid) {
-		Connection conn = getConnection();
+		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -45,6 +47,7 @@ public class BoardDAO {
 		String sql = "";
 		
 		try {
+			conn = getConnection();
 			sql = "SELECT boardser.nextval from dual";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -93,4 +96,144 @@ public class BoardDAO {
 			Util.close(conn, pstmt, rs);
 		}
 	}
+	
+	public int getArticleCount(String boardid, String category, String sentence) {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		int x = 0;
+		
+		try {
+			if (category == null || category.equals("")) {
+				sql = "SELECT NVL(count(*),0) FROM board WHERE boardid = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, boardid);
+			} else {
+				sql = "SELECT NVL(count(*),0) FROM board WHERE boardid = ? AND " + category + " like ? ";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, boardid);
+				pstmt.setString(2, "%" + category + "%");
+			}
+			
+			rs = pstmt.executeQuery();
+			if (rs != null) {
+				while (rs.next()) {
+					x = rs.getInt(1);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		return x;
+	}
+	
+	public List getArticles(int startRow, int endRow, String boardid, String category, String sentence) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		List articleList = null;
+		
+		try {
+			conn = getConnection();
+			if (category == null || category.equals("")) {
+				sql = "SELECT * FROM (SELECT rownum rnum, a.* FROM ("
+						+ "SELECT * FROM board WHERE boardid = ? ORDER BY ref desc, re_step) a) WHERE rnum BETWEEN ? AND ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, boardid);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+			} else {
+				sql = "SELECT * FROM (SELECT rownum rnum, a.* FROM ("
+						+ "SELECT * FROM board WHERE boardid = ? AND " + category + " like ? ORDER BY ref desc, re_step) a) WHERE rnum BETWEEN ? AND ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, boardid);
+				pstmt.setString(2, "%" + category + "%");
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, endRow);
+			}
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				articleList = new ArrayList(endRow);
+				do {
+					BoardDTO article = new BoardDTO();
+					article.setNum(rs.getInt("num"));
+					article.setWriter(rs.getString("writer"));
+					article.setSubject(rs.getString("subject"));
+					article.setEmail(rs.getString("email"));
+					article.setContent(rs.getString("content"));
+					article.setPasswd(rs.getString("passwd"));
+					article.setBoardid(rs.getString("boardid"));
+					article.setReg_date(rs.getTimestamp("reg_date"));
+					article.setReadcount(rs.getInt("readcount"));
+					article.setIp(rs.getString("ip"));
+					article.setRef(rs.getInt("ref"));
+					article.setRe_step(rs.getInt("re_step"));
+					article.setRe_level(rs.getInt("re_level"));
+					article.setFilename(rs.getString("filename"));
+					article.setFilesize(rs.getInt("filesize"));
+					articleList.add(article);
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		
+		return articleList;
+	}
+	
+	public BoardDTO getArticle(int num, String boardid) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		BoardDTO article = new BoardDTO();
+		
+		try {
+			conn = getConnection();
+			sql = "UPDATE board SET readcount = readcount + 1 WHERE num = ? AND boardid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.setString(2, boardid);
+			pstmt.executeUpdate();
+			
+			sql = "SELECT * FROM board WHERE num = ? AND boardid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.setString(2, boardid);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+					article = new BoardDTO();
+					article.setNum(rs.getInt("num"));
+					article.setWriter(rs.getString("writer"));
+					article.setSubject(rs.getString("subject"));
+					article.setEmail(rs.getString("email"));
+					article.setContent(rs.getString("content"));
+					article.setPasswd(rs.getString("passwd"));
+					article.setBoardid(rs.getString("boardid"));
+					article.setReg_date(rs.getTimestamp("reg_date"));
+					article.setReadcount(rs.getInt("readcount"));
+					article.setIp(rs.getString("ip"));
+					article.setRef(rs.getInt("ref"));
+					article.setRe_step(rs.getInt("re_step"));
+					article.setRe_level(rs.getInt("re_level"));
+					article.setFilename(rs.getString("filename"));
+					article.setFilesize(rs.getInt("filesize"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		
+		return article;
+	}
+	
 }
