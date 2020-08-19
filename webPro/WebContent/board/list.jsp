@@ -73,12 +73,12 @@
 			if (article.getRe_level() > 0) {
 				wid = 5 * (article.getRe_level());
 %>
-			<img src="images/level.gif" width="<%=wid%>" height="16">
-			<img src="images/re.gif">
+			<img src="<%=request.getContextPath() %>/images/level.gif" width="<%=wid%>" height="16">
+			<img src="<%=request.getContextPath() %>/images/re.gif">
 <%
 			} else {
 %>			
-			<img src="images/level.gif" width="<%=wid%>" height="16">
+			<img src="<%=request.getContextPath() %>/images/level.gif" width="<%=wid%>" height="16">
 <%
 			}
 %>
@@ -89,7 +89,7 @@
 <%
 			if (article.getReadcount() >= 20) {
 %>
-			<img src="images/hot.gif" border="0" height="16">
+			<img src="<%=request.getContextPath() %>/images/hot.gif" border="0" height="16">
 <%
 			}
 %>

@@ -15,7 +15,7 @@
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 	try {
 		BoardDAO dbPro = BoardDAO.getInstance();
-		BoardDTO article = dbPro.getArticle(num, boardid);
+		BoardDTO article = dbPro.getArticle(num, boardid, true);
 		int ref = article.getRef();
 		int re_step = article.getRe_step();
 		int re_level = article.getRe_level();
@@ -51,6 +51,8 @@
 			<input type="button" value="글수정" onclick="document.location.href='updateForm.jsp?num=<%=article.getNum()%>'">
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" value="글삭제" onclick="document.location.href='deleteForm.jsp?num=<%=num%>&ref=<%=ref%>&re_step=<%=re_step%>&re_level=<%=re_level%>'">
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" value="답글쓰기" onclick="document.location.href='writeUploadForm.jsp?num=<%=num%>&ref=<%=ref%>&re_step=<%=re_step%>&re_level=<%=re_level%>'">
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" value="글목록" onclick="document.location.href='list.jsp'">
 		</td>

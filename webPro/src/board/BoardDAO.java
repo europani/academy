@@ -36,13 +36,12 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		// 1
 		int num = article.getNum();
 		int ref = article.getRef();
 		int re_step = article.getRe_step();
 		int re_level = article.getRe_level();
 		
-		// 1 답글쓰기
+
 		int number = 0;
 		String sql = "";
 		
@@ -59,7 +58,7 @@ public class BoardDAO {
 			}
 			
 			if (num != 0) {		// 답글
-				sql = "UPDATE board SET re_step=re_step + 1 WHERE ref = ? AND re_step > ? AND boardid = ?";
+				sql = "UPDATE board SET re_step=re_step + 1 WHERE ref = ? AND re_step > ? AND boardid = ?";		// 이전에 작성된 답글의 re_step 증가
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, ref);
 				pstmt.setInt(2, re_step);
@@ -188,7 +187,7 @@ public class BoardDAO {
 		return articleList;
 	}
 	
-	public BoardDTO getArticle(int num, String boardid) {
+	public BoardDTO getArticle(int num, String boardid, boolean readcount) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -197,12 +196,15 @@ public class BoardDAO {
 		
 		try {
 			conn = getConnection();
-			sql = "UPDATE board SET readcount = readcount + 1 WHERE num = ? AND boardid = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, num);
-			pstmt.setString(2, boardid);
-			pstmt.executeUpdate();
 			
+			if (readcount) {
+				
+				sql = "UPDATE board SET readcount = readcount + 1 WHERE num = ? AND boardid = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				pstmt.setString(2, boardid);
+				pstmt.executeUpdate();
+			}
 			sql = "SELECT * FROM board WHERE num = ? AND boardid = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -236,4 +238,75 @@ public class BoardDAO {
 		return article;
 	}
 	
+	public int updateArticle(BoardDTO article, String boardid) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String dbpasswd = "";
+		String sql = "";
+		int x = -1;
+		
+		try {
+			conn = getConnection();
+			sql = "SELECT passwd FROM board WHERE num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, article.getNum());
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				dbpasswd = rs.getString("passwd");
+				if (dbpasswd.equals(article.getPasswd())) {
+					sql = "UPDATE board SET writer=?, email=?, subject=?, passwd=?, content=?, filename=?, filesize=? WHERE num=?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, article.getWriter());
+					pstmt.setString(2, article.getEmail());
+					pstmt.setString(3, article.getSubject());
+					pstmt.setString(4, article.getPasswd());
+					pstmt.setString(5, article.getContent());
+					pstmt.setString(6, article.getFilename());
+					pstmt.setInt(7, article.getFilesize());
+					pstmt.setInt(8, article.getNum());
+					pstmt.executeUpdate();
+					x = 1;
+				}
+			} else x=0;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		return x;
+	}
+	
+	public int deleteArticle(String num, String inputPasswd, String boardid) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			sql = "SELECT passwd FROM board WHERE num = ? AND boardid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			pstmt.setString(2, boardid);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				if (rs.getString(1).equals(inputPasswd)) {
+					sql = "DELETE FROM board WHERE num = ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, num);
+					result = pstmt.executeUpdate();		
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		return result;
+		
+	}
 }
