@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <!-- bradcam_area_start -->
 <div class="bradcam_area breadcam_bg overlay2">
-	<h3>쌤등록</h3>
+	<h3>수업등록</h3>
 </div>
 <!-- bradcam_area_end -->
 <div class="our_courses">

@@ -61,7 +61,7 @@
 									<li><a href="#">선생님<i class="ti-angle-down"></i></a>
 										<ul class="submenu">
 											<li><a href="/JSP_PROJECT/board/teacher/teacherSingup.jsp">쌤등록</a></li>
-											<li><a href="#">수업등록</a></li>
+											<li><a href="/JSP_PROJECT/board/course/courseRegister.jsp">수업등록</a></li>
 											<li><a href="#">신청자 조회</a></li>
 										</ul></li>
 									<li><a href="#">마이페이지<i class="ti-angle-down"></i></a>
@@ -177,12 +177,12 @@
 						<div class="switch-wrap d-flex justify-content-between">
 							<p>남</p>
 							<div class="primary-radio">
-								<input type="radio" name="gender" value="male" id="male" value="1"> <label
+								<input type="radio" name="gender" value="male" id="male"> <label
 									for="male"></label>
 							</div>
 							<p>여</p>
 							<div class="primary-radio">
-								<input type="radio" name="gender" value="female" id="female" value="2"><label
+								<input type="radio" name="gender" value="female" id="female"><label
 									for="female"></label>
 
 							</div>

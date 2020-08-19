@@ -20,7 +20,7 @@
 						<!-- <a href="#" class="boxed_btn">나를 위한 선생님 찾으러가기</a> -->
 
 						<div class="search">
-							<form action="course/cource.jsp" method="get">
+							<form action="course/course.jsp" method="get">
 								<input type="search" name="search" id="search" placeholder="나를 위한 선생님 찾으러가기">
 								<button type="submit">
 									<i class="fa fa-search"></i>

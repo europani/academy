@@ -1,12 +1,9 @@
-<%@page import="com.semosam.dto.courseDTO"%>
-<%@page import="com.semosam.dao.courseDAO"%>
 <%@page import="java.io.File"%>
 <%@page import="com.semosam.dto.teacherDTO"%>
 <%@page import="java.util.Enumeration"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="com.semosam.dao.teacherDAO"%>
-<%@page import="com.semosam.dao.memberDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%
 	request.setCharacterEncoding("EUC-KR");
@@ -37,28 +34,12 @@
 	boolean resultT = daoT.insertTeacher(dtoT, email);
 %>
 
-<%
-	courseDTO dtoC = new courseDTO();
-
-	String file2 = (String) files.nextElement();
-	File courseImage = multi.getFile(file2);
-	dtoC.setCourseimage(courseImage.getName());
-	dtoC.setTitle(multi.getParameter("title"));
-	dtoC.setCategory(multi.getParameter("category"));
-	dtoC.setDifficulty(multi.getParameter("difficulty"));
-	dtoC.setMaxppl(Integer.parseInt(multi.getParameter("maxppl")));
-	dtoC.setAddress(multi.getParameter("address"));
-	dtoC.setContent(multi.getParameter("content"));
-	dtoC.setNotice(multi.getParameter("notice"));
-	courseDAO daoC = new courseDAO();
-	boolean resultC = daoC.insertCourse(dtoC, email);
-%>
 
 <body>
 	<%
 		String msg = "쌤등록에 실패 하였습니다.";
 		String location = "document.referrer";
-		if (resultT && resultC) {
+		if (resultT) {
 			msg = "쌤등록을 하였습니다.";
 		}
 	%>
