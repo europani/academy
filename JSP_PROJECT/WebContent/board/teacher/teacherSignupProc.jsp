@@ -41,11 +41,12 @@
 		String location = "document.referrer";
 		if (resultT) {
 			msg = "쌤등록을 하였습니다.";
+			location = "/JSP_PROJECT/board/index.jsp";
 		}
 	%>
 	<script type="text/javascript">
-	alert("<%=msg%>");
-		location.href =	<%=location%>;
+		alert("<%=msg%>");
+		location.href =	'<%=location%>';
 	</script>
 </body>
 </html>

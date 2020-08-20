@@ -22,6 +22,28 @@ public class memberDAO {
 			System.out.println("Error : JDBC 드라이버 로딩 실패");
 		}
 	}
+	
+	public boolean teacherCheck(String email) {
+		boolean flag = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			sql = "select m.memnum from member m, teacher t where t.memnum = m.memnum and m.email=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			if(pstmt.executeQuery().next()) {
+				flag = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt);
+		}
+		return flag;
+	}
 
 	public boolean login(String email, String pwd) {
 		boolean flag = false;
@@ -54,7 +76,7 @@ public class memberDAO {
 
 		try {
 			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
-			sql = "select id from tblMember where id=?";
+			sql = "select email from member where email=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 

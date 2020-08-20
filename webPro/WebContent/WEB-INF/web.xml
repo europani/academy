@@ -12,7 +12,10 @@
   
   <jsp-config>
 	<jsp-property-group>
-		<url-pattern>/board/*</url-pattern>	
+		<url-pattern>/board/*</url-pattern>
+		<url-pattern>/member/*</url-pattern>
+		<url-pattern>/websocket/*</url-pattern>
+		<url-pattern>/chartjsPro/*</url-pattern>				
 		<include-prelude>/common/head.jsp</include-prelude>
 		<include-coda>/common/footer.jsp</include-coda>
 	</jsp-property-group>  

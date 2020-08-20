@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%
+	request.setCharacterEncoding("EUC-KR");
+%>
 <!DOCTYPE html>
 
 <html lang="en"> 
@@ -57,9 +60,24 @@
   <a href="<%=request.getContextPath()%>/board/list.jsp?boardid=1" class="w3-bar-item w3-button">공지사항</a>
   <a href="<%=request.getContextPath()%>/board/list.jsp?boardid=2" class="w3-bar-item w3-button">자유게시판</a>
   <a href="<%=request.getContextPath()%>/board/list.jsp?boardid=3" class="w3-bar-item w3-button">Q&A</a>
-  <a href="<%=request.getContextPath()%>/member/inputForm.jsp"    class="w3-bar-item w3-button">회원가입</a>
   <a href="<%=request.getContextPath()%>/chartjsPro/bar_sample.jsp"    class="w3-bar-item w3-button">BarGraph</a>
   <a href="<%=request.getContextPath()%>/awesomePro/aweSomeCloud.jsp"    class="w3-bar-item w3-button">WordCloud</a>
+  
+<% 
+  	if (session.getAttribute("idKey") == null) {
+%> 		
+  	  <a href="<%=request.getContextPath()%>/member/member.jsp"    class="w3-bar-item w3-button">회원가입</a>
+  	  <a href="<%=request.getContextPath()%>/member/login.jsp"    class="w3-bar-item w3-button">로그인</a>
+<%
+  	} else {
+%>
+	  <a href="<%=request.getContextPath()%>/member/update.jsp"    class="w3-bar-item w3-button">회원수정</a>
+  	  <a href="<%=request.getContextPath()%>/member/logout.jsp"    class="w3-bar-item w3-button">로그아웃</a>
+<%  		
+  	}
+%>
+  
+
 </div>
 
 

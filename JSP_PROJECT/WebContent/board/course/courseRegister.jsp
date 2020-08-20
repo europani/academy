@@ -34,6 +34,7 @@
 							<input type="text" name="title" placeholder="수업명" onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '수업 이름'" required class="single-input">
 						</div>
+						
 						<p>카테고리</p>
 						<div class="input-group-icon mt-10">
 
@@ -55,17 +56,25 @@
 							</div>
 						</div>
 
-						<div class="mt-10">
-							<p>수업 난이도</p>
-
-							<input type="text" name="difficulty" placeholder="난이도" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '수업 난이도'" required class="single-input">
+						<p>수업 난이도</p>
+						<div class="input-group-icon mt-10">
+							<div class="icon">
+								<i class="fa fa-paperclip" aria-hidden="true"></i>
+							</div>
+							<div class="form-select" id="default-select">
+								<select name="difficulty">
+									<option selected disabled>난이도</option>
+									<option value="easy">easy</option>
+									<option value=intermediate>intermediate</option>
+									<option value="hard">hard</option>
+								</select>
+							</div>
 						</div>
 						<div class="mt-10">
-							<p>수업 정원</p>
+							<p>수업 인원(1~99)</p>
 
-							<input type="text" name="maxppl" placeholder="수어 정원" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '수업 정원'" required class="single-input">
+							<input type="text" name="maxppl" placeholder="수업 인원" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '수업 인원'" required class="single-input">
 						</div>
 						<div class="mt-10">
 							<p>수업 장소</p>

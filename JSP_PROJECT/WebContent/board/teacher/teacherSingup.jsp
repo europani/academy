@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
+<html>
+<body>
 <!-- bradcam_area_start -->
 <div class="bradcam_area breadcam_bg overlay2">
 	<h3>½Üµî·Ï</h3>
@@ -26,6 +28,9 @@
 						<h3 class="mb-30">½ÜÁ¤º¸</h3>
 						<div class="mt-10">
 							<p>½Ü»çÁø</p>
+						<div id="upload">
+						<img id="samPic" width="200px" height="200px">
+						</div>
 							<div class="file-input">
 								<input type="text" readonly="readonly" id="fileRoute" required class="fileRoute"> <label
 									for="teacherImage">»çÁø ¾÷·Îµå <input name="teacherImage" type="file"
@@ -47,3 +52,30 @@
 		</div>
 	</div>
 </div>
+<script>
+	const samPic = document.querySelector("#samPic");
+	const upload = document.querySelector("#upload");
+	const teacherImage = document.querySelector("#teacherImage"); 
+	
+	teacherImage.addEventListener('change', function(e) {
+		 let get_file = e.target.files;
+		 
+		 let image = document.createElement('img');
+		 
+		 let reader = new FileReader();
+		 
+		 reader.onload = function (img) {
+			return function (e) {
+				img.src = e.target.result;
+			}
+		}(img)
+	
+	
+	if (get_file) {
+		reader.readAsDataURL(get_file[0]);
+	}
+		div.appendChild(image);
+	})
+</script>
+</body>
+</html>

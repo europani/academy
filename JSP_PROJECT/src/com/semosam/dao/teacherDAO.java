@@ -11,7 +11,7 @@ import com.semosam.dto.teacherDTO;
 public class teacherDAO {
 	private final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private final String USER = "JSP_Project";
+	private final String USER = "teamproject";
 	private final String PASS = "1111";
 
 	public teacherDAO() {
