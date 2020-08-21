@@ -144,3 +144,8 @@ function inputCheck2() {
 	document.updateFrm.submit();
 }
 
+function win_upload() {
+	let op = "width=500, height=150, left=50, top=150";
+	open("/webPro/nohead/pictureForm.jsp","",op);
+}
+

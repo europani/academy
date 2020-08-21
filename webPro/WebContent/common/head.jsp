@@ -62,6 +62,7 @@
   <a href="<%=request.getContextPath()%>/board/list.jsp?boardid=3" class="w3-bar-item w3-button">Q&A</a>
   <a href="<%=request.getContextPath()%>/chartjsPro/bar_sample.jsp"    class="w3-bar-item w3-button">BarGraph</a>
   <a href="<%=request.getContextPath()%>/awesomePro/aweSomeCloud.jsp"    class="w3-bar-item w3-button">WordCloud</a>
+  <a href="<%=request.getContextPath()%>/websocket/websocket01.jsp"    class="w3-bar-item w3-button">Ã¤ÆÃ</a>
   
 <% 
   	if (session.getAttribute("idKey") == null) {

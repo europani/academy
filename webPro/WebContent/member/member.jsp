@@ -8,28 +8,33 @@
 </head>
 <body>
 <form name="regFrm" method="post" action="memberProc.jsp">
+	<input type="hidden" name="picture">
 	<input type="hidden" name="idCheckOk" value="no">
 	<table align="center" border="0" cellspacing="0" cellpadding="5">
 		<tr>
 			<td bgcolor="#996600" colspan="3" align="center"><font color="#FFFFFF">회원 가입</font></td>
 		</tr>
 		<tr>
-			<td>아이디</td>
-			<td>
-				<input name="id" onkeyup="idCheck(this.form.id.value)">
-				<span id="idcheck"></span>
+			<td rowspan="4"><img src="" width="100" height="120" id="pic"><br>
+				<input type="button" onclick="javscript:win_upload()" value="사진등록">
 			</td>
-			<td>아이디를 적어 주세요.</td>
 		</tr>
 		<tr>
-			<td>패스워드</td>
-			<td><input name="pwd" type="password"></td>
-			<td>패스워드를 적어 주세요.</td>
+			<td>아이디:
+				<input name="id" size="15" onkeyup="idCheck(this.form.id.value)">
+				<span id="idcheck"></span>
+				<td>아이디를 적어 주세요.</td>
+			</td>
 		</tr>
 		<tr>
-			<td>패스워드 확인</td>
-			<td><input name="repwd" type="password"></td>
-			<td>패스워드를 확인합니다.</td>
+			<td>패스워드:
+			<input name="pwd" type="password" size="15"></td>
+			<td>비밀번호를 적어 주세요.</td>
+		</tr>
+		<tr>
+			<td>패스워드 확인:
+			<input name="repwd" type="password" size="15"></td>
+			<td>비밀번호를 확인해 주세요.</td>
 		</tr>
 		<tr>
 			<td>이름</td>
