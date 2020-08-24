@@ -1,5 +1,17 @@
+<%@page import="java.util.Vector"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.semosam.dao.courseDAO"%>
+<%@page import="com.semosam.dto.courseDTO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
+<%
+	request.setCharacterEncoding("EUC-KR");
+%>
+<%
+	courseDAO dbPro = new courseDAO();
+	/* courseDTO bean = dbPro.getCourses(); */
+	/* Vector<courseDTO> courseList = dbPro.getCourseList(); */
+%>
 
 <!-- bradcam_area_start -->
 <div class="bradcam_area breadcam_bg overlay2">
@@ -9,63 +21,102 @@
 
 <!-- popular_courses_start -->
 <div class="popular_courses plus_padding">
+	<!-- 인기쌤 수업~수업카테고리 시작 -->
 	<div class="container">
 		<div class="row">
 			<div class="col-xl-12">
 				<div class="section_title text-center mb-100">
-					<h3>Popular Courses</h3>
-					<p>
-						Your domain control panel is designed for ease-of-use and <br> allows for all aspects of
-						your domains.
+					<h3>인기쌤 수업</h3>
+					<p style="font: 'gulim'; ">
+						지금 세모쌤에서 가장 인기있는 선생님을 만나보세요!
 					</p>
 				</div>
 			</div>
 		</div>
+		<!-- 수업 카테고리 -->
 		<div class="row">
 			<div class="col-xl-12">
 				<div class="course_nav">
 					<nav>
 						<ul class="nav" id="myTab" role="tablist">
-							<li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab"
-								href="#home" role="tab" aria-controls="home" aria-selected="true">All Courses</a></li>
-							<li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab"
-								href="#profile" role="tab" aria-controls="profile" aria-selected="false">Photoshop</a></li>
-							<li class="nav-item"><a class="nav-link" id="contact-tab" data-toggle="tab"
-								href="#contact" role="tab" aria-controls="contact" aria-selected="false">UI/UX</a></li>
-							<li class="nav-item"><a class="nav-link" id="design-tab" data-toggle="tab"
-								href="#design" role="tab" aria-controls="design" aria-selected="false">Web Design</a></li>
-							<li class="nav-item"><a class="nav-link" id="Web-tab" data-toggle="tab" href="#Web"
-								role="tab" aria-controls="design" aria-selected="false">Web dev</a></li>
-							<li class="nav-item"><a class="nav-link" id="Web-tab1" data-toggle="tab" href="#Web1"
-								role="tab" aria-controls="design" aria-selected="false">Wordpress</a></li>
-							<li class="nav-item"><a class="nav-link" id="Web-tab11" data-toggle="tab" href="#Web11"
-								role="tab" aria-controls="design" aria-selected="false">Adobe XD</a></li>
-							<li class="nav-item"><a class="nav-link" id="Adobe-XD-tab8" data-toggle="tab"
-								href="#Adobe-XD8" role="tab" aria-controls="design" aria-selected="false">Sketch App</a></li>
-							<li class="nav-item"><a class="nav-link" id="Adobe-XD-tab9" data-toggle="tab"
-								href="#Adobe-XD9" role="tab" aria-controls="design" aria-selected="false">Illustrator</a></li>
+							<li class="nav-item"><a class="nav-link active"
+								id="home-tab" data-toggle="tab" href="#home" role="tab"
+								aria-controls="home" aria-selected="true">모든 수업</a></li>
+							
+							<!-- 로그인 시에만 확인 가능 -->
+							<% if(id != null) { %>
+							<li class="nav-item"><a class="nav-link" id="interest-tab"
+								data-toggle="tab" href="#interest" role="tab"
+								aria-controls="interest" aria-selected="false">내 관심사</a></li>
+							<%} %>
+							
+							<li class="nav-item"><a class="nav-link" id="design-tab"
+								data-toggle="tab" href="#design" role="tab"
+								aria-controls="design" aria-selected="false">디자인</a></li>
+
+							<li class="nav-item"><a class="nav-link" id="business-tab"
+								data-toggle="tab" href="#business" role="tab"
+								aria-controls="business" aria-selected="false">실무역량</a></li>
+
+							<li class="nav-item"><a class="nav-link" id="beauty-tab"
+								data-toggle="tab" href="#beauty" role="tab"
+								aria-controls="beauty" aria-selected="false">뷰티</a></li>
+
+							<li class="nav-item"><a class="nav-link" id="video-tab"
+								data-toggle="tab" href="#video" role="tab"
+								aria-controls="video" aria-selected="false">영상</a></li>
+
+							<li class="nav-item"><a class="nav-link" id="language-tab"
+								data-toggle="tab" href="#language" role="tab"
+								aria-controls="language" aria-selected="false">외국어</a></li>
+
+							<li class="nav-item"><a class="nav-link" id="music-tab"
+								data-toggle="tab" href="#music" role="tab" aria-controls="music"
+								aria-selected="false">음악</a></li>
+
+							<li class="nav-item"><a class="nav-link" id="lifestyle-tab"
+								data-toggle="tab" href="#lifestyle" role="tab"
+								aria-controls="lifestyle" aria-selected="false">라이프스타일</a></li>
+
+							<li class="nav-item"><a class="nav-link" id="Etc-tab"
+								data-toggle="tab" href="#Etc" role="tab" aria-controls="Etc"
+								aria-selected="false">기타</a></li>
+
 						</ul>
 					</nav>
 				</div>
 			</div>
 		</div>
-
+		<!-- 수업 카테고리 끝 -->
 	</div>
+	<!-- 인기쌤 수업~수업카테고리 끝 -->
+	
+	
 	<div class="all_courses">
 		<div class="container">
 			<div class="tab-content" id="myTabContent">
+			
+			<!-- 모든 수업 시작 -->
 				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 					<div class="row">
+					
+					<!-- DB course -->
+<%-- 					<% for(int i = 0; i < courseList.size(); i++) {
+						courseDTO course = courseList.get(i);
+					%>
+					
 						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
+								<!-- 수업 이미지 -->
 								<div class="thumb">
-									<a href="#"> <img src="img/courses/1.png" alt="">
+									<a href="#"> <img src="<%=request.getContextPath() %>/uploadFile/<%=course.getCourseimage() %>">
 									</a>
 								</div>
+								<!-- 수업 내용 -->
 								<div class="courses_info">
-									<span>Photoshop</span>
+									<span><%=course.getCategory() %></span>
 									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
+										<a href="course_details.jsp"><%=course.getTitle() %>
 										</a>
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
@@ -73,29 +124,33 @@
 											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
 										</div>
 										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
+											<span class="active_prise"><%=course.getTeacherName() %> 쌤</span>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						<%} %> --%>
+						<!-- DB course -->
+						
+						<!-- 임시 레이어 -->
 						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<div class="thumb">
-									<a href="#"> <img src="img/courses/2.png" alt="">
+									<a href="course_details.jsp"> <img src="<%=request.getContextPath() %>/uploadFile/1.jpg">
 									</a>
 								</div>
 								<div class="courses_info">
-									<span>Adobe XD</span>
+									<span>카테고리</span>
 									<h3>
-										<a href="#">UI/UX design with Adobe XD with Anderson</a>
+										<a href="course_details.jsp">수업명</a>
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<i class="flaticon-mark-as-favorite-star"></i> <span>(평균별점)</span>
 										</div>
 										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
+											<span class="active_prise">누구누구 쌤</span>
 										</div>
 									</div>
 								</div>
@@ -104,21 +159,20 @@
 						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<div class="thumb">
-									<a href="#"> <img src="img/courses/3.png" alt="">
+									<a href="course_details.jsp"> <img src="<%=request.getContextPath() %>/uploadFile/2.jpg">
 									</a>
 								</div>
 								<div class="courses_info">
-									<span>Wordpress</span>
+									<span>카테고리</span>
 									<h3>
-										<a href="#">Wordpress theme development <br> from scratch
-										</a>
+										<a href="course_details.jsp">수업명</a>
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<i class="flaticon-mark-as-favorite-star"></i> <span>(평균별점)</span>
 										</div>
 										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
+											<span class="active_prise">누구누구 쌤</span>
 										</div>
 									</div>
 								</div>
@@ -127,90 +181,57 @@
 						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<div class="thumb">
-									<a href="#"> <img src="img/courses/4.png" alt="">
+									<a href="course_details.jsp"> <img src="<%=request.getContextPath() %>/uploadFile/3.jpg">
 									</a>
 								</div>
 								<div class="courses_info">
-									<span>Photoshop</span>
+									<span>카테고리</span>
 									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
-										</a>
+										<a href="course_details.jsp">수업명</a>
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<i class="flaticon-mark-as-favorite-star"></i> <span>(평균별점)</span>
 										</div>
 										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
+											<span class="active_prise">누구누구 쌤</span>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<img src="img/courses/5.png" alt="">
-								</div>
-								<div class="courses_info">
-									<span>UI/UX</span>
-									<h3>
-										<a href="#">How to complete user research <br> and make work flow
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/6.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Wordpress</span>
-									<h3>
-										<a href="#">Commitment to dedicated <br> Support
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-12">
+						<!-- 임시 레이어 -->
+					<!-- <div class="col-xl-12">
 							<div class="more_courses text-center">
 								<a href="#" class="boxed_btn_rev">More Courses</a>
 							</div>
-						</div>
+						</div> -->
+						
 					</div>
 				</div>
-				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+				<!-- 모든 수업 끝 -->
+				
+				<!-- 내 관심사 시작 -->
+				<div class="tab-pane fade" id="interest" role="tabpanel" aria-labelledby="interest-tab">
 					<div class="row">
-						<div class="col-xl-4 col-lg-4 col-md-6  col-md-6">
+					
+					<!-- DB course -->
+<%-- 					<% for(int i = 0; i < courseList.size(); i++) {
+						courseDTO course = courseList.get(i);
+					%>
+					
+						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
+								<!-- 수업 이미지 -->
 								<div class="thumb">
-									<a href="#"> <img src="img/courses/1.png" alt="">
+									<a href="#"> <img src="<%=request.getContextPath() %>/uploadFile/<%=course.getCourseimage() %>">
 									</a>
 								</div>
+								<!-- 수업 내용 -->
 								<div class="courses_info">
-									<span>Photoshop</span>
+									<span><%=course.getCategory() %></span>
 									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
+										<a href="course_details.jsp"><%=course.getTitle() %>
 										</a>
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
@@ -218,7 +239,33 @@
 											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
 										</div>
 										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
+											<span class="active_prise"><%=course.getTeacherName() %> 쌤</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<%} %> --%>
+						<!-- DB course -->
+						
+						<!-- 임시 레이어 -->
+						<div class="col-xl-4 col-lg-4 col-md-6">
+							<div class="single_courses">
+								<div class="thumb">
+									<a href="course_details.jsp"> <img src="<%=request.getContextPath() %>/uploadFile/1.jpg">
+									</a>
+								</div>
+								<div class="courses_info">
+									<span>카테고리(관심사)</span>
+									<h3>
+										<a href="course_details.jsp">수업명</a>
+									</h3>
+									<div class="star_prise d-flex justify-content-between">
+										<div class="star">
+											<i class="flaticon-mark-as-favorite-star"></i> <span>(평균별점)</span>
+										</div>
+										<div class="prise">
+											<span class="active_prise">누구누구 쌤</span>
 										</div>
 									</div>
 								</div>
@@ -227,20 +274,20 @@
 						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<div class="thumb">
-									<a href="#"> <img src="img/courses/2.png" alt="">
+									<a href="#"> <img src="<%=request.getContextPath() %>/uploadFile/1.jpg">
 									</a>
 								</div>
 								<div class="courses_info">
-									<span>Adobe XD</span>
+									<span>카테고리(관심사)</span>
 									<h3>
-										<a href="#">UI/UX design with Adobe XD with Anderson</a>
+										<a href="course_details.jsp">수업명</a>
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<i class="flaticon-mark-as-favorite-star"></i> <span>(평균별점)</span>
 										</div>
 										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
+											<span class="active_prise">누구누구 쌤</span>
 										</div>
 									</div>
 								</div>
@@ -249,1116 +296,246 @@
 						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<div class="thumb">
-									<a href="#"> <img src="img/courses/3.png" alt="">
+									<a href="#"> <img src="<%=request.getContextPath() %>/uploadFile/1.jpg">
 									</a>
 								</div>
 								<div class="courses_info">
-									<span>Wordpress</span>
+									<span>카테고리(관심사)</span>
 									<h3>
-										<a href="#">Wordpress theme development <br> from scratch
-										</a>
+										<a href="course_details.jsp">수업명</a>
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<i class="flaticon-mark-as-favorite-star"></i> <span>(평균별점)</span>
 										</div>
 										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
+											<span class="active_prise">누구누구 쌤</span>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/4.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Photoshop</span>
-									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<img src="img/courses/5.png" alt="">
-								</div>
-								<div class="courses_info">
-									<span>UI/UX</span>
-									<h3>
-										<a href="#">How to complete user research <br> and make work flow
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/6.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Wordpress</span>
-									<h3>
-										<a href="#">Commitment to dedicated <br> Support
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-12">
+						<!-- 임시 레이어 -->
+					<!-- <div class="col-xl-12">
 							<div class="more_courses text-center">
 								<a href="#" class="boxed_btn_rev">More Courses</a>
 							</div>
-						</div>
+						</div> -->
+						
 					</div>
 				</div>
-				<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-					<div class="row">
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/1.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Photoshop</span>
-									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/2.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Adobe XD</span>
-									<h3>
-										<a href="#">UI/UX design with Adobe XD with Anderson</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/3.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Wordpress</span>
-									<h3>
-										<a href="#">Wordpress theme development <br> from scratch
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/4.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Photoshop</span>
-									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<img src="img/courses/5.png" alt="">
-								</div>
-								<div class="courses_info">
-									<span>UI/UX</span>
-									<h3>
-										<a href="#">How to complete user research <br> and make work flow
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/6.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Wordpress</span>
-									<h3>
-										<a href="#">Commitment to dedicated <br> Support
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-12">
-							<div class="more_courses text-center">
-								<a href="#" class="boxed_btn_rev">More Courses</a>
-							</div>
-						</div>
-					</div>
-				</div>
+				<!-- 내 관심사 끝 -->
+					
+					
 				<div class="tab-pane fade" id="design" role="tabpanel" aria-labelledby="design-tab">
 					<div class="row">
-						<div class="col-xl-4 col-lg-4 col-md-6 ">
+											<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<div class="thumb">
-									<a href="#"> <img src="img/courses/1.png" alt="">
+									<a href="#"> <img src="<%=request.getContextPath() %>/uploadFile/1.jpg">
 									</a>
 								</div>
 								<div class="courses_info">
-									<span>Photoshop</span>
+									<span>디자인</span>
 									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
-										</a>
+										<a href="course_details.jsp">수업명</a>
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<i class="flaticon-mark-as-favorite-star"></i> <span>(평균별점)</span>
 										</div>
 										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
+											<span class="active_prise">누구누구 쌤</span>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/2.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Adobe XD</span>
-									<h3>
-										<a href="#">UI/UX design with Adobe XD with Anderson</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/3.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Wordpress</span>
-									<h3>
-										<a href="#">Wordpress theme development <br> from scratch
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/4.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Photoshop</span>
-									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<img src="img/courses/5.png" alt="">
-								</div>
-								<div class="courses_info">
-									<span>UI/UX</span>
-									<h3>
-										<a href="#">How to complete user research <br> and make work flow
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/6.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Wordpress</span>
-									<h3>
-										<a href="#">Commitment to dedicated <br> Support
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-12">
-							<div class="more_courses text-center">
-								<a href="#" class="boxed_btn_rev">More Courses</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="Web" role="tabpanel" aria-labelledby="Web-tab">
+				<div class="tab-pane fade" id="business" role="tabpanel" aria-labelledby="business-tab">
 					<div class="row">
-						<div class="col-xl-4 col-lg-4 col-md-6">
+												<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<div class="thumb">
-									<a href="#"> <img src="img/courses/1.png" alt="">
+									<a href="#"> <img src="<%=request.getContextPath() %>/uploadFile/1.jpg">
 									</a>
 								</div>
 								<div class="courses_info">
-									<span>Photoshop</span>
+									<span>실무역량</span>
 									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
-										</a>
+										<a href="course_details.jsp">수업명</a>
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<i class="flaticon-mark-as-favorite-star"></i> <span>(평균별점)</span>
 										</div>
 										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
+											<span class="active_prise">누구누구 쌤</span>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/2.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Adobe XD</span>
-									<h3>
-										<a href="#">UI/UX design with Adobe XD with Anderson</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/3.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Wordpress</span>
-									<h3>
-										<a href="#">Wordpress theme development <br> from scratch
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/4.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Photoshop</span>
-									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<img src="img/courses/5.png" alt="">
-								</div>
-								<div class="courses_info">
-									<span>UI/UX</span>
-									<h3>
-										<a href="#">How to complete user research <br> and make work flow
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/6.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Wordpress</span>
-									<h3>
-										<a href="#">Commitment to dedicated <br> Support
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-12">
-							<div class="more_courses text-center">
-								<a href="#" class="boxed_btn_rev">More Courses</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="Web1" role="tabpanel" aria-labelledby="Web-tab1">
+				<div class="tab-pane fade" id="beauty" role="tabpanel" aria-labelledby="beauty-tab">
 					<div class="row">
-						<div class="col-xl-4 col-lg-4  col-md-6">
+												<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<div class="thumb">
-									<a href="#"> <img src="img/courses/1.png" alt="">
+									<a href="#"> <img src="<%=request.getContextPath() %>/uploadFile/1.jpg">
 									</a>
 								</div>
 								<div class="courses_info">
-									<span>Photoshop</span>
+									<span>뷰티</span>
 									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
-										</a>
+										<a href="course_details.jsp">수업명</a>
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<i class="flaticon-mark-as-favorite-star"></i> <span>(평균별점)</span>
 										</div>
 										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
+											<span class="active_prise">누구누구 쌤</span>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/2.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Adobe XD</span>
-									<h3>
-										<a href="#">UI/UX design with Adobe XD with Anderson</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/3.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Wordpress</span>
-									<h3>
-										<a href="#">Wordpress theme development <br> from scratch
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/4.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Photoshop</span>
-									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<img src="img/courses/5.png" alt="">
-								</div>
-								<div class="courses_info">
-									<span>UI/UX</span>
-									<h3>
-										<a href="#">How to complete user research <br> and make work flow
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/6.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Wordpress</span>
-									<h3>
-										<a href="#">Commitment to dedicated <br> Support
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-12">
-							<div class="more_courses text-center">
-								<a href="#" class="boxed_btn_rev">More Courses</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="Web11" role="tabpanel" aria-labelledby="Web-tab11">
+				<div class="tab-pane fade" id="video" role="tabpanel" aria-labelledby="video-tab">
 					<div class="row">
-						<div class="col-xl-4 col-lg-4 col-md-6">
+												<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<div class="thumb">
-									<a href="#"> <img src="img/courses/1.png" alt="">
+									<a href="#"> <img src="<%=request.getContextPath() %>/uploadFile/1.jpg">
 									</a>
 								</div>
 								<div class="courses_info">
-									<span>Photoshop</span>
+									<span>영상</span>
 									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
-										</a>
+										<a href="course_details.jsp">수업명</a>
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<i class="flaticon-mark-as-favorite-star"></i> <span>(평균별점)</span>
 										</div>
 										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
+											<span class="active_prise">누구누구 쌤</span>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/2.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Adobe XD</span>
-									<h3>
-										<a href="#">UI/UX design with Adobe XD with Anderson</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/3.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Wordpress</span>
-									<h3>
-										<a href="#">Wordpress theme development <br> from scratch
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/4.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Photoshop</span>
-									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<img src="img/courses/5.png" alt="">
-								</div>
-								<div class="courses_info">
-									<span>UI/UX</span>
-									<h3>
-										<a href="#">How to complete user research <br> and make work flow
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/6.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Wordpress</span>
-									<h3>
-										<a href="#">Commitment to dedicated <br> Support
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-12">
-							<div class="more_courses text-center">
-								<a href="#" class="boxed_btn_rev">More Courses</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="Adobe-XD8" role="tabpanel" aria-labelledby="Adobe-XD8">
+				<div class="tab-pane fade" id="language" role="tabpanel" aria-labelledby="language-tab">
 					<div class="row">
-						<div class="col-xl-4 col-lg-4  col-md-6">
+												<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<div class="thumb">
-									<a href="#"> <img src="img/courses/1.png" alt="">
+									<a href="#"> <img src="<%=request.getContextPath() %>/uploadFile/1.jpg">
 									</a>
 								</div>
 								<div class="courses_info">
-									<span>Photoshop</span>
+									<span>외국어</span>
 									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
-										</a>
+										<a href="course_details.jsp">수업명</a>
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<i class="flaticon-mark-as-favorite-star"></i> <span>(평균별점)</span>
 										</div>
 										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
+											<span class="active_prise">누구누구 쌤</span>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/2.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Adobe XD</span>
-									<h3>
-										<a href="#">UI/UX design with Adobe XD with Anderson</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/3.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Wordpress</span>
-									<h3>
-										<a href="#">Wordpress theme development <br> from scratch
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/4.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Photoshop</span>
-									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<img src="img/courses/5.png" alt="">
-								</div>
-								<div class="courses_info">
-									<span>UI/UX</span>
-									<h3>
-										<a href="#">How to complete user research <br> and make work flow
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/6.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Wordpress</span>
-									<h3>
-										<a href="#">Commitment to dedicated <br> Support
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-12">
-							<div class="more_courses text-center">
-								<a href="#" class="boxed_btn_rev">More Courses</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="Adobe-XD9" role="tabpanel" aria-labelledby="Adobe-XD-tab9">
+				<div class="tab-pane fade" id="music" role="tabpanel" aria-labelledby="music">
 					<div class="row">
-						<div class="col-xl-4 col-lg-4 col-md-6">
+												<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<div class="thumb">
-									<a href="#"> <img src="img/courses/1.png" alt="">
+									<a href="#"> <img src="<%=request.getContextPath() %>/uploadFile/1.jpg">
 									</a>
 								</div>
 								<div class="courses_info">
-									<span>Photoshop</span>
+									<span>음악</span>
 									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
-										</a>
+										<a href="course_details.jsp">수업명</a>
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<i class="flaticon-mark-as-favorite-star"></i> <span>(평균별점)</span>
 										</div>
 										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
+											<span class="active_prise">누구누구 쌤</span>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/2.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Adobe XD</span>
-									<h3>
-										<a href="#">UI/UX design with Adobe XD with Anderson</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/3.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Wordpress</span>
-									<h3>
-										<a href="#">Wordpress theme development <br> from scratch
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6 ">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/4.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Photoshop</span>
-									<h3>
-										<a href="#">Mobile App design step by step <br> from beginner
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<img src="img/courses/5.png" alt="">
-								</div>
-								<div class="courses_info">
-									<span>UI/UX</span>
-									<h3>
-										<a href="#">How to complete user research <br> and make work flow
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single_courses">
-								<div class="thumb">
-									<a href="#"> <img src="img/courses/6.png" alt="">
-									</a>
-								</div>
-								<div class="courses_info">
-									<span>Wordpress</span>
-									<h3>
-										<a href="#">Commitment to dedicated <br> Support
-										</a>
-									</h3>
-									<div class="star_prise d-flex justify-content-between">
-										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
-										</div>
-										<div class="prise">
-											<span class="offer">$89.00</span> <span class="active_prise"> $49 </span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-12">
-							<div class="more_courses text-center">
-								<a href="#" class="boxed_btn_rev">More Courses</a>
 							</div>
 						</div>
 					</div>
 				</div>
+				<div class="tab-pane fade" id="lifestyle" role="tabpanel" aria-labelledby="lifestyle">
+					<div class="row">
+												<div class="col-xl-4 col-lg-4 col-md-6">
+							<div class="single_courses">
+								<div class="thumb">
+									<a href="#"> <img src="<%=request.getContextPath() %>/uploadFile/1.jpg">
+									</a>
+								</div>
+								<div class="courses_info">
+									<span>라이프스타일</span>
+									<h3>
+										<a href="course_details.jsp">수업명</a>
+									</h3>
+									<div class="star_prise d-flex justify-content-between">
+										<div class="star">
+											<i class="flaticon-mark-as-favorite-star"></i> <span>(평균별점)</span>
+										</div>
+										<div class="prise">
+											<span class="active_prise">누구누구 쌤</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="Etc" role="tabpanel" aria-labelledby="Etc">
+					<div class="row">
+												<div class="col-xl-4 col-lg-4 col-md-6">
+							<div class="single_courses">
+								<div class="thumb">
+									<a href="#"> <img src="<%=request.getContextPath() %>/uploadFile/1.jpg">
+									</a>
+								</div>
+								<div class="courses_info">
+									<span>기타</span>
+									<h3>
+										<a href="course_details.jsp">수업명</a>
+									</h3>
+									<div class="star_prise d-flex justify-content-between">
+										<div class="star">
+											<i class="flaticon-mark-as-favorite-star"></i> <span>(평균별점)</span>
+										</div>
+										<div class="prise">
+											<span class="active_prise">누구누구 쌤</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 카테고리별 수업 끝 -->
 			</div>
 		</div>
 	</div>

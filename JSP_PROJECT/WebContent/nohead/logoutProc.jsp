@@ -5,5 +5,5 @@
 
 <script>
 	alert("로그아웃 되었습니다.");
-	location.href = document.referrer;
+	location.href = "/JSP_PROJECT/board/index.jsp";
 </script>

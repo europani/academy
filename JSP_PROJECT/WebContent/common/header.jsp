@@ -68,8 +68,8 @@
 
 									<li><a href="#">선생님<i class="ti-angle-down"></i></a>
 										<ul class="submenu">
-											<li><a href="/JSP_PROJECT/board/course/courseRegister.jsp">수업등록</a></li>
-											<li><a href="#">수업 조회</a></li>
+											<li><a href="/JSP_PROJECT/board/teacher/courseRegister.jsp">수업등록</a></li>
+											<li><a href="/JSP_PROJECT/board/teacher/teacherContent.jsp">수업 조회</a></li>
 											<!-- 수업 조회 안에 신청자 조회/스케쥴등록/수업변경/수업삭제 있음 -->
 										</ul></li>
 									<%
@@ -78,11 +78,11 @@
 									<%
 										if (id != null) {
 									%>
-									<li><a href="#">마이페이지<i class="ti-angle-down"></i></a>
+									<li><a href="/JSP_PROJECT/board/mypage/myprofile.jsp">마이페이지<i class="ti-angle-down"></i></a>
 										<ul class="submenu">
-											<li><a href="#">회원정보</a></li>
-											<li><a href="#">수강목록</a></li>
-											<li><a href="#">찜목록</a></li>
+											<li><a href="/JSP_PROJECT/board/mypage/myprofile.jsp">회원정보</a></li>
+											<li><a href="/JSP_PROJECT/board/mypage/mycourse.jsp">수강목록</a></li>
+											<li><a href="/JSP_PROJECT/board/mypage/wishlist.jsp">찜목록</a></li>
 
 										</ul></li>
 									<%

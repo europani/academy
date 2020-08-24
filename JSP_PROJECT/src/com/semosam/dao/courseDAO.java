@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import com.semosam.dto.courseDTO;
 import com.semosam.dto.teacherDTO;
@@ -11,7 +12,7 @@ import com.semosam.dto.teacherDTO;
 public class courseDAO {
 	private final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private final String USER = "JSP_Project";
+	private final String USER = "teamproject";
 	private final String PASS = "1111";
 
 	public courseDAO() {
@@ -74,6 +75,118 @@ public class courseDAO {
 		}
 		return flag;
 
+	}
+	
+	public int updateCourse(courseDTO dto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		int result = 0;
+		
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			sql = "UPDATE course SET memnum=?, category=?, difficulty=?, maxppl=?, address=?, content=?, notice=?, courseimage=?, title=? WHERE coursenum=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getMemnum());
+			pstmt.setString(2, dto.getCategory());
+			pstmt.setString(3, dto.getDifficulty());
+			pstmt.setInt(4, dto.getMaxppl());
+			pstmt.setString(5, dto.getAddress());
+			pstmt.setString(6, dto.getContent());
+			pstmt.setString(7, dto.getNotice());
+			pstmt.setString(8, dto.getCourseimage());
+			pstmt.setString(9, dto.getTitle());
+			pstmt.setInt(10, dto.getCoursenum());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int deleteCourse(courseDTO dto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		int result = 0;
+		
+		return result;
+	}
+	
+	
+	
+	public ArrayList<courseDTO> getCourses(String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		ArrayList<courseDTO> list = new ArrayList<courseDTO>();
+		
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			sql = "SELECT c.* FROM course c, member m WHERE m.email = ? AND c.memnum = m.memnum";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				courseDTO dto = new courseDTO();
+				dto.setCoursenum(rs.getInt("coursenum"));
+				dto.setCategory(rs.getString("category"));
+				dto.setDifficulty(rs.getString("difficulty"));
+				dto.setMaxppl(rs.getInt("maxppl"));
+				dto.setAddress(rs.getString("address"));
+				dto.setContent(rs.getString("content"));
+				dto.setNotice(rs.getString("notice"));
+				dto.setCourseimage(rs.getString("courseimage"));
+				dto.setTitle(rs.getString("title"));
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		return list;
+	}
+	
+	public courseDTO getCourse(int courseNum) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		courseDTO dto = null;
+		
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			sql = "SELECT * FROM course WHERE coursenum = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, courseNum);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				dto = new courseDTO();
+				dto.setCoursenum(courseNum);
+				dto.setCategory(rs.getString("category"));
+				dto.setDifficulty(rs.getString("difficulty"));
+				dto.setMaxppl(rs.getInt("maxppl"));
+				dto.setAddress(rs.getString("address"));
+				dto.setContent(rs.getString("content"));
+				dto.setNotice(rs.getString("notice"));
+				dto.setCourseimage(rs.getString("courseimage"));
+				dto.setTitle(rs.getString("title"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		
+		return dto;
 	}
 
 }

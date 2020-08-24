@@ -107,7 +107,7 @@ public class memberDAO {
 			} else {
 				number = 1;
 			}
-			sql = "insert into member(memnum,email,pwd,name,gender,tel,interest) values(?,?,?,?,?,?,?)";
+			sql = "insert into member(memnum,email,pwd,name,gender,tel,interests) values(?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, number);
 			pstmt.setString(2, bean.getEmail());
@@ -126,5 +126,97 @@ public class memberDAO {
 		}
 		return flag;
 
+	}
+	
+	public memberDTO getMember(String email) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		memberDTO bean = null;
+		String strQuery = null;
+
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			strQuery = "SELECT email,name,gender,tel,interests FROM member WHERE email=?";
+			pstmt = conn.prepareStatement(strQuery);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				bean = new memberDTO();
+				bean.setEmail(rs.getString("email"));
+				bean.setName(rs.getString("name"));
+				bean.setGender(rs.getString("gender"));
+				bean.setTel(rs.getString("tel"));
+				bean.setInterest(rs.getString("interests"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		return bean;
+	}
+
+	public boolean updateMember(memberDTO bean) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean flag = false;
+		String strQuery = null;
+		int num = 0;
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			strQuery = "update member set name=?, gender=?, tel=?, interests=? where email=?";
+			pstmt = conn.prepareStatement(strQuery);
+			pstmt.setString(1, bean.getName());
+			pstmt.setString(2, bean.getGender());
+			pstmt.setString(3, bean.getTel());
+			pstmt.setString(4, bean.getInterest());
+			pstmt.setString(5, bean.getEmail());
+
+			num = pstmt.executeUpdate();
+			System.out.println(num);
+			if (num > 0) {
+				flag = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt);
+		}
+		return flag;
+	}
+
+	public int deleteMember(String email, String pwd) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int x = -1;
+		String passwd = "";
+
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			pstmt = conn.prepareStatement("SELECT pwd FROM member WHERE email=?");
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				passwd = rs.getString("pwd");
+				if (passwd.equals(pwd)) {
+					pstmt = conn.prepareStatement("UPDATE member SET pwd='(Å»ÅðÇÑ È¸¿ø)', name='(Å»ÅðÇÑ È¸¿ø)', gender='(Å»ÅðÇÑ È¸¿ø)', tel='(Å»ÅðÇÑ È¸¿ø)', interests=NULL WHERE email=?");
+					pstmt.setString(1, email);
+					pstmt.executeUpdate();
+					x = 1;
+				} else
+					x = 0;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		return x;
 	}
 }
