@@ -1,9 +1,9 @@
-<%@page import="boardold.BoardDto"%>
+<%@page import="board.BoardDto"%>
 <%@page import="java.util.Vector"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
- <jsp:useBean id="bDao" class="boardold.BoardDao"></jsp:useBean>
+ <jsp:useBean id="bDao" class="board.BoardDao"></jsp:useBean>
  <%
  	request.setCharacterEncoding("EUC-KR");
  

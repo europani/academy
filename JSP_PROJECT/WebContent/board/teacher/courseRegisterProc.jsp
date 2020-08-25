@@ -4,7 +4,6 @@
 <%@page import="java.util.Enumeration"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
-<%@page import="com.semosam.dao.memberDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%
 	request.setCharacterEncoding("EUC-KR");
@@ -48,12 +47,12 @@
 		String location = "document.referrer";
 		if (resultC) {
 			msg = "수업등록을 하였습니다.";
-			location = "/JSP_PROJECT/board/teacherContent.jsp";
+			location = "/JSP_PROJECT/board/teacher/teacherContent.jsp";
 		}
 	%>
 	<script type="text/javascript">
-	alert("<%=msg%>");
-		location.href =	<%=location%>;
+		alert("<%=msg%>");
+		location.href =	'<%=location%>';
 	</script>
 </body>
 </html>

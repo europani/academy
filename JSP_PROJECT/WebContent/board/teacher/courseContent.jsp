@@ -18,8 +18,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xl-8 col-lg-8 col-md-8" id="teacherSingup">
-				<form name="courseUpdateForm" action="/JSP_PROJECT/board/teacher/courseUpdate.jsp" method="post"
-					enctype="multipart/form-data">
+				<form name="courseUpdateForm" action="/JSP_PROJECT/board/teacher/courseUpdate.jsp" method="post">
 					<div id="course">
 						<h3 class="mb-30"><br>수업 정보</h3>
 						<div class="mt-10">
@@ -90,20 +89,11 @@
 							<textarea name="notice" class="single-textarea"
 								onfocus="this.placeholder = ''" onblur="this.placeholder = '수업 공지'" required><%=dto.getNotice() %></textarea>
 						</div>
-						<div class="mt-10">
-							<p>수업 이미지</p>
-							<div class="file-input">
-								<input type="text" readonly="readonly" id="fileRoute2" value="<%=dto.getCourseimage() %>" required class="fileRoute"> <label
-									for="courseImage">사진 업로드 <input name="courseImage" type="file"
-									onchange="javascript:document.getElementById('fileRoute2').value=this.value"
-									id="courseImage">
-								</label>
-							</div>
-						</div>
 					</div>
+					<input type="hidden" name="coursenum" value="<%=dto.getCoursenum()%>">
 					<button type="submit" class="boxed_btn_orange">수업변경</button>
+					<button type="button" class="boxed_btn" onclick="window.location='/JSP_PROJECT/board/teacher/courseDeleteProc.jsp?coursenum=<%=dto.getCoursenum()%>'">수업삭제</button>
 				</form>
-					<button type="text" class="boxed_btn" onclick="window.location='/JSP_PROJECT/board/teacher/courseDeleteProc.jsp?coursenum=<%=dto.getCoursenum()%>'">수업삭제</button>
 			</div>
 		</div>
 	</div>

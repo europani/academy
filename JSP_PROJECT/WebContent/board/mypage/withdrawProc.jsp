@@ -8,13 +8,17 @@
 	String email = (String) session.getAttribute("idKey");
 	String pwd = request.getParameter("pwd");
 	memberDAO mdao = new memberDAO();
-	/* memberDTO dto = dao.getMember(email); */
 	
 	int check = mdao.deleteMember(email, pwd);
 	if (check == 1) {
+		session.invalidate();
 %>
-<meta http-equiv="Refresh" content="0, url=/JSP_PROJECT/nohead/logoutProc.jsp">
-<%
+	<script language="JavaScript">
+		alert("회원탈퇴 되었습니다.");
+		location.href = "/JSP_PROJECT/board/index.jsp";
+	</script>
+<%		
+		
 	} else {
 %>
 <script language="JavaScript">

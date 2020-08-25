@@ -1,5 +1,5 @@
-<%@page import="member.MemberBean"%>
-<%@page import="member.MemberMgr"%>
+<%@page import="member.MemberDTO"%>
+<%@page import="member.MemberDAO"%>
 <%@page import="java.util.Vector"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
@@ -9,10 +9,8 @@
 <%
 	String id = (String)session.getAttribute("idKey");
 		
-	MemberMgr mgr = new MemberMgr();
-	MemberBean mem = mgr.getMember(id);
-	
-
+	MemberDAO mgr = new MemberDAO();
+	MemberDTO mem = mgr.getMember(id);
 %>
 <!DOCTYPE html>
 <html>

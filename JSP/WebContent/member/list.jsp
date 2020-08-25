@@ -1,15 +1,14 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="member.MemberBean"%>
-<%@page import="member.MemberMgr"%>
+<%@page import="member.MemberDTO"%>
+<%@page import="member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<% 
+<%
 	request.setCharacterEncoding("EUC-KR");
 %>
 <%
-	MemberMgr mgr = new MemberMgr();
-	ArrayList<MemberBean> memberList = mgr.selectMember();
-
+	MemberDAO mgr = new MemberDAO();
+	ArrayList<MemberDTO> memberList = mgr.selectMember();
 %>
 <!DOCTYPE html>
 <html>
@@ -34,7 +33,7 @@
 	<tr>
 		<%
 			for (int i=0; i < memberList.size(); i++) {
-				MemberBean bean = memberList.get(i);
+				MemberDTO bean = memberList.get(i);
 		%>
 		<td><%=bean.getId() %></td>
 		<td><%=bean.getName() %></td>

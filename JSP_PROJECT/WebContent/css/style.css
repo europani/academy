@@ -4073,12 +4073,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* line 368, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_elements.scss */
 .progress-table .gender {
-	width: 19.74%;
+	width: 15%;
 }
 
 /* line 371, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_elements.scss */
 .progress-table .percentage {
-	width: 40.36%;
+	width: 70%;
 	padding-right: 50px;
 }
 
@@ -4108,7 +4108,7 @@ h1, h2, h3, h4, h5, h6 {
 /* line 391, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_elements.scss */
 .progress-table .table-row .serial, .progress-table .table-row .country, .progress-table .table-row .visit,
 	.progress-table .table-row .percentage {
-	display: flex;
+	/* display: flex; */
 	align-items: center;
 }
 

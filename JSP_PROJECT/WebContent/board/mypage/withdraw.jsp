@@ -3,10 +3,7 @@
 <%@page import="com.semosam.dto.memberDTO"%>
 <%
 	request.setCharacterEncoding("EUC-KR");
-	/* memberDAO dao = new memberDAO(); */
 	String email = (String) session.getAttribute("idKey");
-	/* memberDTO dto = dao.getMember(email); */ 
-	/* String email = request.getParameter("email"); */  
 
 %>
 <!DOCTYPE html>

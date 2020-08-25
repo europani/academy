@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <% request.setCharacterEncoding("EUC-KR"); %>
-<jsp:useBean id="bean" class="member.MemberBean" />
-<jsp:useBean id="mgr" class="member.MemberMgr" />
+<jsp:useBean id="bean" class="member.MemberDTO" />
+<jsp:useBean id="mgr" class="member.MemberDAO" />
 <jsp:setProperty name="bean" property="*" />
 <%
 	

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<jsp:useBean id="mMgr" class="member.MemberMgr" />
+<jsp:useBean id="mMgr" class="member.MemberDAO" />
 <%
 	request.setCharacterEncoding("EUC-KR");
 	String id = request.getParameter("id");

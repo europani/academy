@@ -205,7 +205,7 @@ public class memberDAO {
 			if (rs.next()) {
 				passwd = rs.getString("pwd");
 				if (passwd.equals(pwd)) {
-					pstmt = conn.prepareStatement("UPDATE member SET pwd='(Å»ÅðÇÑ È¸¿ø)', name='(Å»ÅðÇÑ È¸¿ø)', gender='(Å»ÅðÇÑ È¸¿ø)', tel='(Å»ÅðÇÑ È¸¿ø)', interests=NULL WHERE email=?");
+					pstmt = conn.prepareStatement("UPDATE member SET email=null, pwd=null, name='(Å»ÅðÇÑ È¸¿ø)', gender=null, tel=null, interests=NULL WHERE email=?");
 					pstmt.setString(1, email);
 					pstmt.executeUpdate();
 					x = 1;

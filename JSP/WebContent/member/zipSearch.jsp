@@ -2,7 +2,7 @@
 <%@page import="java.util.Vector"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<jsp:useBean id="mMgr" class="member.MemberMgr" />
+<jsp:useBean id="mMgr" class="member.MemberDAO" />
 <%
 	request.setCharacterEncoding("EUC-KR");
 	String search = request.getParameter("search");
@@ -10,7 +10,7 @@
 	Vector<ZipcodeBean> vlist = null;
 	if (search.equals("y")) {
 		area3 = request.getParameter("area3");
-		vlist = mMgr.zipcodeRead(area3);
+		/* vlist = mMgr.zipcodeRead(area3); */
 	}
 %>
 <!DOCTYPE html>

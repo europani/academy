@@ -19,7 +19,7 @@ public class courseDAO {
 		try {
 			Class.forName(JDBC_DRIVER);
 		} catch (Exception e) {
-			System.out.println("Error : JDBC µå¶óÀÌ¹ö ·Îµù ½ÇÆÐ");
+			System.out.println("Error : JDBC ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 	}
 
@@ -81,22 +81,21 @@ public class courseDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
-		int result = 0;
+		int result = -1;
 		
 		try {
 			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
-			sql = "UPDATE course SET memnum=?, category=?, difficulty=?, maxppl=?, address=?, content=?, notice=?, courseimage=?, title=? WHERE coursenum=?";
+			sql = "UPDATE course SET category=?, difficulty=?, maxppl=?, address=?, content=?, notice=?, courseimage=?, title=? WHERE coursenum=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, dto.getMemnum());
-			pstmt.setString(2, dto.getCategory());
-			pstmt.setString(3, dto.getDifficulty());
-			pstmt.setInt(4, dto.getMaxppl());
-			pstmt.setString(5, dto.getAddress());
-			pstmt.setString(6, dto.getContent());
-			pstmt.setString(7, dto.getNotice());
-			pstmt.setString(8, dto.getCourseimage());
-			pstmt.setString(9, dto.getTitle());
-			pstmt.setInt(10, dto.getCoursenum());
+			pstmt.setString(1, dto.getCategory());
+			pstmt.setString(2, dto.getDifficulty());
+			pstmt.setInt(3, dto.getMaxppl());
+			pstmt.setString(4, dto.getAddress());
+			pstmt.setString(5, dto.getContent());
+			pstmt.setString(6, dto.getNotice());
+			pstmt.setString(7, dto.getCourseimage());
+			pstmt.setString(8, dto.getTitle());
+			pstmt.setInt(9, dto.getCoursenum());
 			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -108,12 +107,23 @@ public class courseDAO {
 		return result;
 	}
 	
-	public int deleteCourse(courseDTO dto) {
+	public int deleteCourse(int courseNum) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
 		int result = 0;
 		
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			sql = "DELETE FROM course WHERE coursenum = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, courseNum);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt);
+		}
 		return result;
 	}
 	
@@ -187,6 +197,32 @@ public class courseDAO {
 		}
 		
 		return dto;
+	}
+	
+	public String getTitle(int courseNum) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		String result = "";
+		
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			sql = "SELECT title FROM course WHERE coursenum = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, courseNum);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getString(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		
+		return result;
 	}
 
 }

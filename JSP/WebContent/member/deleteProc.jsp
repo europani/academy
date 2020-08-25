@@ -1,8 +1,10 @@
-<%@page import="member.MemberMgr"%>
+<%@page import="member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%request.setCharacterEncoding("EUC-KR"); %>
-<jsp:useBean id="mgr" class="member.MemberMgr" />
+<%
+	request.setCharacterEncoding("EUC-KR");
+%>
+<jsp:useBean id="mgr" class="member.MemberDAO" />
 <%
 	String id = (String)session.getAttribute("idKey");
 	int result = mgr.deleteMember(id);

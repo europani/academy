@@ -60,8 +60,8 @@
   <a href="<%=request.getContextPath()%>/board/list.jsp?boardid=1" class="w3-bar-item w3-button">공지사항</a>
   <a href="<%=request.getContextPath()%>/board/list.jsp?boardid=2" class="w3-bar-item w3-button">자유게시판</a>
   <a href="<%=request.getContextPath()%>/board/list.jsp?boardid=3" class="w3-bar-item w3-button">Q&A</a>
-  <a href="<%=request.getContextPath()%>/chartjsPro/bar_sample.jsp"    class="w3-bar-item w3-button">BarGraph</a>
-  <a href="<%=request.getContextPath()%>/awesomePro/aweSomeCloud.jsp"    class="w3-bar-item w3-button">WordCloud</a>
+  <a href="<%=request.getContextPath()%>/chart/bar_sample.jsp"    class="w3-bar-item w3-button">BarGraph</a>
+  <a href="<%=request.getContextPath()%>/cloud/awesomeCloud.jsp"    class="w3-bar-item w3-button">WordCloud</a>
   <a href="<%=request.getContextPath()%>/websocket/websocket01.jsp"    class="w3-bar-item w3-button">채팅</a>
   
 <% 

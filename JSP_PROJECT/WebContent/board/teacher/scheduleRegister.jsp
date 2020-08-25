@@ -1,4 +1,11 @@
+<%@page import="com.semosam.dao.courseDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%
+	int courseNum = Integer.parseInt(request.getParameter("coursenum"));
+	courseDAO daoC = new courseDAO();
+	String title = daoC.getTitle(courseNum);
+	
+%>
 <!DOCTYPE html>
 <!-- bradcam_area_start -->
 <div class="bradcam_area breadcam_bg overlay2">
@@ -11,7 +18,7 @@
 			<div class="col-xl-8 col-lg-8 col-md-8" id="teacherSingup">
 				<div class="mt-10">
 					<p>수업 이름</p>
-					<input name="title" class="single-input">
+					<input name="title" value="<%=title%>" class="single-input" disabled>
 				</div>
 				<table class="mt-10">
 					<form action="/JSP_PROJECT/board/teacher/scheduleRegisterProc.jsp"
@@ -25,10 +32,8 @@
 						<td><input type="date" name="date" class="single-input"></td>
 						<td><input type="time" name="time" min="08:00" max="22:00" list="timeslist" class="single-input"></td>
 						<td><input name="runtime" size="1" class="single-input"></td>
+						<input type="hidden" name="coursenum" value="<%=courseNum%>">
 					</tr>
-					
-					<!-- <textarea name="content" class="single-textarea" placeholder="수업 소개"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = '수업 소개'" required></textarea> -->
 					<tr>
 					<td colspan="2"><button type="submit" class="boxed_btn_orange">수업등록</button></td>
 					</tr>

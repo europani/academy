@@ -66,7 +66,7 @@
 										if (teacher) {
 									%>
 
-									<li><a href="#">선생님<i class="ti-angle-down"></i></a>
+									<li><a href="/JSP_PROJECT/board/teacher/teacherContent.jsp">선생님<i class="ti-angle-down"></i></a>
 										<ul class="submenu">
 											<li><a href="/JSP_PROJECT/board/teacher/courseRegister.jsp">수업등록</a></li>
 											<li><a href="/JSP_PROJECT/board/teacher/teacherContent.jsp">수업 조회</a></li>

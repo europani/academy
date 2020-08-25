@@ -51,9 +51,9 @@
 								<div class="serial"><%=list.get(i).getMaxppl()%></div>
 								<div class="name"><%=list.get(i).getAddress()%></div>
 							</div>
-							<div class="table-row" style="padding-left:420px">
+							<div class="table-row" style="padding-left: 420px;">
 								<a href="<%=request.getContextPath()%>/board/teacher/courseContent.jsp?coursenum=<%=list.get(i).getCoursenum()%>"
-									class="genric-btn success circle">수정하기</a>&nbsp;&nbsp;&nbsp;
+									class="genric-btn success circle ">수정하기</a>&nbsp;&nbsp;&nbsp;
 								<a href="<%=request.getContextPath()%>/board/teacher/scheduleContent.jsp?coursenum=<%=list.get(i).getCoursenum()%>"
 									class="genric-btn primary circle">일정관리</a>
 							</div>

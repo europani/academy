@@ -16,7 +16,10 @@
 		</tr>
 		<tr>
 			<td>아이디</td>
-			<td><input name="id"><input type="button" value="ID중복확인" onclick="idCheck(this.form.id.value)"></td>
+			<td>
+				<input name="id" onkeyup="idCheck(this.form.id.value)">
+				<span id="idcheck"></span>
+			</td>
 			<td>아이디를 적어 주세요.</td>
 		</tr>
 		<tr>
@@ -97,23 +100,30 @@
 </form>
 
 <script type="text/javascript">
+	const check = document.querySelector('#idcheck');
+	
 	function idCheck(id) {
-		frm = document.regFrm;
-		if (id=="") {
-			alert("아이디를 입력해주세요.");
-			frm.id.focus();
-			return;
+		if (id.length < 8) {
+			check.innerHTML = '8자이상 입력해주세요.';
+		} else {
+			idcheckOfServer(id);
 		}
-		url = "idCheck.jsp?id=" + encodeURIComponent(id);
-		window.open(url, "IDCheck", "width=300,height=150");
+		url = "idCheck.jsp?id=" + id;
 	}
 	
-	function zipCheck() {
-		url = "zipSearch.jsp?search=n";
-		window.open(url, "ZipCodeSearch", "width=500,height=300,scrollbars=yes");
+	function idcheckOfServer(id) {
+		let xhttp = new XMLHttpRequest();
+		let params = "?id=" + encodeURIComponent(id);
+		xhttp.open("GET", "<%=request.getContextPath()%>/member/idCheck.jsp" + params);
+		xhttp.send();
+		
+		xhttp.onreadystatechange = function () {
+			if (this.readyState == 4 && this.status == 200) {
+				let str = this.responseText;
+				check.innerHTML = str;
+			}
+		};
 	}
-
-
 </script>
 <script src="javascript.js" type="text/javascript"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -148,7 +158,6 @@
                 document.getElementById("sample4_roadAddress").value = roadAddr;
             }
         }).open();
-        
     }
 </script>
 </body>

@@ -13,9 +13,7 @@
 			<div class="col-xl-8 col-lg-8 col-md-8" id="teacherSingup">
 				<form action="/JSP_PROJECT/board/teacher/courseRegisterProc.jsp" method="post"
 					enctype="multipart/form-data">
-					
 					<div id="course">
-
 						<h3 class="mb-30">
 							<br>수업 정보
 						</h3>
