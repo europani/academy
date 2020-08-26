@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import com.semosam.dto.courseDTO;
 import com.semosam.dto.teacherDTO;
@@ -85,7 +86,7 @@ public class courseDAO {
 		
 		try {
 			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
-			sql = "UPDATE course SET category=?, difficulty=?, maxppl=?, address=?, content=?, notice=?, courseimage=?, title=? WHERE coursenum=?";
+			sql = "UPDATE course SET category=?, difficulty=?, maxppl=?, address=?, content=?, notice=?, title=? WHERE coursenum=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getCategory());
 			pstmt.setString(2, dto.getDifficulty());
@@ -93,11 +94,11 @@ public class courseDAO {
 			pstmt.setString(4, dto.getAddress());
 			pstmt.setString(5, dto.getContent());
 			pstmt.setString(6, dto.getNotice());
-			pstmt.setString(7, dto.getCourseimage());
-			pstmt.setString(8, dto.getTitle());
-			pstmt.setInt(9, dto.getCoursenum());
+			pstmt.setString(7, dto.getTitle());
+			pstmt.setInt(8, dto.getCoursenum());
 			
 			result = pstmt.executeUpdate();
+			System.out.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -187,7 +188,6 @@ public class courseDAO {
 				dto.setAddress(rs.getString("address"));
 				dto.setContent(rs.getString("content"));
 				dto.setNotice(rs.getString("notice"));
-				dto.setCourseimage(rs.getString("courseimage"));
 				dto.setTitle(rs.getString("title"));
 			}
 		} catch (Exception e) {
@@ -223,6 +223,48 @@ public class courseDAO {
 		}
 		
 		return result;
+	}
+	
+	public Vector<courseDTO> getCourseList(String category) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		Vector<courseDTO> vlist = null;
+		try {
+
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			sql = "select * from course c, member m, teacher t where c.memnum = m.memnum and m.memnum = t.memnum and category like ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, category);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vlist = new Vector<courseDTO>();
+				do {
+					courseDTO course = new courseDTO();
+					course.setCoursenum(rs.getInt("coursenum"));
+					course.setMemnum(rs.getInt("memnum"));
+					course.setCategory(rs.getString("category"));
+					course.setDifficulty(rs.getString("difficulty"));
+					course.setMaxppl(rs.getInt("maxppl"));
+					course.setAddress(rs.getString("address"));
+					course.setContent(rs.getString("content"));
+					course.setNotice(rs.getString("notice"));
+					course.setCourseimage(rs.getString("courseimage"));
+					course.setTitle(rs.getString("title"));
+					course.setTeacherName(rs.getString("name"));
+					course.setTeacherImage(rs.getString("teacherimage"));
+					course.setTeacherInfo(rs.getString("teacherinfo"));
+					vlist.add(course);
+				} while(rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		return vlist;
 	}
 
 }

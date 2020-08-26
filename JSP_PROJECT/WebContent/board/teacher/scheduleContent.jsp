@@ -31,10 +31,12 @@
 						<div class="progress-table" align="center">
 
 							<%
-								if (false) {
+								if (list == null || list.isEmpty()) {
 							%>
 							<tr>
-								<td align="center">일정이 존재하지 않습니다. 일정을 등록해주세요.</td>
+								<td align="center">일정이 존재하지 않습니다. 일정을 등록해주세요.</td>&nbsp;&nbsp;
+								<td><a href="<%=request.getContextPath()%>/board/teacher/scheduleRegister.jsp?coursenum=<%=courseNum%>"
+									class="genric-btn success circle">일정추가</a></td>
 							</tr>
 
 							<%
@@ -51,6 +53,8 @@
 							<div class="table-row" align="center">
 								<div class="percentage"><%=list.get(i).getDay()%></div>
 								<div class="gender"><%=list.get(i).getRuntime()%>시간</div>
+								<div class="gender"> <a href="<%=request.getContextPath()%>/board/teacher/scheduleAplList.jsp?coursenum=<%=list.get(i).getCoursenum()%>&serial=<%=list.get(i).getSerial()%>"
+									class="genric-btn danger circle">튜티목록</a></div>
 								<div class="gender"> <a href="<%=request.getContextPath()%>/board/teacher/scheduleDelete.jsp?coursenum=<%=list.get(i).getCoursenum()%>&serial=<%=list.get(i).getSerial()%>"
 									class="genric-btn info circle arrow">일정삭제</a></div>
 							</div>

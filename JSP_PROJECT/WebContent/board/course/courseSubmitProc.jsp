@@ -15,7 +15,7 @@
 		String location = "document.referrer";
 	%>
 	<script type="text/javascript">
-	alert("<%=msg%>");
+		alert("<%=msg%>");
 		location.href =	<%=location%>;
 	</script>
 </body>

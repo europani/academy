@@ -61,7 +61,7 @@
 							<nav>
 								<ul id="navigation">
 									<li><a href="/JSP_PROJECT/board/index.jsp">메인</a></li>
-									<li><a href="/JSP_PROJECT/board/courses.jsp">수업</a></li>
+									<li><a href="/JSP_PROJECT/board/course/courses.jsp">수업</a></li>
 									<%
 										if (teacher) {
 									%>

@@ -17,10 +17,9 @@
 						<h3 class="black">
 							세상의 모든 선생님<br>세모쌤 <br>
 						</h3>
-						<!-- <a href="#" class="boxed_btn">나를 위한 선생님 찾으러가기</a> -->
 
 						<div class="search">
-							<form action="course/searchingCourses.jsp" method="get">
+							<form action="/JSP_PROJECT/board/course/courses.jsp" method="get">
 								<input type="search" name="search" id="search" placeholder="나를 위한 선생님 찾으러가기">
 								<button type="submit">
 									<i class="fa fa-search"></i>

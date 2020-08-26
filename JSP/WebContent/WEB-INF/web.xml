@@ -42,4 +42,13 @@
 		<exception-type>java.lang.NullPointerException</exception-type>
 		<location>/error/errorNullPointer.jsp</location>
 	</error-page> -->
+	
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>/ignoredEl/*</url-pattern>
+			<el-ignored>true</el-ignored>
+		</jsp-property-group>
+	</jsp-config>
+
+	
 </web-app>

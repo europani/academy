@@ -11,14 +11,9 @@ public class courseDTO {
 	private String content;
 	private String notice;
 	private String courseimage;
-
-	@Override
-	public String toString() {
-		return "courseDTO [coursenum=" + coursenum + ", memnum=" + memnum + ", title=" + title
-				+ ", category=" + category + ", difficulty=" + difficulty + ", maxppl=" + maxppl
-				+ ", address=" + address + ", content=" + content + ", notice=" + notice
-				+ ", courseimage=" + courseimage + "]";
-	}
+	private String teacherName;
+	private String teacherInfo;
+	private String teacherImage;
 
 	public int getCoursenum() {
 		return coursenum;
@@ -100,4 +95,43 @@ public class courseDTO {
 		this.courseimage = courseimage;
 	}
 
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+
+	public String getTeacherInfo() {
+		return teacherInfo;
+	}
+
+	public void setTeacherInfo(String teacherInfo) {
+		this.teacherInfo = teacherInfo;
+	}
+
+	public String getTeacherImage() {
+		return teacherImage;
+	}
+
+	public void setTeacherImage(String teacherImage) {
+		this.teacherImage = teacherImage;
+	}
+
+	@Override
+	public String toString() {
+		return "courseDTO [coursenum=" + coursenum + ", memnum=" + memnum + ", title=" + title + ", category="
+				+ category + ", difficulty=" + difficulty + ", maxppl=" + maxppl + ", address=" + address + ", content="
+				+ content + ", notice=" + notice + ", courseimage=" + courseimage + ", teacherName=" + teacherName
+				+ ", teacherInfo=" + teacherInfo + ", teacherImage=" + teacherImage + ", getCoursenum()="
+				+ getCoursenum() + ", getMemnum()=" + getMemnum() + ", getTitle()=" + getTitle() + ", getCategory()="
+				+ getCategory() + ", getDifficulty()=" + getDifficulty() + ", getMaxppl()=" + getMaxppl()
+				+ ", getAddress()=" + getAddress() + ", getContent()=" + getContent() + ", getNotice()=" + getNotice()
+				+ ", getCourseimage()=" + getCourseimage() + ", getTeacherName()=" + getTeacherName()
+				+ ", getTeacherInfo()=" + getTeacherInfo() + ", getTeacherImage()=" + getTeacherImage()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
+	
 }
