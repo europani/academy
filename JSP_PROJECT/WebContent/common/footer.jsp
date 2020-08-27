@@ -49,7 +49,7 @@
 					<div class="footer_widget">
 						<h3 class="footer_title">세모쌤</h3>
 						<ul>
-							<li><a href="#">소개</a></li>
+							<li><a href="/JSP_PROJECT/board/service/introduce.jsp">소개</a></li>
 							<li><a href="/JSP_PROJECT/board/service/center.jsp">세모쌤센터</a></li>
 						</ul>
 					</div>
@@ -59,8 +59,8 @@
 					<div class="footer_widget">
 						<h3 class="footer_title">고객센터</h3>
 						<ul>
-							<li><a href="#"> 공지사항</a></li>
-							<li><a href="#"> Q&A</a></li>
+							<li><a href="/JSP_PROJECT/board/service/notice.jsp"> 공지사항</a></li>
+							<li><a href="/JSP_PROJECT/board/service/qna.jsp"> Q&A</a></li>
 						</ul>
 					</div>
 				</div>

@@ -90,8 +90,8 @@
 									%>
 									<li><a href="#">고객센터<i class="ti-angle-down"></i></a>
 										<ul class="submenu">
-											<li><a href="#">공지사항</a></li>
-											<li><a href="#">Q&A</a></li>
+											<li><a href="/JSP_PROJECT/board/service/notice.jsp">공지사항</a></li>
+											<li><a href="/JSP_PROJECT/board/service/qna.jsp">Q&A</a></li>
 
 										</ul></li>
 								</ul>
@@ -113,13 +113,13 @@
 							<%
 								if (id != null) {
 							%>
-							<a href="/JSP_PROJECT/nohead/logoutProc.jsp" class="boxed_btn_orange"> <!-- <i class="fa fa-phone"></i> -->
+							<a href="/JSP_PROJECT/nohead/logoutProc.jsp" class="genric-btn danger circle"> <!-- <i class="fa fa-phone"></i> -->
 								<span>로그아웃</span>
 							</a>
 							<%
 								} else {
 							%>
-							<a href="#test-form" class="boxed_btn_orange popup-with-form"> <!-- <i class="fa fa-phone"></i> -->
+							<a href="#test-form" class="genric-btn danger circle popup-with-form"> <!-- <i class="fa fa-phone"></i> -->
 								<span>로그인</span>
 							</a>
 							<%

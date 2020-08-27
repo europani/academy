@@ -1,4 +1,20 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.semosam.dto.scheduleDTO"%>
+<%@page import="com.semosam.dao.scheduleDAO"%>
+<%@page import="com.semosam.dao.courseDAO"%>
+<%@page import="com.semosam.dto.courseDTO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%
+	request.setCharacterEncoding("EUC-KR");
+%>
+<%
+	int coursenum = Integer.parseInt(request.getParameter("coursenum"));
+	courseDAO cDao = new courseDAO();
+	courseDTO course = cDao.getCourse(coursenum);
+	scheduleDAO sDao = new scheduleDAO();
+	ArrayList<scheduleDTO> list = sDao.getSchedules(coursenum);
+	System.out.println(id);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,14 +26,17 @@ td {
 </style>
 
 <script type="text/javascript">
-<%--
-	if(<%=id %> == null) {
+
+	if("<%=id%>"==null) {
 		alert('로그인이 필요합니다.');
 		history.go(-1);
 	}
---%>
+	
 	function applicant() {
-		alert("수업 신청이 완료되었습니다.");
+		if(document.applicantForm.serial.value=="") {
+			alert("수업 일정을 선택하세요")
+			return false;
+		}
 		document.applicantForm.submit();
 	}
 </script>
@@ -37,47 +56,40 @@ td {
 		
 			<div class="col-xl-7 col-lg-7">
 				<div class="single_courses" style="margin-bottom: 20px;">
-					<h4>수업명 : </h4>
+					<h3><b><%= course.getTitle() %></b></h3>
 					<br>
 					 <h4 class="second_title"><i class="ti-calendar"></i>&nbsp;&nbsp;원하시는 수업일정을 선택해주세요.</h4>
 				</div>
 					<div class="outline_courses_info">
 					
-					<form name="applicantForm" method="post" action="courseSubmitProc.jsp" >
-					<table style="margin-top: 30px;
-								margin-left:30px;">
+					<form name="applicantForm" method="get"
+					action="/JSP_PROJECT/board/course/courseSubmitProc.jsp" >
+					
+					<input type="hidden" name="coursenum" value="<%=coursenum%>">
+					<table style="margin-top: 30px;	margin-left:30px;">
+						<%
+							if(list.size()!=0){
+						for(int i = 0; i < list.size(); i++) {%>
 						<tr>
 						<td>
+						
 						<div class="primary-radio" style="float: left">
-							<input type="radio" id="schedule1" name="schedule" value="1" checked>
-							<label for="schedule1"></label>
-							</div>
-						</td>
-						<td>
-						&nbsp;&nbsp;2020년 8월 24일 월요일 9:00
-						</td>
-						</tr>
-						<tr>
-						<td>
-						<div class="primary-radio" style="float: left">
-							<input type="radio" id="schedule2" name="schedule" value="2" >
-							<label for="schedule2"></label>
+							<input type="radio" id="schedule<%=i %>" name="serial" value="<%=list.get(i).getSerial() %>" >
+							<label for="schedule<%=i %>"></label>
 						</div>
 						</td>
 						<td>
-						&nbsp;&nbsp;2020년 8월 25일 화요일 9:00
-						</td>
-						</tr><tr>
-						<td>
-						<div class="primary-radio" style="float: left">
-							<input type="radio" id="schedule3" name="schedule" value="3">
-							<label for="schedule3"></label>
-							</div>
-						</td>
-						<td>
-						&nbsp;&nbsp;2020년 8월 26일 수요일 9:00
+						<label for="schedule<%=i %>">&nbsp;&nbsp;<%=list.get(i).getDay() %> <%=list.get(i).getWeekday() %>요일 <%=list.get(i).getTime() %></label>
 						</td>
 						</tr>
+						<!-- 수업 없을 때 -->
+						<%}} else { %>
+						<tr>
+						<td align="center">
+							등록된 수업 일정이 없습니다.
+						</td>
+						</tr>
+						<%} %>
 					</table>
 											
 					</form>
@@ -91,25 +103,25 @@ td {
 					<div class="author_info">
 						<div class="auhor_header">
 							<div class="thumb">
-								<img src="/JSP_PROJECT/uploadFile/4.jpg" alt="" height="90" width="90" style="border-radius: 100%;" >
+								<img src="<%=request.getContextPath() %>/uploadFile/<%=course.getTeacherImage() %>" alt="" height="90" width="90" style="border-radius: 100%;" >
 							</div>
 							<div class="name">
-								<h3>누구누구 쌤</h3>
-								<p>쌤 이력?</p>
+								<h3><%=course.getTeacherName() %></h3>
+								<p><br></p>
 							</div>
 						</div>
-						<p class="text_info"><br>수업에 오신걸 환영해요!<br><b>장소,수업일,시간</b>을 선택해주세요.</p>
-						<ul>
-							<li><a href="#"> <i class="fa fa-envelope"></i>
-							</a></li>
-							<li><a href="#"> <i class="fa fa-twitter"></i>
-							</a></li>
-							<li><a href="#"> <i class="ti-linkedin"></i>
-							</a></li>
-						</ul>
+						<%if(list.size() != 0) {%>
+						<p class="text_info"><br>수업에 오신걸 환영해요!<br><b>수업일, 시간</b>을 선택해주세요.</p>
+						<%} else { %>
+						<p class="text_info"><br>아직 수업 일정이 정해지지 않았어요.<br><b>빠른 시일 내에 일정 추가하겠습니다!</b><br>
+						조금만 기다려 주세요.</p>
+						<%} %>
 					</div>
-					<a href="/JSP_PROJECT/board/course/courseSubmitProc.jsp" class="boxed_btn">수업 신청하기</a>
-					
+					<%if(list.size() != 0) {%>
+					<a href="javascript:applicant()" class="boxed_btn">수업 신청하기</a>
+					<%} else {%>
+					<a href="javascript:history.back()" class="boxed_btn">수업 정보로 돌아가기</a>
+					<%} %>
 				</div>
 			</div>
 		</div>

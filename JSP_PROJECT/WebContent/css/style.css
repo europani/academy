@@ -559,7 +559,7 @@ h3 {
 	cursor: pointer;
 	font-size: 16px;
 	color: #fff;
-	padding: 12px 30px;
+	padding: 17px 50px;
 	background: #FDAE5C;
 	-webkit-border-radius: 30px;
 	-moz-border-radius: 30px;
@@ -570,6 +570,9 @@ h3 {
 	-moz-transition: 0.3s;
 	-o-transition: 0.3s;
 	transition: 0.3s;
+	width : 450px;
+	margin-top : 10px;
+	text-align : center;
 }
 
 /* line 158, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_btn.scss */
@@ -3160,7 +3163,7 @@ h3 {
 }
 
 /* line 173, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_course_details.scss */
-.courses_details_info .courses_sidebar .boxed_btn {
+.courses_details_info .courses_sidebar .boxed_btn  {
 	width: 100%;
 	text-align: center;
 }

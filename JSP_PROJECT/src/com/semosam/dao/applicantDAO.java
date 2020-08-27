@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.semosam.dto.applicantDTO;
@@ -56,4 +57,45 @@ public class applicantDAO {
 		
 		return list;
 	}
+	
+	public boolean insertApplicant(int coursenum, int serial, String email) {
+	      Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      String sql = "";
+
+	      boolean flag = false;
+	      int memnum = 0;
+
+	      try {
+	         conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+	         	         
+	         pstmt = conn.prepareStatement("select memnum from member where email=?");
+	         pstmt.setString(1, email);
+	         rs = pstmt.executeQuery();
+	         if (rs.next()) {
+	            memnum = rs.getInt(1);
+	         }
+
+	         sql = "insert into applicant"
+	               + " values(?,?,?)";
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setInt(1, coursenum);
+	         pstmt.setInt(2, serial);
+	         pstmt.setInt(3, memnum);
+	         
+	         if (pstmt.executeUpdate() == 1) {
+	            flag = true;
+	         }
+	      } catch (SQLException se) {
+	    	  System.out.println("수업 신청 중복 불가");
+	    	  se.printStackTrace();
+	         return false;
+	      } catch(Exception e){
+	    	  e.printStackTrace();
+	      }finally {
+	    	  Util.close(conn, pstmt, rs);
+	      }
+	      return flag;
+	   }
 }

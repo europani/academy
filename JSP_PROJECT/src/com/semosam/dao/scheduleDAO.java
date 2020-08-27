@@ -60,7 +60,7 @@ public class scheduleDAO {
 		return result;
 	}
 	
-	public ArrayList<scheduleDTO> getSchedules(int courseNum) {
+	public ArrayList<scheduleDTO> getSchedules(int coursenum) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -69,9 +69,16 @@ public class scheduleDAO {
 		
 		try {
 			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
-			sql = "SELECT * FROM schedule WHERE coursenum = ?";
+			sql = "select coursenum, serial, " + 
+					"substr(day,1,instr(day, ' ')-1) day " + 
+					", to_char(to_date(day, 'yyyy-MM-dd hh24:mi'), 'dy') weekday " + 
+					", substr(day, instr(day, ' ')+1) time " +
+					", runtime " +
+					"from schedule " + 
+					"where coursenum = ? " + 
+					"order by day, time";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, courseNum);
+			pstmt.setInt(1, coursenum);
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
@@ -79,11 +86,11 @@ public class scheduleDAO {
 				dto.setCoursenum(rs.getInt("coursenum"));
 				dto.setSerial(rs.getInt("serial"));
 				dto.setDay(rs.getString("day"));
+				dto.setWeekday(rs.getString("weekday"));
+				dto.setTime(rs.getString("time"));
 				dto.setRuntime(rs.getInt("runtime"));
 				list.add(dto);
 			}
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -113,4 +120,73 @@ public class scheduleDAO {
 		return result;
 	}
 	
+	public ArrayList<String> getDistinctTime(int coursenum) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<String> list = new ArrayList<String>();
+		String sql = "";
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			sql = "select distinct substr(day, instr(day, ' ')+1) time " + 
+					"from schedule " + 
+					"where coursenum = ? " + 
+					"order by time";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, coursenum);
+			rs = pstmt.executeQuery();
+				
+			while (rs.next()) {
+				list.add(rs.getString("time"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		return list;
+	}
+	
+	public ArrayList<String> getDistinctWeekday(int coursenum) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<Integer> list = new ArrayList<>();
+		String sql = "";
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			sql = "select distinct to_char(to_date(day, 'yyyy-MM-dd hh24:mi'), 'd') weekday " + 
+					"from schedule " + 
+					"where coursenum = ? "
+					+ "order by weekday";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, coursenum);
+			rs = pstmt.executeQuery();
+			
+				
+			while (rs.next()) {
+				list.add(rs.getInt("weekday"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		ArrayList<String> days = new ArrayList<String>();
+		
+		for (int i = 0; i < list.size(); i++) {
+			switch (list.get(i)) {
+			case 1: days.add("일요일"); break;
+			case 2: days.add("월요일"); break;
+			case 3: days.add("화요일"); break;
+			case 4: days.add("수요일"); break;
+			case 5: days.add("목요일"); break;
+			case 6: days.add("금요일"); break;
+			case 7: days.add("토요일"); break;
+			}
+		}
+		return days;
+	}
 }

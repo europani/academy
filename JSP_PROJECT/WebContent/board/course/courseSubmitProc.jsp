@@ -1,22 +1,20 @@
-<%@page import="com.semosam.dto.courseDTO"%>
-<%@page import="com.semosam.dao.courseDAO"%>
-<%@page import="java.io.File"%>
-<%@page import="com.semosam.dto.teacherDTO"%>
-<%@page import="java.util.Enumeration"%>
-<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
-<%@page import="com.oreilly.servlet.MultipartRequest"%>
-<%@page import="com.semosam.dao.teacherDAO"%>
-<%@page import="com.semosam.dao.memberDAO"%>
+<%@page import="com.semosam.dao.applicantDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<body>
-	<%
-		/* String msg = "수업 신청에 실패 하였습니다."; */
-		String msg = "수업 신청되었습니다.";
-		String location = "document.referrer";
-	%>
-	<script type="text/javascript">
-		alert("<%=msg%>");
-		location.href =	<%=location%>;
-	</script>
-</body>
-</html>
+<%
+	applicantDAO aDao = new applicantDAO();
+	int coursenum = Integer.parseInt(request.getParameter("coursenum"));
+	int serial = Integer.parseInt(request.getParameter("serial"));
+	boolean flag = aDao.insertApplicant(coursenum, serial, id);
+	
+	
+%>
+<script type="text/javascript">
+		
+	if(<%=flag%>) {
+		alert("수업 신청이 완료되었습니다.");
+		location.href = "/JSP_PROJECT/board/mypage/mycourse.jsp";
+	} else {
+		alert("같은 일정을 중복으로 신청할 수 없습니다.");
+		history.back();
+	}
+</script>

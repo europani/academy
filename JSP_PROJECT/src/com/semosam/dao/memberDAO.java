@@ -19,7 +19,7 @@ public class memberDAO {
 		try {
 			Class.forName(JDBC_DRIVER);
 		} catch (Exception e) {
-			System.out.println("Error : JDBC µå¶óÀÌ¹ö ·Îµù ½ÇÆÐ");
+			System.out.println("Error : JDBC ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 	}
 	
@@ -87,6 +87,31 @@ public class memberDAO {
 			Util.close(conn, pstmt);
 		}
 		return flag;
+	}
+	
+	public int getMemnum(String email) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		int memnum = -1;
+		
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			sql = "SELECT memnum FROM member WHERE email = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				memnum = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		return memnum;
 	}
 
 	public boolean insertMember(memberDTO bean) {
@@ -205,7 +230,7 @@ public class memberDAO {
 			if (rs.next()) {
 				passwd = rs.getString("pwd");
 				if (passwd.equals(pwd)) {
-					pstmt = conn.prepareStatement("UPDATE member SET email=null, pwd=null, name='(Å»ÅðÇÑ È¸¿ø)', gender=null, tel=null, interests=NULL WHERE email=?");
+					pstmt = conn.prepareStatement("UPDATE member SET email=null, pwd=null, name='(Å»ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½)', gender=null, tel=null, interests=NULL WHERE email=?");
 					pstmt.setString(1, email);
 					pstmt.executeUpdate();
 					x = 1;

@@ -140,7 +140,8 @@
 									
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+										<%String shortAddr = course.getAddress().substring(0, 7); %>
+											<span><%=shortAddr %></span>
 										</div>
 										<div class="prise">
 											<span class="active_prise"><%=course.getTeacherName() %> ½Ü</span>
@@ -192,7 +193,8 @@
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<%String shortAddr = course.getAddress().substring(0, 7); %>
+											<span><%=shortAddr %></span>
 										</div>
 										<div class="prise">
 											<span class="active_prise"><%=course.getTeacherName() %> ½Ü</span>
@@ -246,7 +248,8 @@
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<%String shortAddr = dCourse.getAddress().substring(0, 7); %>
+											<span><%=shortAddr %></span>
 										</div>
 										<div class="prise">
 											<span class="active_prise"><%=dCourse.getTeacherName() %> ½Ü</span>
@@ -289,7 +292,8 @@
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<%String shortAddr = bCourse.getAddress().substring(0, 7); %>
+											<span><%=shortAddr %></span>
 										</div>
 										<div class="prise">
 											<span class="active_prise"><%=bCourse.getTeacherName() %> ½Ü</span>
@@ -332,7 +336,8 @@
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<%String shortAddr = btCourse.getAddress().substring(0, 7); %>
+											<span><%=shortAddr %></span>
 										</div>
 										<div class="prise">
 											<span class="active_prise"><%=btCourse.getTeacherName() %> ½Ü</span>
@@ -375,7 +380,8 @@
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<%String shortAddr = vCourse.getAddress().substring(0, 7); %>
+											<span><%=shortAddr %></span>
 										</div>
 										<div class="prise">
 											<span class="active_prise"><%=vCourse.getTeacherName() %> ½Ü</span>
@@ -418,7 +424,8 @@
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<%String shortAddr = lCourse.getAddress().substring(0, 7); %>
+											<span><%=shortAddr %></span>
 										</div>
 										<div class="prise">
 											<span class="active_prise"><%=lCourse.getTeacherName() %> ½Ü</span>
@@ -461,7 +468,8 @@
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<%String shortAddr = mCourse.getAddress().substring(0, 7); %>
+											<span><%=shortAddr %></span>
 										</div>
 										<div class="prise">
 											<span class="active_prise"><%=mCourse.getTeacherName() %> ½Ü</span>
@@ -504,7 +512,8 @@
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<%String shortAddr = lsCourse.getAddress().substring(0, 7); %>
+											<span><%=shortAddr %></span>
 										</div>
 										<div class="prise">
 											<span class="active_prise"><%=lsCourse.getTeacherName() %> ½Ü</span>
@@ -547,7 +556,8 @@
 									</h3>
 									<div class="star_prise d-flex justify-content-between">
 										<div class="star">
-											<i class="flaticon-mark-as-favorite-star"></i> <span>(4.5)</span>
+											<%String shortAddr = eCourse.getAddress().substring(0, 7); %>
+											<span><%=shortAddr %></span>
 										</div>
 										<div class="prise">
 											<span class="active_prise"><%=eCourse.getTeacherName() %> ½Ü</span>

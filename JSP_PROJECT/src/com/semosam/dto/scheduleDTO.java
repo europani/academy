@@ -4,6 +4,8 @@ public class scheduleDTO {
 	private int coursenum;
 	private int serial;
 	private String day;
+	private String weekday;
+	private String time;
 	private int runtime;
 	
 	public int getCoursenum() {
@@ -23,6 +25,18 @@ public class scheduleDTO {
 	}
 	public void setDay(String day) {
 		this.day = day;
+	}
+	public String getWeekday() {
+		return weekday;
+	}
+	public void setWeekday(String weekday) {
+		this.weekday = weekday;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
 	}
 	public int getRuntime() {
 		return runtime;
