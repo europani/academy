@@ -49,6 +49,5 @@
 			<el-ignored>true</el-ignored>
 		</jsp-property-group>
 	</jsp-config>
-
 	
 </web-app>
