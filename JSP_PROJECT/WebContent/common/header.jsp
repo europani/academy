@@ -52,8 +52,6 @@
 				<div class="row align-items-center no-gutters">
 					<div class="col-xl-2 col-lg-2">
 						<div class="logo-img">
-							<a href="index.html"> <img src="img/logo.png" alt=""> <!-- 로고이미지 -->
-							</a>
 						</div>
 					</div>
 					<div class="col-xl-7 col-lg-7">
@@ -88,7 +86,7 @@
 									<%
 										}
 									%>
-									<li><a href="#">고객센터<i class="ti-angle-down"></i></a>
+									<li><a href="/JSP_PROJECT/board/service/notice.jsp">고객센터<i class="ti-angle-down"></i></a>
 										<ul class="submenu">
 											<li><a href="/JSP_PROJECT/board/service/notice.jsp">공지사항</a></li>
 											<li><a href="/JSP_PROJECT/board/service/qna.jsp">Q&A</a></li>

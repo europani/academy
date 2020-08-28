@@ -138,7 +138,7 @@ public class scheduleDAO {
 			rs = pstmt.executeQuery();
 				
 			while (rs.next()) {
-				list.add(rs.getString("time"));
+				list.add(rs.getString("time") + "-" + rs.getInt("runtime") + "시간");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -188,5 +188,82 @@ public class scheduleDAO {
 			}
 		}
 		return days;
+	}
+	
+	public ArrayList<scheduleDTO> getMyCoursesSchedules(int coursenum) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		ArrayList<scheduleDTO> list = new ArrayList<scheduleDTO>();
+
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			sql = "select a.coursenum, a.serial, " + "substr(day,1,instr(day, ' ')-1) day "
+					+ ", to_char(to_date(day, 'yyyy-MM-dd hh24:mi'), 'dy') weekday "
+					+ ", substr(day, instr(day, ' ')+1) time " + ", s.runtime " + "from schedule s, applicant a "
+					+ "WHERE s.COURSENUM = a.COURSENUM AND s.SERIAL=a.SERIAL AND s.coursenum = ? "
+					+ "order by day, time ";
+			System.out.println(sql);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, coursenum);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				scheduleDTO dto = new scheduleDTO();
+				dto.setCoursenum(rs.getInt("coursenum"));
+				dto.setSerial(rs.getInt("serial"));
+				dto.setDay(rs.getString("day"));
+				dto.setWeekday(rs.getString("weekday"));
+				dto.setTime(rs.getString("time"));
+				dto.setRuntime(rs.getInt("runtime"));
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		return list;
+	}
+
+	public ArrayList<String> getMyDistinctWeekday(int coursenum, String email) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		ArrayList<String> list = new ArrayList<String>();
+		String sql = "";
+		int memnum = -1;
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			sql = "SELECT memnum from member WHERE email = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				memnum = rs.getInt("memnum");
+			}
+			
+			sql = "select day, to_char(to_date(day, 'yyyy-MM-dd hh24:mi'), 'dy') weekday , runtime "
+					+ "from schedule s ,applicant a "
+					+ "where s.coursenum=a.coursenum and s.SERIAL = a.SERIAL And a.coursenum =? and a.memnum =? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, coursenum);
+			pstmt.setInt(2, memnum);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString("day"));
+				list.add(rs.getString("weekday"));
+				list.add(rs.getString("runtime"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		return list;
 	}
 }

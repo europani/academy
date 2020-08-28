@@ -267,4 +267,119 @@ public class courseDAO {
 		return vlist;
 	}
 
+	public ArrayList<courseDTO> getSearchingResults(String keyword) throws Exception {
+	      Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      String sql = "";
+	      ArrayList<courseDTO> list = new ArrayList<courseDTO>();
+	      try {
+
+	         conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+	         sql = "select * " + 
+	               "from course c, teacher t, member m " + 
+	               "where c.memnum = t.memnum and m.memnum = t.memnum " + 
+	               "and (c.title like ? or m.name like ? or c.content like ?) ";
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, "%" + keyword + "%");
+	         pstmt.setString(2, "%" + keyword + "%");
+	         pstmt.setString(3, "%" + keyword + "%");
+	         rs = pstmt.executeQuery();
+	         while(rs.next()) {
+	            courseDTO course = new courseDTO();
+	            course.setCoursenum(rs.getInt("coursenum"));
+	            course.setMemnum(rs.getInt("memnum"));
+	            course.setCategory(rs.getString("category"));
+	            course.setDifficulty(rs.getString("difficulty"));
+	            course.setMaxppl(rs.getInt("maxppl"));
+	            course.setAddress(rs.getString("address"));
+	            course.setContent(rs.getString("content"));
+	            course.setNotice(rs.getString("notice"));
+	            course.setCourseimage(rs.getString("courseimage"));
+	            course.setTitle(rs.getString("title"));
+	            course.setTeacherName(rs.getString("name"));
+	            course.setTeacherImage(rs.getString("teacherimage"));
+	            course.setTeacherInfo(rs.getString("teacherinfo"));
+	            list.add(course);
+	         }
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         Util.close(conn, pstmt, rs);
+	      }
+	      return list;
+	   }
+	
+	public ArrayList<courseDTO> getMyCourses(String email) throws Exception {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		ArrayList<courseDTO> list = new ArrayList<courseDTO>();
+
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			sql = "select distinct (select name from member where memnum = c.memnum) AS tname, c.* from course c, member m, applicant a where a.coursenum = c.coursenum and a.memnum = m.memnum and m.email=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				do {
+					courseDTO dto = new courseDTO();
+					dto.setCoursenum(rs.getInt("coursenum"));
+					dto.setMemnum(rs.getInt("memnum"));
+					dto.setCategory(rs.getString("category"));
+					dto.setDifficulty(rs.getString("difficulty"));
+					dto.setAddress(rs.getString("address"));
+					dto.setCourseimage(rs.getString("courseimage"));
+					dto.setTitle(rs.getString("title"));
+					dto.setTeacherName(rs.getString("tname"));
+					list.add(dto);
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		return list;
+	}
+
+	public ArrayList<courseDTO> getMyWish(String email) throws Exception {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		ArrayList<courseDTO> list = new ArrayList<courseDTO>();
+
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			sql = "SELECT DISTINCT (SELECT name FROM member WHERE memnum = c.memnum) AS tname, c.* FROM course c, member m, wishlist w WHERE w.coursenum = c.coursenum AND w.memnum = m.memnum AND m.email=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				do {
+					courseDTO dto = new courseDTO();
+					dto.setCoursenum(rs.getInt("coursenum"));
+					dto.setMemnum(rs.getInt("memnum"));
+					dto.setCategory(rs.getString("category"));
+					dto.setDifficulty(rs.getString("difficulty"));
+					dto.setAddress(rs.getString("address"));
+					dto.setCourseimage(rs.getString("courseimage"));
+					dto.setTitle(rs.getString("title"));
+					dto.setTeacherName(rs.getString("tname"));
+					list.add(dto);
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		return list;
+	}
+	
 }

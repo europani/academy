@@ -51,7 +51,7 @@
 							%>
 
 							<div class="table-row" align="center">
-								<div class="percentage"><%=list.get(i).getDay()%></div>
+								<div class="percentage"><%=list.get(i).getDay() + " " + list.get(i).getTime()%></div>
 								<div class="gender"><%=list.get(i).getRuntime()%>시간</div>
 								<div class="gender"> <a href="<%=request.getContextPath()%>/board/teacher/scheduleAplList.jsp?coursenum=<%=list.get(i).getCoursenum()%>&serial=<%=list.get(i).getSerial()%>"
 									class="genric-btn danger circle">튜티목록</a></div>

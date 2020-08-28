@@ -36,9 +36,9 @@
 					<h3>수업 검색</h3>
 				</div>
 				<div class="search" align="center" style="margin-bottom: 50px;">
-					<form action="/JSP_PROJECT/board/course/courses.jsp" method="get">
+					<form action="/JSP_PROJECT/board/course/searchingCourses.jsp" method="get">
 						<input type="search" name="search" id="search"
-							placeholder="검색할 수업명을 입력하세요" style="background-color: #F6F6F6;">
+							placeholder="검색어를 입력하세요" style="background-color: #F6F6F6;">
 						<button type="submit">
 							<i class="fa fa-search"></i>
 						</button>
@@ -203,34 +203,28 @@
 								</div>
 							</div>
 						</div>
-						<%}} else {%>
-					<div class="tab-pane fade" id="business" role="tabpanel" aria-labelledby="business-tab">
-					<div style="text-align: center;">
-						수업이 존재하지 않습니다.
-					</div></div>
-				<%} %>
-						<!-- DB course -->
-						
-						
-					<!-- <div class="col-xl-12">
-							<div class="more_courses text-center">
-								<a href="#" class="boxed_btn_rev">More Courses</a>
-							</div>
-						</div> -->
-						
+						<% }} else { %>
+						<div style="text-align: center;">
+							수업이 존재하지 않습니다.
+						</div>
+						<%
+							}
+						%>
 					</div>
-				</div>
+					</div>
 				<!-- 내 관심사 끝 -->
-					
+				
 				<!-- course design -->
+				<div class="tab-pane fade" id="design" role="tabpanel" aria-labelledby="design-tab">
+					<div class="row">
+				<!-- 있을 때 -->
  					<% 
  						if(designAll != null) {
+ 							System.out.println(designAll.size());
  						for(int i = 0; i < designAll.size(); i++) {
 						courseDTO dCourse = designAll.get(i);
 					%>
-				<div class="tab-pane fade" id="design" role="tabpanel" aria-labelledby="design-tab">
-					<div class="row">
-											<div class="col-xl-4 col-lg-4 col-md-6">
+						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<!-- 수업 이미지 -->
 								<div class="thumb">
@@ -258,23 +252,24 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
 				<%}} else {%>
-					<div class="tab-pane fade" id="business" role="tabpanel" aria-labelledby="business-tab">
 					<div style="text-align: center;">
 						수업이 존재하지 않습니다.
-					</div></div>
+					</div>
 				<%} %>
+				</div>
+				</div>
+				
+				
  				<!-- course business -->
+ 				<div class="tab-pane fade" id="business" role="tabpanel" aria-labelledby="business-tab">
+					<div class="row">
  					<% 
  						if(businessAll != null) {
  						for(int i = 0; i < businessAll .size(); i++) {
 						courseDTO bCourse = businessAll .get(i);
 					%>
-				<div class="tab-pane fade" id="business" role="tabpanel" aria-labelledby="business-tab">
-					<div class="row">
-												<div class="col-xl-4 col-lg-4 col-md-6">
+						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<!-- 수업 이미지 -->
 								<div class="thumb">
@@ -302,22 +297,22 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
 				<%}} else {%>
-					<div class="tab-pane fade" id="business" role="tabpanel" aria-labelledby="business-tab">
 					<div style="text-align: center;">
 						수업이 존재하지 않습니다.
-					</div></div>
+					</div>
 				<%} %>
+				</div>
+				</div>
+				
 				<!-- course beauty -->
+				<div class="tab-pane fade" id="beauty" role="tabpanel" aria-labelledby="beauty-tab">
+					<div class="row">
  					<% 
  						if(beautyAll != null) {
  						for(int i = 0; i < beautyAll .size(); i++) {
 						courseDTO btCourse = beautyAll .get(i);
 					%>
-				<div class="tab-pane fade" id="beauty" role="tabpanel" aria-labelledby="beauty-tab">
-					<div class="row">
 						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<!-- 수업 이미지 -->
@@ -346,22 +341,23 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
 				<%}} else {%>
-					<div class="tab-pane fade" id="beauty" role="tabpanel" aria-labelledby="beauty-tab">
 					<div style="text-align: center;">
 						수업이 존재하지 않습니다.
-					</div></div>
+					</div>
 				<%} %>
+				</div>
+				</div>
+				
 				<!-- course video -->
+				<div class="tab-pane fade" id="video" role="tabpanel" aria-labelledby="video-tab">
+					<div class="row">
  					<% 
  						if(videoAll != null) {
  						for(int i = 0; i < videoAll .size(); i++) {
 						courseDTO vCourse = videoAll .get(i);
 					%>
-				<div class="tab-pane fade" id="video" role="tabpanel" aria-labelledby="video-tab">
-					<div class="row">
+				
 						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<!-- 수업 이미지 -->
@@ -390,22 +386,23 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
+					
 				<%}} else {%>
-					<div class="tab-pane fade" id="video" role="tabpanel" aria-labelledby="video-tab">
 					<div style="text-align: center;">
 						수업이 존재하지 않습니다.
-					</div></div>
+					</div>
 				<%} %>
+				</div>
+				</div>
+				
 				<!-- course language -->
+				<div class="tab-pane fade" id="language" role="tabpanel" aria-labelledby="language-tab">
+					<div class="row">
  					<% 
  						if(languageAll != null) {
  						for(int i = 0; i < languageAll .size(); i++) {
 						courseDTO lCourse = languageAll .get(i);
 					%>
-				<div class="tab-pane fade" id="language" role="tabpanel" aria-labelledby="language-tab">
-					<div class="row">
 						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<!-- 수업 이미지 -->
@@ -434,22 +431,22 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
+					
 				<%}} else {%>
-					<div class="tab-pane fade" id="language" role="tabpanel" aria-labelledby="language-tab">
 					<div style="text-align: center;">
 						수업이 존재하지 않습니다.
-					</div></div>
+					</div>
 				<%} %>
+				</div>
+				</div>
 				<!-- course music -->
+				<div class="tab-pane fade" id="music" role="tabpanel" aria-labelledby="music">
+					<div class="row">
  					<% 
  						if(musicAll != null) {
  						for(int i = 0; i < musicAll .size(); i++) {
 						courseDTO mCourse = musicAll .get(i);
 					%>
-				<div class="tab-pane fade" id="music" role="tabpanel" aria-labelledby="music">
-					<div class="row">
 						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<!-- 수업 이미지 -->
@@ -478,22 +475,23 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
+					
 				<%}} else {%>
-					<div class="tab-pane fade" id="music" role="tabpanel" aria-labelledby="music-tab">
 					<div style="text-align: center;">
 						수업이 존재하지 않습니다.
-					</div></div>
+					</div>
 				<%} %>
+				</div>
+				</div>
+				
 				<!-- course lifestyle -->
+				<div class="tab-pane fade" id="lifestyle" role="tabpanel" aria-labelledby="lifestyle">
+					<div class="row">
  					<% 
  						if(lifestyleAll != null) {
  						for(int i = 0; i < lifestyleAll .size(); i++) {
 						courseDTO lsCourse = lifestyleAll .get(i);
 					%>
-				<div class="tab-pane fade" id="lifestyle" role="tabpanel" aria-labelledby="lifestyle">
-					<div class="row">
 						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<!-- 수업 이미지 -->
@@ -522,22 +520,23 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
+					
 				<%}} else {%>
-					<div class="tab-pane fade" id="lifestyle" role="tabpanel" aria-labelledby="lifestyle-tab">
 					<div style="text-align: center;">
 						수업이 존재하지 않습니다.
-					</div></div>
+					</div>
 				<%} %>
+				</div>
+				</div>
+				
 				<!-- course etc -->
+				<div class="tab-pane fade" id="etc" role="tabpanel" aria-labelledby="Etc">
+					<div class="row">
  					<% 
  						if(etcAll != null) {
  						for(int i = 0; i < etcAll .size(); i++) {
 						courseDTO eCourse = etcAll .get(i);
 					%>
-				<div class="tab-pane fade" id="etc" role="tabpanel" aria-labelledby="Etc">
-					<div class="row">
 						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single_courses">
 								<!-- 수업 이미지 -->
@@ -566,14 +565,15 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
+					
 				<%}} else {%>
-					<div class="tab-pane fade" id="etc" role="tabpanel" aria-labelledby="etc-tab">
 					<div style="text-align: center;">
 						수업이 존재하지 않습니다.
-					</div></div>
+					</div>
 				<%} %>
+				</div>
+				</div>
+				<!-- etc 끝 -->
 				<!-- 카테고리별 수업 끝 -->
 			</div>
 		</div>

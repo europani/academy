@@ -98,4 +98,30 @@ public class applicantDAO {
 	      }
 	      return flag;
 	   }
+	
+	public int deleteMyCourses(int coursenum, int serial) {
+		System.out.println(coursenum);
+		System.out.println(serial);
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		int result = 0;
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			sql = "DELETE FROM applicant WHERE coursenum=? AND serial=? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, coursenum);
+			pstmt.setInt(2, serial);
+			result = pstmt.executeUpdate();
+
+			System.out.println(result);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt);
+		}
+		return result;
+	}
 }
