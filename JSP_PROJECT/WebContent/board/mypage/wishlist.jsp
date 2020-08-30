@@ -51,7 +51,7 @@
 					<div class="row">
 						<!-- course All -->
 						<%
-							if (MyWish != null) {
+							if (MyWish != null && !MyWish.isEmpty()) {
 								for (int i = 0; i < MyWish.size(); i++) {
 									courseDTO dto = MyWish.get(i);
 						%>
@@ -68,9 +68,9 @@
 									<span><%=dto.getCategory()%> [<%=dto.getDifficulty()%>]</span>
 									<h3>
 										<a href="/JSP_PROJECT/board/course/course_details.jsp?coursenum=<%=dto.getCoursenum()%>">
-											<%=dto.getTitle()%>
+											<%=dto.getTitle()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<a href="<%=request.getContextPath()%>/board/teacher/wishlistDeleteProc.jsp?coursenum=" + <%=dto.getCoursenum()%>
-											class="genric-btn warning circle" >일정삭제</a>
+											class="genric-btn warning circle" >찜삭제</a>
 											
 											<br>
 										</a>
@@ -89,9 +89,9 @@
 						<%
 									}
 								} else {%>
-						<div class="tab-pane fade" id="business" role="tabpanel" aria-labelledby="business-tab">
-							<div style="text-align: center;">수업이 존재하지 않습니다.</div>
-						</div>
+							<tr>
+								<td align="center">찜한 수업이 존재하지 않습니다. 수업메뉴에서 찜하기를 이용해보세요.</td>
+							</tr>
 						<%} %>
 						<!-- course All-->
 						<!-- <div class="col-xl-12">

@@ -9,15 +9,15 @@
 %>
 <%
 	courseDAO dbPro = new courseDAO();
-	Vector<courseDTO> courseAll = dbPro.getCourseList("%%");
-	Vector<courseDTO> designAll = dbPro.getCourseList("디자인");
-	Vector<courseDTO> businessAll = dbPro.getCourseList("실무역량");
-	Vector<courseDTO> beautyAll = dbPro.getCourseList("뷰티");
-	Vector<courseDTO> videoAll = dbPro.getCourseList("영상");
-	Vector<courseDTO> languageAll = dbPro.getCourseList("외국어");
-	Vector<courseDTO> musicAll = dbPro.getCourseList("음악");
-	Vector<courseDTO> lifestyleAll = dbPro.getCourseList("라이프스타일");
-	Vector<courseDTO> etcAll = dbPro.getCourseList("기타");
+	ArrayList<courseDTO> courseAll = dbPro.getCourseList("%%");
+	ArrayList<courseDTO> designAll = dbPro.getCourseList("디자인");
+	ArrayList<courseDTO> businessAll = dbPro.getCourseList("실무역량");
+	ArrayList<courseDTO> beautyAll = dbPro.getCourseList("뷰티");
+	ArrayList<courseDTO> videoAll = dbPro.getCourseList("영상");
+	ArrayList<courseDTO> languageAll = dbPro.getCourseList("외국어");
+	ArrayList<courseDTO> musicAll = dbPro.getCourseList("음악");
+	ArrayList<courseDTO> lifestyleAll = dbPro.getCourseList("라이프스타일");
+	ArrayList<courseDTO> etcAll = dbPro.getCourseList("기타");
 %>
 
 <!-- bradcam_area_start -->

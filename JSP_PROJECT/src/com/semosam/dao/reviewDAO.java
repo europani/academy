@@ -18,11 +18,10 @@ public class reviewDAO {
 		try {
 			Class.forName(JDBC_DRIVER);
 		} catch (Exception e) {
-			System.out.println("Error : JDBC 연결 실패");
+			System.out.println("Error : JDBC �ε� �Ұ�");
 		}
 	}
 
-	// 나경 추가
 	public ArrayList<reviewDTO> getReviews(int coursenum) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -42,7 +41,6 @@ public class reviewDAO {
 				reviewDTO dto = new reviewDTO();
 				dto.setReviewnum(rs.getInt("reviewnum"));
 				dto.setCoursenum(rs.getInt("coursenum"));
-				dto.setSerial(rs.getInt("serial"));
 				dto.setMemnum(rs.getInt("memnum"));
 				dto.setContent(rs.getString("content"));
 				dto.setRegdate(rs.getString("regdate"));
@@ -57,7 +55,6 @@ public class reviewDAO {
 		return list;
 	}
 
-	// 나경 추가
 	public int getCountReview(int coursenum) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -101,13 +98,12 @@ public class reviewDAO {
 			if (rs.next()) {
 				memnum = rs.getInt(1);
 			}
-			sql = "INSERT INTO review VALUES (reviewnum.nextval, ?, ?, ?, ?, sysdate, ?)";
+			sql = "INSERT INTO review VALUES (reviewnum.nextval, ?, ?, ?, sysdate, ?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, courseNum);
-			pstmt.setInt(2, 0);
-			pstmt.setInt(3, memnum);
-			pstmt.setString(4, content);
-			pstmt.setDouble(5, starscore);
+			pstmt.setInt(2, memnum);
+			pstmt.setString(3, content);
+			pstmt.setDouble(4, starscore);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

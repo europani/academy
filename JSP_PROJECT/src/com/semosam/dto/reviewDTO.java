@@ -3,7 +3,6 @@ package com.semosam.dto;
 public class reviewDTO {
 	private int reviewnum;
 	private int coursenum;
-	private int serial;
 	private int memnum;
 	private String content;
 	private String regdate;
@@ -21,12 +20,6 @@ public class reviewDTO {
 	}
 	public void setCoursenum(int coursenum) {
 		this.coursenum = coursenum;
-	}
-	public int getSerial() {
-		return serial;
-	}
-	public void setSerial(int serial) {
-		this.serial = serial;
 	}
 	public int getMemnum() {
 		return memnum;

@@ -18,7 +18,7 @@ public class scheduleDAO {
 		try {
 			Class.forName(JDBC_DRIVER);
 		} catch (Exception e) {
-			System.out.println("Error : JDBC ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½");
+			System.out.println("Error : JDBC ·Îµå ºÒ°¡");
 		}
 	}
 	
@@ -129,7 +129,7 @@ public class scheduleDAO {
 		String sql = "";
 		try {
 			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
-			sql = "select distinct substr(day, instr(day, ' ')+1) time " + 
+			sql = "select distinct substr(day, instr(day, ' ')+1) time, runtime " + 
 					"from schedule " + 
 					"where coursenum = ? " + 
 					"order by time";
@@ -138,7 +138,7 @@ public class scheduleDAO {
 			rs = pstmt.executeQuery();
 				
 			while (rs.next()) {
-				list.add(rs.getString("time") + "-" + rs.getInt("runtime") + "ì‹œê°„");
+				list.add(rs.getString("time") + "(" + rs.getInt("runtime") + "½Ã°£) ");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -178,13 +178,13 @@ public class scheduleDAO {
 		
 		for (int i = 0; i < list.size(); i++) {
 			switch (list.get(i)) {
-			case 1: days.add("ì¼ìš”ì¼"); break;
-			case 2: days.add("ì›”ìš”ì¼"); break;
-			case 3: days.add("í™”ìš”ì¼"); break;
-			case 4: days.add("ìˆ˜ìš”ì¼"); break;
-			case 5: days.add("ëª©ìš”ì¼"); break;
-			case 6: days.add("ê¸ˆìš”ì¼"); break;
-			case 7: days.add("í† ìš”ì¼"); break;
+			case 1: days.add("ÀÏ¿äÀÏ"); break;
+			case 2: days.add("¿ù¿äÀÏ"); break;
+			case 3: days.add("È­¿äÀÏ"); break;
+			case 4: days.add("¼ö¿äÀÏ"); break;
+			case 5: days.add("¸ñ¿äÀÏ"); break;
+			case 6: days.add("±Ý¿äÀÏ"); break;
+			case 7: days.add("Åä¿äÀÏ"); break;
 			}
 		}
 		return days;
@@ -255,9 +255,7 @@ public class scheduleDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				list.add(rs.getString("day"));
-				list.add(rs.getString("weekday"));
-				list.add(rs.getString("runtime"));
+				list.add(rs.getString("day") + " " +  rs.getString("weekday") + " " + rs.getString("runtime") + "½Ã°£ ");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

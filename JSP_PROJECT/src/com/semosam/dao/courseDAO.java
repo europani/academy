@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Vector;
 
 import com.semosam.dto.courseDTO;
@@ -20,7 +21,7 @@ public class courseDAO {
 		try {
 			Class.forName(JDBC_DRIVER);
 		} catch (Exception e) {
-			System.out.println("Error : JDBC ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½");
+			System.out.println("Error : JDBC ¿¬°á½ÇÆÐ");
 		}
 	}
 
@@ -31,13 +32,12 @@ public class courseDAO {
 		String sql = "";
 
 		boolean flag = false;
-		int courseNum=0;
+		int courseNum = 0;
 		int memNum = 0;
 
 		try {
 			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
-			
-			
+
 			pstmt = conn.prepareStatement("select coursenum.nextval from dual");
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -45,7 +45,7 @@ public class courseDAO {
 			} else {
 				courseNum = 1;
 			}
-			
+
 			pstmt = conn.prepareStatement("select memnum from member where email=?");
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
@@ -77,13 +77,13 @@ public class courseDAO {
 		return flag;
 
 	}
-	
+
 	public int updateCourse(courseDTO dto) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
 		int result = -1;
-		
+
 		try {
 			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
 			sql = "UPDATE course SET category=?, difficulty=?, maxppl=?, address=?, content=?, notice=?, title=? WHERE coursenum=?";
@@ -96,24 +96,23 @@ public class courseDAO {
 			pstmt.setString(6, dto.getNotice());
 			pstmt.setString(7, dto.getTitle());
 			pstmt.setInt(8, dto.getCoursenum());
-			
+
 			result = pstmt.executeUpdate();
-			System.out.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			Util.close(conn, pstmt);
 		}
-		
+
 		return result;
 	}
-	
+
 	public int deleteCourse(int courseNum) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
 		int result = 0;
-		
+
 		try {
 			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
 			sql = "DELETE FROM course WHERE coursenum = ?";
@@ -127,23 +126,21 @@ public class courseDAO {
 		}
 		return result;
 	}
-	
-	
-	
+
 	public ArrayList<courseDTO> getCourses(String id) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
 		ArrayList<courseDTO> list = new ArrayList<courseDTO>();
-		
+
 		try {
 			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
 			sql = "SELECT c.* FROM course c, member m WHERE m.email = ? AND c.memnum = m.memnum";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
 				courseDTO dto = new courseDTO();
 				dto.setCoursenum(rs.getInt("coursenum"));
@@ -164,48 +161,50 @@ public class courseDAO {
 		}
 		return list;
 	}
-	
-	public courseDTO getCourse(int courseNum) {
+
+	public courseDTO getCourse(int coursenum) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
-		courseDTO dto = null;
-		
+		courseDTO course = new courseDTO();
 		try {
+
 			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
-			sql = "SELECT * FROM course WHERE coursenum = ?";
+			sql = "select * from course c, member m, teacher t where c.memnum = m.memnum and m.memnum = t.memnum and coursenum = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, courseNum);
+			pstmt.setInt(1, coursenum);
 			rs = pstmt.executeQuery();
-			
 			while (rs.next()) {
-				dto = new courseDTO();
-				dto.setCoursenum(courseNum);
-				dto.setCategory(rs.getString("category"));
-				dto.setDifficulty(rs.getString("difficulty"));
-				dto.setMaxppl(rs.getInt("maxppl"));
-				dto.setAddress(rs.getString("address"));
-				dto.setContent(rs.getString("content"));
-				dto.setNotice(rs.getString("notice"));
-				dto.setTitle(rs.getString("title"));
+				course.setCoursenum(rs.getInt("coursenum"));
+				course.setMemnum(rs.getInt("memnum"));
+				course.setCategory(rs.getString("category"));
+				course.setDifficulty(rs.getString("difficulty"));
+				course.setMaxppl(rs.getInt("maxppl"));
+				course.setAddress(rs.getString("address"));
+				course.setContent(rs.getString("content"));
+				course.setNotice(rs.getString("notice"));
+				course.setCourseimage(rs.getString("courseimage"));
+				course.setTitle(rs.getString("title"));
+				course.setTeacherName(rs.getString("name"));
+				course.setTeacherImage(rs.getString("teacherimage"));
+				course.setTeacherInfo(rs.getString("teacherinfo"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			Util.close(conn, pstmt, rs);
 		}
-		
-		return dto;
+		return course;
 	}
-	
+
 	public String getTitle(int courseNum) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
 		String result = "";
-		
+
 		try {
 			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
 			sql = "SELECT title FROM course WHERE coursenum = ?";
@@ -215,23 +214,23 @@ public class courseDAO {
 			if (rs.next()) {
 				result = rs.getString(1);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			Util.close(conn, pstmt, rs);
 		}
-		
+
 		return result;
 	}
-	
-	public Vector<courseDTO> getCourseList(String category) throws Exception {
+
+	public ArrayList<courseDTO> getCourseList(String category) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
-		
-		Vector<courseDTO> vlist = null;
+
+		ArrayList<courseDTO> list = null;
 		try {
 
 			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
@@ -239,8 +238,8 @@ public class courseDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, category);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				vlist = new Vector<courseDTO>();
+			if (rs.next()) {
+				list = new ArrayList<courseDTO>();
 				do {
 					courseDTO course = new courseDTO();
 					course.setCoursenum(rs.getInt("coursenum"));
@@ -249,67 +248,112 @@ public class courseDAO {
 					course.setDifficulty(rs.getString("difficulty"));
 					course.setMaxppl(rs.getInt("maxppl"));
 					course.setAddress(rs.getString("address"));
-					course.setContent(rs.getString("content"));
-					course.setNotice(rs.getString("notice"));
 					course.setCourseimage(rs.getString("courseimage"));
 					course.setTitle(rs.getString("title"));
 					course.setTeacherName(rs.getString("name"));
-					course.setTeacherImage(rs.getString("teacherimage"));
-					course.setTeacherInfo(rs.getString("teacherinfo"));
-					vlist.add(course);
-				} while(rs.next());
+					list.add(course);
+				} while (rs.next());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			Util.close(conn, pstmt, rs);
 		}
-		return vlist;
+		return list;
+	}
+
+	public ArrayList<courseDTO> getInterestsCourses(String email) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		String interests = "";
+		ArrayList<courseDTO> list = null;
+		try {
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+
+			sql = "select nvl(interests,'0') interests from member where email = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				interests = rs.getString("interests");
+				interests = "'" + interests.replace(",", "','") + "'";
+			}
+			// °ü½É»ç ¼ö¾÷ÀÌ ÀÖÀ» °æ¿ì, °ü½É»ç ¼ö¾÷ÀÌ ¾øÀ» °æ¿ì, °ü½É»ç°¡ ¾øÀ» °æ¿ì
+
+			if (!interests.equals("'0'")) {
+				sql = "select * from course c, member m, teacher t "
+						+ "where c.memnum = m.memnum and m.memnum = t.memnum " + "and category in (" + interests + ")";
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+
+				list = new ArrayList<courseDTO>();
+				if (rs.next()) {
+					do {
+						courseDTO course = new courseDTO();
+						course.setCoursenum(rs.getInt("coursenum"));
+						course.setMemnum(rs.getInt("memnum"));
+						course.setCategory(rs.getString("category"));
+						course.setDifficulty(rs.getString("difficulty"));
+						course.setMaxppl(rs.getInt("maxppl"));
+						course.setAddress(rs.getString("address"));
+						course.setCourseimage(rs.getString("courseimage"));
+						course.setTitle(rs.getString("title"));
+						course.setTeacherName(rs.getString("name"));
+						list.add(course);
+					} while (rs.next());
+				} else {
+					return null;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		return list;
 	}
 
 	public ArrayList<courseDTO> getSearchingResults(String keyword) throws Exception {
-	      Connection conn = null;
-	      PreparedStatement pstmt = null;
-	      ResultSet rs = null;
-	      String sql = "";
-	      ArrayList<courseDTO> list = new ArrayList<courseDTO>();
-	      try {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		ArrayList<courseDTO> list = new ArrayList<courseDTO>();
+		try {
 
-	         conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
-	         sql = "select * " + 
-	               "from course c, teacher t, member m " + 
-	               "where c.memnum = t.memnum and m.memnum = t.memnum " + 
-	               "and (c.title like ? or m.name like ? or c.content like ?) ";
-	         pstmt = conn.prepareStatement(sql);
-	         pstmt.setString(1, "%" + keyword + "%");
-	         pstmt.setString(2, "%" + keyword + "%");
-	         pstmt.setString(3, "%" + keyword + "%");
-	         rs = pstmt.executeQuery();
-	         while(rs.next()) {
-	            courseDTO course = new courseDTO();
-	            course.setCoursenum(rs.getInt("coursenum"));
-	            course.setMemnum(rs.getInt("memnum"));
-	            course.setCategory(rs.getString("category"));
-	            course.setDifficulty(rs.getString("difficulty"));
-	            course.setMaxppl(rs.getInt("maxppl"));
-	            course.setAddress(rs.getString("address"));
-	            course.setContent(rs.getString("content"));
-	            course.setNotice(rs.getString("notice"));
-	            course.setCourseimage(rs.getString("courseimage"));
-	            course.setTitle(rs.getString("title"));
-	            course.setTeacherName(rs.getString("name"));
-	            course.setTeacherImage(rs.getString("teacherimage"));
-	            course.setTeacherInfo(rs.getString("teacherinfo"));
-	            list.add(course);
-	         }
-	      } catch (Exception e) {
-	         e.printStackTrace();
-	      } finally {
-	         Util.close(conn, pstmt, rs);
-	      }
-	      return list;
-	   }
-	
+			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+			sql = "select * " + "from course c, teacher t, member m "
+					+ "where c.memnum = t.memnum and m.memnum = t.memnum "
+					+ "and (c.title like ? or m.name like ? or c.content like ?) ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + keyword + "%");
+			pstmt.setString(2, "%" + keyword + "%");
+			pstmt.setString(3, "%" + keyword + "%");
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				courseDTO course = new courseDTO();
+				course.setCoursenum(rs.getInt("coursenum"));
+				course.setMemnum(rs.getInt("memnum"));
+				course.setCategory(rs.getString("category"));
+				course.setDifficulty(rs.getString("difficulty"));
+				course.setMaxppl(rs.getInt("maxppl"));
+				course.setAddress(rs.getString("address"));
+				course.setCourseimage(rs.getString("courseimage"));
+				course.setTitle(rs.getString("title"));
+				course.setTeacherName(rs.getString("name"));
+				list.add(course);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Util.close(conn, pstmt, rs);
+		}
+		return list;
+	}
+
 	public ArrayList<courseDTO> getMyCourses(String email) throws Exception {
 
 		Connection conn = null;
@@ -320,7 +364,9 @@ public class courseDAO {
 
 		try {
 			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
-			sql = "select distinct (select name from member where memnum = c.memnum) AS tname, c.* from course c, member m, applicant a where a.coursenum = c.coursenum and a.memnum = m.memnum and m.email=?";
+			sql = "select distinct (select name from member where memnum = c.memnum) AS tname, c.* "
+					+ "from course c, member m, applicant a "
+					+ "where a.coursenum = c.coursenum and a.memnum = m.memnum and m.email=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
@@ -356,7 +402,9 @@ public class courseDAO {
 
 		try {
 			conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
-			sql = "SELECT DISTINCT (SELECT name FROM member WHERE memnum = c.memnum) AS tname, c.* FROM course c, member m, wishlist w WHERE w.coursenum = c.coursenum AND w.memnum = m.memnum AND m.email=?";
+			sql = "SELECT DISTINCT (SELECT name FROM member WHERE memnum = c.memnum) AS tname, c.* "
+					+ "FROM course c, member m, wishlist w "
+					+ "WHERE w.coursenum = c.coursenum AND w.memnum = m.memnum AND m.email=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
@@ -381,5 +429,5 @@ public class courseDAO {
 		}
 		return list;
 	}
-	
+
 }

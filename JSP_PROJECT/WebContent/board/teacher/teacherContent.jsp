@@ -25,9 +25,9 @@
 							<%
 								if (list == null || list.isEmpty()) {
 							%>
-							<tr>
-								<td align="center">수업이 존재하지 않습니다. 수업을 등록해주세요.</td>
-							</tr>
+							
+								수업이 존재하지 않습니다. 수업을 등록해주세요.
+							
 
 							<%
 								} else {

@@ -51,7 +51,7 @@
 					<div class="row">
 						<!-- course All -->
 						<%
-							if (MyCourse != null) {
+							if (MyCourse != null && !MyCourse.isEmpty()) {
 								for (int i = 0; i < MyCourse.size(); i++) {
 									courseDTO dto = MyCourse.get(i);
 						%>
@@ -85,16 +85,10 @@
 						<%
 									}
 								} else {%>
-						<div class="tab-pane fade" id="business" role="tabpanel" aria-labelledby="business-tab">
-							<div style="text-align: center;">수업이 존재하지 않습니다.</div>
-						</div>
+							<tr>
+								<td align="center">수업이 존재하지 않습니다. 수업메뉴에서 수강신청을 이용해보세요.</td>
+							</tr>
 						<%} %>
-						<!-- course All-->
-						<!-- <div class="col-xl-12">
-							<div class="more_courses text-center">
-								<a href="#" class="boxed_btn_rev">More Courses</a>
-							</div>
-						</div> -->
 					</div>
 				</div>
 				<!-- 모든 수업 끝 -->

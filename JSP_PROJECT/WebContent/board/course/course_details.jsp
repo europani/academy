@@ -48,7 +48,7 @@
 							<div class="single_video">
 								<table>
 								<tr>
-								<td align="center"><i class="ti-calendar"></i></td>
+								<td align="center" style="padding-right: 10px;"><i class="ti-calendar"></i></td>
 								<td><span>
 								<% 
 									if(days.size() != 0) {
@@ -61,7 +61,7 @@
 								</span></td>
 								</tr>
 								<tr>
-								<td align="center"><i class="fa fa-clock-o"></i></td>
+								<td align="center" style="padding-right: 10px;"><i class="fa fa-clock-o"></i></td>
 								<td><span>
 								<% 
 									if(time.size() != 0) {
@@ -75,7 +75,7 @@
 								</span></td>
 								</tr>
 								<tr>
-								<td align="center"><i class="fa fa-thumb-tack" aria-hidden="true"></i></td>
+								<td align="center" style="padding-right: 10px;"><i class="fa fa-thumb-tack" aria-hidden="true"></i></td>
 								<td><span><%=shortAddr %></span></td>
 								</tr>
 								</table>
@@ -169,7 +169,7 @@
 									if(reviewList.size() > 0) {
 										for(int i = 0; i < reviewList.size(); i++) {%>
 										학생 중 <%=i+1 %>번째 리뷰 : <%=reviewList.get(i).getContent() %> / 
-										<b>점수 : <%=reviewList.get(i).getStarscore() %></b>
+										<b>점수 : <%=reviewList.get(i).getStarscore() %></b><br>
 									<%}} else {%>
 									<b>등록된 리뷰가 없습니다.</b>
 									<%} %>

@@ -19,7 +19,7 @@ public class memberDAO {
 		try {
 			Class.forName(JDBC_DRIVER);
 		} catch (Exception e) {
-			System.out.println("Error : JDBC ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½");
+			System.out.println("Error : JDBC ·Îµå ½ÇÆÐ");
 		}
 	}
 	
@@ -230,7 +230,7 @@ public class memberDAO {
 			if (rs.next()) {
 				passwd = rs.getString("pwd");
 				if (passwd.equals(pwd)) {
-					pstmt = conn.prepareStatement("UPDATE member SET email=null, pwd=null, name='(Å»ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½)', gender=null, tel=null, interests=NULL WHERE email=?");
+					pstmt = conn.prepareStatement("UPDATE member SET email=null, pwd=null, name='(Å»ÅðÇÑ È¸¿ø)', gender=null, tel=null, interests=NULL WHERE email=?");
 					pstmt.setString(1, email);
 					pstmt.executeUpdate();
 					x = 1;

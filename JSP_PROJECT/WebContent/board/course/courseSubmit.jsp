@@ -13,7 +13,6 @@
 	courseDTO course = cDao.getCourse(coursenum);
 	scheduleDAO sDao = new scheduleDAO();
 	ArrayList<scheduleDTO> list = sDao.getSchedules(coursenum);
-	System.out.println(id);
 %>
 <!DOCTYPE html>
 <html>
