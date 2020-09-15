@@ -9,7 +9,7 @@ public class HelloHandler implements CommandHandler {
 	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		req.setAttribute("hello", "ì•ˆë…•í•˜ì„¸ìš”!");
+		req.setAttribute("hello", "¾È³çÇÏ¼¼¿ä!");
 		return "/WEB-INF/view/hello.jsp";
 	}
 }

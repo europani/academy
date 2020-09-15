@@ -28,9 +28,6 @@
 						<h3 class="mb-30">쌤정보</h3>
 						<div class="mt-10">
 							<p>쌤사진</p>
-						<div id="upload">
-						<img id="samPic" width="200px" height="200px">
-						</div>
 							<div class="file-input">
 								<input type="text" readonly="readonly" id="fileRoute" required class="fileRoute"> <label
 									for="teacherImage">사진 업로드 <input name="teacherImage" type="file"

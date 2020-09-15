@@ -23,4 +23,32 @@
   	<servlet-name>ControllerUsingFile</servlet-name>
   	<url-pattern>/ControllerUsingFile</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+  	<servlet-name>ControllerUsingEXT</servlet-name>
+  	<servlet-class>controller.ControllerUsingEXT</servlet-class>
+  	<init-param>
+  		<param-name>configFile</param-name>
+  		<param-value>/WEB-INF/commandHandlerEXT.properties</param-value>
+  	</init-param>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ControllerUsingEXT</servlet-name>
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ControllerUsingPath</servlet-name>
+  	<servlet-class>controller.ControllerUsingPath</servlet-class>
+  	<init-param>
+  		<param-name>configFile</param-name>
+  		<param-value>/WEB-INF/commandHandlerPath.properties</param-value>
+  	</init-param>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ControllerUsingPath</servlet-name>
+  	<url-pattern>/space/*</url-pattern>
+  </servlet-mapping>
 </web-app>

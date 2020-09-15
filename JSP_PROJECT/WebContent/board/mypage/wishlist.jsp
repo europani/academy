@@ -15,7 +15,7 @@
 <%
 	String email = (String) session.getAttribute("idKey");
 	courseDAO Cdao = new courseDAO();
-	ArrayList<courseDTO> MyWish = Cdao.getMyCourses(email);
+	ArrayList<courseDTO> MyWish = Cdao.getMyWish(email);
 %>
 <!-- bradcam_area_start -->
 <div class="bradcam_area breadcam_bg overlay2">
@@ -69,7 +69,7 @@
 									<h3>
 										<a href="/JSP_PROJECT/board/course/course_details.jsp?coursenum=<%=dto.getCoursenum()%>">
 											<%=dto.getTitle()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<a href="<%=request.getContextPath()%>/board/teacher/wishlistDeleteProc.jsp?coursenum=" + <%=dto.getCoursenum()%>
+										<a href="/JSP_PROJECT/board/mypage/wishlistDeleteProc.jsp?coursenum=<%=dto.getCoursenum()%>"
 											class="genric-btn warning circle" >Âò»èÁ¦</a>
 											
 											<br>
