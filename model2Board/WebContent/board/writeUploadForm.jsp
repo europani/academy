@@ -14,7 +14,7 @@
 		<table class="w3-table-all" >
 			<tr>
 				<td align="right" colspan="2"><a
-					href="<%=request.getContextPath()%>/board/list.jsp"> 글목록</a></td>
+					href="<%=request.getContextPath()%>/board/list.jsp">글목록</a></td>
 			</tr>
 			<tr>
 				<td width="70" align="center">이 름</td>
@@ -37,7 +37,6 @@
 				<td width="330"><input type="text" size="40" maxlength="30"
 					name="email"></td>
 			</tr>
-
 			<tr>
 				<td width="70" align="center">내 용</td>
 				<td width="330"><textarea name="content" rows="13" cols="40"></textarea>
@@ -48,16 +47,14 @@
 				<td width="330"><input type="file" size="40" maxlength="30"
 					name="uploadfile"></td>
 			</tr>
-		<tr>
+			<tr>
 				<td width="70" align="center">비밀번호</td>
-				<td width="330"><input type="password" size="8" maxlength="12"
-					name="passwd"></td>
+				<td width="330"><input type="password" size="8" maxlength="12" name="passwd"></td>
 			</tr>
 			<tr>
 				<td colspan=2 align="center"><input type="submit" value="글쓰기">
-					<input type="reset" value="다시작성"> <input type="button"
-					value="목록보기"
-					OnClick="window.location='<%=request.getContextPath()%>/board/list.jsp'">
+					<input type="reset" value="다시작성"> 
+					<input type="button" value="목록보기" OnClick="window.location='<%=request.getContextPath()%>/board/list.jsp'">
 				</td>
 			</tr>
 		</table>

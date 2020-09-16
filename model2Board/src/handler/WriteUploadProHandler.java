@@ -11,13 +11,16 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import command.CommandHandler;
+import command.HeadAction;
 import db.BoardDAO;
 import db.BoardDTO;
 
-public class WriteUploadProHandler implements CommandHandler {
+public class WriteUploadProHandler extends HeadAction implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		headProcess(request, response);
+		
 		String realFolder = "";
 		String saveFolder = "uploadFile";
 		String encType = "EUC-KR";
@@ -55,7 +58,7 @@ public class WriteUploadProHandler implements CommandHandler {
 			article.setIp(request.getRemoteAddr());
 			BoardDAO dao = BoardDAO.getInstance();
 			System.out.println(article);
-			dao.insertArticle(article, "1");
+			dao.insertArticle(article, boardid);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
