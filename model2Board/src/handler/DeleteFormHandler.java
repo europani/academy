@@ -5,22 +5,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import command.CommandHandler;
 import command.HeadAction;
-import db.BoardDAO;
-import db.BoardDTO;
 
-public class ContentHandler extends HeadAction implements CommandHandler {
+public class DeleteFormHandler extends HeadAction implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		headProcess(request, response);
 		int num = Integer.parseInt(request.getParameter("num"));
-
-		BoardDAO dbPro = BoardDAO.getInstance();
-		BoardDTO article = dbPro.getArticle(num, boardid, true);	
 		
-		request.setAttribute("article", article);
+		request.setAttribute("num", num);
+		request.setAttribute("board", board);
 		
-		return "/board/content.jsp";
+		return "/board/deleteForm.jsp";
 	}
-
 }

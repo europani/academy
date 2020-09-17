@@ -6,21 +6,21 @@ import javax.servlet.http.HttpServletResponse;
 import command.CommandHandler;
 import command.HeadAction;
 import db.BoardDAO;
-import db.BoardDTO;
 
-public class ContentHandler extends HeadAction implements CommandHandler {
+public class DeleteProHandler extends HeadAction implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		headProcess(request, response);
-		int num = Integer.parseInt(request.getParameter("num"));
-
+		
+		String num = request.getParameter("num");
+		String passwd = request.getParameter("passwd");
 		BoardDAO dbPro = BoardDAO.getInstance();
-		BoardDTO article = dbPro.getArticle(num, boardid, true);	
+		int check = dbPro.deleteArticle(num, passwd, boardid);
 		
-		request.setAttribute("article", article);
+		request.setAttribute("check", check);
 		
-		return "/board/content.jsp";
+		return "/board/deletePro.jsp";
 	}
 
 }

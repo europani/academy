@@ -12,21 +12,33 @@
   
   <servlet>
   	<servlet-name>board</servlet-name>
-  	<servlet-class>controller.BoardController</servlet-class>
+  	<servlet-class>controller.BoardAction</servlet-class>
+ <!--  	<servlet-class>controller.BoardController</servlet-class>
   	<init-param>
   		<param-name>configFile</param-name>
   		<param-value>/WEB-INF/commandBoard.properties</param-value>
-  	</init-param>
+  	</init-param> -->
   	<load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
   	<servlet-name>board</servlet-name>
-  	<url-pattern>*.do</url-pattern>
+  	<url-pattern>/board/*</url-pattern>
+  	<!-- <url-pattern>*.do</url-pattern> -->
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>member</servlet-name>
+  	<servlet-class>controller.MemberAction</servlet-class>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>member</servlet-name>
+  	<url-pattern>/member/*</url-pattern>
   </servlet-mapping>
   
   <jsp-config>
 	<jsp-property-group>
-		<url-pattern>/board/*</url-pattern>
+		<url-pattern>/view/*</url-pattern>
 		<include-prelude>/common/head.jsp</include-prelude>
 		<include-coda>/common/footer.jsp</include-coda>
 	</jsp-property-group>  
