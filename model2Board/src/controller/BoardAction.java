@@ -14,11 +14,14 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import command.Action;
 import db.BoardDAO;
 import db.BoardDTO;
+import db.BoardMybatisDAO;
 
 public class BoardAction extends Action {
 	public String board = "";
 	public String boardid = "";
 	public String pageNum = "";
+	public String category = "";
+	public String sentence = "";
 
 	public void headProcess(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -31,10 +34,18 @@ public class BoardAction extends Action {
 		}
 		if (request.getParameter("boardid") != null) { // 게시판 이동
 			session.setAttribute("boardid", request.getParameter("boardid"));
+			session.setAttribute("sentence", "");
 			session.setAttribute("pageNum", "1");
 		}
-
+		if (request.getParameter("category") != null) { // 검색시 검색어 고정
+			session.setAttribute("category", request.getParameter("category"));
+			session.setAttribute("sentence", request.getParameter("sentence"));
+			session.setAttribute("pageNum", "1");
+		}
+		category = (String) session.getAttribute("category");
+		sentence = (String) session.getAttribute("sentence");
 		pageNum = (String) session.getAttribute("pageNum");
+		
 		if (pageNum == null)
 			pageNum = "1";
 
@@ -56,16 +67,13 @@ public class BoardAction extends Action {
 		headProcess(request, response);
 		int pageSize = 5;
 
-		String category = request.getParameter("category");
-		String sentence = request.getParameter("sentence");
-
 		int currentPage = Integer.parseInt(pageNum);
 		int startRow = (currentPage - 1) * pageSize + 1;
 		int endRow = currentPage * pageSize;
 		int count = 0;
 		int number = 0;
 		List articleList = null;
-		BoardDAO dbPro = BoardDAO.getInstance();
+		BoardMybatisDAO dbPro = new BoardMybatisDAO();
 		count = dbPro.getArticleCount(boardid, category, sentence);
 		if (count > 0) {
 			articleList = dbPro.getArticles(startRow, endRow, boardid, category, sentence);
@@ -105,7 +113,7 @@ public class BoardAction extends Action {
 		headProcess(request, response);
 		int num = Integer.parseInt(request.getParameter("num"));
 
-		BoardDAO dbPro = BoardDAO.getInstance();
+		BoardMybatisDAO dbPro = new BoardMybatisDAO();
 		BoardDTO article = dbPro.getArticle(num, boardid, true);
 
 		request.setAttribute("article", article);
@@ -170,7 +178,7 @@ public class BoardAction extends Action {
 			article.setEmail(multi.getParameter("email"));
 			article.setBoardid((String) request.getSession().getAttribute("boardid"));
 			article.setIp(request.getRemoteAddr());
-			BoardDAO dao = BoardDAO.getInstance();
+			BoardMybatisDAO dao = new BoardMybatisDAO();
 			System.out.println(article);
 			dao.insertArticle(article, boardid);
 		} catch (Exception e) {
@@ -182,7 +190,7 @@ public class BoardAction extends Action {
 	public String updateForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		headProcess(request, response);
 		int num = Integer.parseInt(request.getParameter("num"));
-		BoardDAO dbPro = BoardDAO.getInstance();
+		BoardMybatisDAO dbPro = new BoardMybatisDAO();
 		BoardDTO article = dbPro.getArticle(num, boardid, false);
 		
 		request.setAttribute("num", num);
@@ -223,7 +231,7 @@ public class BoardAction extends Action {
 				article.setEmail(multi.getParameter("email"));
 				article.setBoardid((String) request.getSession().getAttribute("boardid"));
 				article.setIp(request.getRemoteAddr());
-				BoardDAO dbPro = BoardDAO.getInstance();
+				BoardMybatisDAO dbPro = new BoardMybatisDAO();
 				check = dbPro.updateArticle(article, boardid);
 			}
 		} catch (Exception e) {
@@ -250,7 +258,7 @@ public class BoardAction extends Action {
 		
 		String num = request.getParameter("num");
 		String passwd = request.getParameter("passwd");
-		BoardDAO dbPro = BoardDAO.getInstance();
+		BoardMybatisDAO dbPro = new BoardMybatisDAO();
 		int check = dbPro.deleteArticle(num, passwd, boardid);
 		
 		request.setAttribute("check", check);

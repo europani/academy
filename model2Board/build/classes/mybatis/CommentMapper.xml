@@ -4,6 +4,7 @@
 	
 <mapper namespace="CommentMapper">
 	<cache />
+	
 	<sql id="BaseColumns">
 		comment_no AS commentNo,
 		user_id AS userId,
@@ -14,5 +15,126 @@
 		SELECT
 			<include refid="BaseColumns" />
 		FROM tcomment
+	</select>
+	
+	<select id="selectCommentByPrimaryKey" parameterType="Long" resultType="Comment">
+		SELECT
+			<include refid="BaseColumns" />
+		FROM tcomment
+		WHERE comment_no = #{commentNo}
+	</select>
+	
+	<select id="selectCommentByCondition" parameterType="hashmap" resultType="Comment">
+		SELECT
+			<include refid="BaseColumns" />
+		FROM tcomment
+		<where>
+			<if test="commentNo != null">
+				comment_no = #{commentNo}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="insertComment" parameterType="Comment">
+		INSERT INTO tcomment(comment_no, user_id, comment_content, reg_date)
+			VALUES (#{commentNo}, #{userId}, #{commentContent}, #{regDate})
+	</insert>
+	
+	<update id="updateComment" parameterType="Comment">
+		UPDATE tcomment SET comment_content = #{commentContent}
+			WHERE comment_no = #{commentNo}
+	</update>
+	
+	<delete id="deleteComment" parameterType="Comment">
+		DELETE FROM tcomment WHERE comment_no = #{commentNo}
+	</delete>
+	
+	<update id="updateCommentIf" parameterType="Comment">
+		UPDATE tcomment
+			<set>
+				<if test="commentContent != null">comment_content = #{commentContent},</if>
+				<if test="regDate != null">reg_date = #{regDate}</if>
+			</set>
+		WHERE comment_no = #{commentNo}
+	</update>
+	<update id="updateCommentTrim" parameterType="Comment">
+		UPDATE tcomment
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="commentContent != null">comment_content = #{commentContent},</if>
+				<if test="regDate != null">reg_date = #{regDate},</if>
+			</trim>
+		WHERE comment_no = #{commentNo}
+	</update>
+	
+	<select id="selectCommentByConditionIf" parameterType="hashmap" resultType="Comment">
+		SELECT comment_no AS commentNo, user_id AS userId, comment_content AS commentContent, reg_date AS regDate FROM tcomment
+		<where>
+			<if test="commentNo != null">
+				comment_no = #{commentNo}
+			</if>
+			<if test="userId != null">
+				AND user_id = #{userId}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="insertCommentKey" parameterType="Comment">
+		<selectKey keyProperty="commentNo" resultType="long" order="BEFORE" >
+			SELECT max(comment_no)+1 FROM tcomment
+		</selectKey>
+		INSERT INTO tcomment(comment_no, user_id, comment_content, reg_date)
+			VALUES (#{commentNo}, #{userId}, #{commentContent}, #{regDate})
+	</insert>
+	
+	<select id="selectCommentByConditionChoose" parameterType="hashmap" resultType="Comment">
+		SELECT comment_no AS commentNo, user_id AS userId, comment_content AS commentContent, reg_date AS regDate FROM tcomment
+		<choose>
+			<when test="commentNo != null">
+				WHERE comment_no = #{commentNo}
+			</when>
+			<when test="user != null and user.userId != null">
+				WHERE user_id = #{user.userId}
+			</when>
+			<otherwise>
+				WHERE comment_no = 1 AND user_id = 'user1'
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="selectCommentByConditionForeach" parameterType="hashmap" resultType="Comment">
+		SELECT comment_no AS commentNo, user_id AS userId, comment_content AS commentContent, reg_date AS regDate FROM tcomment
+		<trim prefix="WHERE" prefixOverrides="AND/ OR">		<!-- where -->
+			<if test="commentNos != null">
+				comment_no IN
+				<foreach collection="commentNos" item="commentNo" index="index" open="(" close=")" separator=", ">
+					#{commentNo}
+				</foreach>
+			</if>
+		</trim>
+	</select>
+	
+	<select id="selectOgnlStaticMethod" resultType="Comment">
+		SELECT comment_no AS commentNo, user_id AS userId, comment_content AS commentContent, reg_date AS regDate FROM tcomment
+		<if test="_commentNo = @mybatis.StaticSample@getCommentNo1()">
+			WHERE comment_no = #{_commentNo}
+		</if>
+	</select>
+	
+	<select id="selectOgnlStaticField" resultType="Comment">
+		SELECT comment_no AS commentNo, user_id AS userId, comment_content AS commentContent, reg_date AS regDate FROM tcomment
+		<if test="@mybatis.StaticSample@commentNos != null">
+			WHERE comment_no IN
+			<foreach collection="@mybatis.StaticSample@commentNos" item="commentNo"
+			index="index" open="(" close=")" separator=", ">
+				#{commentNo}
+			</foreach>
+		</if>
+	</select>
+	
+	<select id="selectOgnlMethod2" parameterType="hashmap" resultType="User">
+		SELECT user_id AS userId, user_name AS userName FROM tuser
+		<if test="@mybatis.StringUtils@isNotEmpty(userId)">
+			WHERE user_id = #{userId}
+		</if>
 	</select>
 </mapper>

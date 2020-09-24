@@ -6,7 +6,7 @@
 <div class="w3-container">
 	<b>±Û¾²±â</b><br>
 	<form method="post" name="writeform" enctype="multipart/form-data"
-		action="<%=request.getContextPath()%>/writeUploadPro">
+		action="<%=request.getContextPath()%>/board/writeUploadPro">
 		<input type="hidden" name="num" value="${num}"> 
 		<input type="hidden" name="ref" value="${ref}"> 
 		<input type="hidden" name="re_step" value="${re_step}"> 

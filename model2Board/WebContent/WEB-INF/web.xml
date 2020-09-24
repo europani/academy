@@ -10,10 +10,10 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  <!-- <servlet>
+   <servlet>
   	<servlet-name>board</servlet-name>
   	<servlet-class>controller.BoardAction</servlet-class>
-  	<servlet-class>controller.BoardController</servlet-class>
+  	<!-- <servlet-class>controller.BoardController</servlet-class> -->
   	<init-param>
   		<param-name>configFile</param-name>
   		<param-value>/WEB-INF/commandBoard.properties</param-value>
@@ -23,7 +23,7 @@
   <servlet-mapping>
   	<servlet-name>board</servlet-name>
   	<url-pattern>/board/*</url-pattern>
-  	<url-pattern>*.do</url-pattern>
+  	<!-- <url-pattern>*.do</url-pattern> -->
   </servlet-mapping>
   
   <servlet>
@@ -42,9 +42,9 @@
 		<include-prelude>/common/head.jsp</include-prelude>
 		<include-coda>/common/footer.jsp</include-coda>
 	</jsp-property-group>  
-  </jsp-config> -->
+  </jsp-config>
   
-  <filter>
+  <!-- <filter>
   	<filter-name>NullParameter</filter-name>
   	<filter-class>filter.NullParameterFilter</filter-class>
   	<init-param>
@@ -64,7 +64,7 @@
   <filter-mapping>
   	<filter-name>LoginCheck</filter-name>
   	<url-pattern>/board/*</url-pattern>
-  </filter-mapping>
+  </filter-mapping> -->
   
   
 </web-app>

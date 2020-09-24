@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Board">
+	<select id="boardAllList" resultType="Board">
+		SELECT * FROM board
+	</select>
+	
+	<select id="getArticleCount" parameterType="hashmap" resultType="int">
+		SELECT NVL(count(*), 0) FROM board
+		<if test="boardid != null">
+			WHERE boardid = #{boardid}
+		</if>
+		<if test="sentence != null">
+			AND ${category} like '%${sentence}%'
+		</if>
+	</select>
+	
+	<select id="getArticles" parameterType="hashmap" resultType="Board">
+		<if test="category == null or category == ''">
+		SELECT * FROM (SELECT rownum rnum, a.* FROM (SELECT * FROM board WHERE boardid = #{boardid} 
+		ORDER BY ref desc, re_step) a) WHERE rnum BETWEEN #{start} AND #{end}
+		</if>
+		<if test="category != null and category != ''">
+		SELECT * FROM (SELECT rownum rnum, a.* FROM (SELECT * FROM board WHERE boardid = #{boardid} AND ${category} like '%${sentence}%'
+		ORDER BY ref desc, re_step) a) WHERE rnum BETWEEN #{start} AND #{end}
+		</if>
+	</select>
+	
+	<select id="getArticle" parameterType="hashmap" resultType="Board">
+		SELECT * FROM board WHERE num = #{num} AND boardid = #{boardid}
+	</select>
+	
+	<update id="addReadCount" parameterType="hashmap">
+		UPDATE board SET readcount = readcount + 1 WHERE num = #{num} AND boardid = #{boardid}
+	</update>
+	
+	<select id="insertArticle_new" resultType="int">
+		SELECT boardser.nextval from dual
+	</select>
+		
+	<update id="insertArticle_update" parameterType="hashmap">
+		UPDATE board SET re_step=re_step + 1 WHERE ref = #{ref} AND re_step > #{re_step} AND boardid = #{boardid}
+	</update>
+	
+	<insert id="insertArticle_insert" parameterType="Board">
+		INSERT INTO board(num, writer, email, subject, passwd, reg_date, ref, re_step, re_level, content, ip, boardid, filename, filesize)
+		VALUES(#{num},#{writer},#{email},#{subject},#{passwd},sysdate,#{ref},#{re_step},#{re_level},#{content},#{ip},#{boardid},#{filename},#{filesize})
+	</insert>
+	
+	<select id="update_passwd" parameterType="Board" resultType="string">
+		SELECT passwd FROM board WHERE num = #{num}
+	</select>
+	<update id="update_update" parameterType="Board">
+		UPDATE board SET writer=#{writer}, email=#{email}, subject=#{subject}, passwd=#{passwd}, content=#{content}, filename=#{filename}, filesize=#{filesize} WHERE num=#{num}
+	</update>
+	
+	<select id="delete_passwd" parameterType="hashmap" resultType="string">
+		SELECT passwd FROM board WHERE num = #{num} AND boardid = #{boardid}
+	</select>
+	<delete id="delete_delete" parameterType="string">
+		DELETE FROM board WHERE num = #{num}
+	</delete>
+	
+</mapper>

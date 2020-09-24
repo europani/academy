@@ -4,6 +4,11 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="mybatis.Comment" alias="Comment"/>
+		<typeAlias type="mybatis.User" alias="User"/>
+		<typeAlias type="mybatis.CommentUser" alias="CommentUser"/>
+		<typeAlias type="mybatis.Reply" alias="Reply"/>
+		
+		<typeAlias type="db.BoardDTO" alias="Board"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -18,5 +23,9 @@
 	</environments>
 	<mappers>
 		<mapper resource="mybatis/CommentMapper.xml"/>
+		<mapper resource="mybatis/CommentResultMapMapper.xml"/>
+		<mapper class="mybatis.anno.CommentMapper"/>
+		
+		<mapper resource="db/BoardMapper.xml"/>
 	</mappers>
 </configuration>
