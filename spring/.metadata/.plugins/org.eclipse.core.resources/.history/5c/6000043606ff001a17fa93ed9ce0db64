@@ -1,0 +1,14 @@
+package ch02;
+
+public class MessageBeanImpl implements MessageBean {
+	private String name;
+	private String greeting;
+	
+	public MessageBeanImpl(String name, String greeting) {
+		this.name = name;
+		this.greeting = greeting;
+	}
+	
+	
+
+}
