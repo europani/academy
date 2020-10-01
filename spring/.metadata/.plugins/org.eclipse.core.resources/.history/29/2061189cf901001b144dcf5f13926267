@@ -1,0 +1,7 @@
+package ch02.erp;
+
+public abstract class ErpClientFactory {
+	public static ErpClientFactory instance() {
+		
+	}
+}

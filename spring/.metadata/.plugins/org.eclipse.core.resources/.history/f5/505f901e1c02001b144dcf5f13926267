@@ -1,0 +1,17 @@
+package ch02.search;
+
+public class HttpSearchClient implements SearchClient {
+
+	@Override
+	public void addDocument(SearchDocument searchDocument) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void checkLive() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

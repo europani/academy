@@ -1,0 +1,11 @@
+package ch02.search;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+public class Main {	
+	
+	public static void main(String[] args) {
+		ApplicationContext ctx = new GenericXmlApplicationContext("classpath:ch02/search/config.xml");
+	}
+}

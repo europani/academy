@@ -1,0 +1,8 @@
+package ch02.search;
+
+public interface SearchClient {
+
+	void addDocument(SearchDocument document);
+	
+	void checkLive();
+}

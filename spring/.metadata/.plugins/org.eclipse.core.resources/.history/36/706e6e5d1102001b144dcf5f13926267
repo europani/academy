@@ -1,0 +1,11 @@
+package ch02.erp;
+
+public class DefaultErpClientFactory extends ErpClientFactory {
+
+	@Override
+	public ErpClient create() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

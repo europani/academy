@@ -21,6 +21,14 @@ public class User {
 	public boolean matchPassword(String inputPasswd) {
 		return password.equals(inputPasswd);
 	}
+
+	public void changePassword(String beforePw, String afterPw) {
+		if (!matchPassword(beforePw)) {
+			throw new IllegalArgumentException("illegal password");
+		}
+		password = afterPw;
+		System.out.println("passwd ¼öÁ¤ : " + this);
+	}
 	
 	
 }

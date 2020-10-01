@@ -1,0 +1,17 @@
+package ch02.search;
+
+public class HttpSearchClientFactory implements SearchClientFactory {
+
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public SearchClient create() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

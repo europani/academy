@@ -1,0 +1,20 @@
+package ch02.service;
+
+public class PasswordChangeService {
+
+	private UserRepository userRepository;
+
+	public PasswordChangeService(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
+	public void changePassword(String id, String beforePw, String afterPw) {
+		User user = userRepository.findUserById(id);
+		if (user == null) {
+			throw new UserNotFoundException();
+		}
+		user.changePassword(beforePw, afterPw);
+
+	}
+
+}

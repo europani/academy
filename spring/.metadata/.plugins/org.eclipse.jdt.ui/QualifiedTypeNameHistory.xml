@@ -11,7 +11,21 @@
 <fullyQualifiedTypeName name="org.springframework.core.io.FileSystemResource"/>
 <fullyQualifiedTypeName name="ch02.MessageBean"/>
 <fullyQualifiedTypeName name="org.springframework.beans.factory.BeanFactory"/>
+<fullyQualifiedTypeName name="org.springframework.context.support.ClassPathXmlApplicationContext"/>
+<fullyQualifiedTypeName name="ch02.service.UserRepository"/>
+<fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
+<fullyQualifiedTypeName name="ch02.service.UserNotFoundException"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="ch02.sensor.Monitor"/>
+<fullyQualifiedTypeName name="java.util.Properties"/>
+<fullyQualifiedTypeName name="ch02.erp.ErpClientFactory"/>
+<fullyQualifiedTypeName name="ch02.erp.ErpClient"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.FactoryBean"/>
+<fullyQualifiedTypeName name="javax.sql.rowset.serial.SerialArray"/>
+<fullyQualifiedTypeName name="ch02.search.SearchClientFactoryBean"/>
+<fullyQualifiedTypeName name="ch02.search.SearchClientFactoryBuilder"/>
 <fullyQualifiedTypeName name="org.springframework.context.ApplicationContext"/>
 <fullyQualifiedTypeName name="org.springframework.context.support.GenericXmlApplicationContext"/>
-<fullyQualifiedTypeName name="org.springframework.context.support.ClassPathXmlApplicationContext"/>
+<fullyQualifiedTypeName name="ch02.search.SearchClientFactory"/>
 </qualifiedTypeNameHistroy>

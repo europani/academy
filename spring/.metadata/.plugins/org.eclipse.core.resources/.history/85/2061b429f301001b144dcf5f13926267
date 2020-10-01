@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="sensor" class="ch02.sensor.Sensor">
+		<property name="additionalInfo"></property>
+		<property name="agentCodes">
+			<set>
+				<value></value>
+			</set>
+		</property>
+	</bean>
+
+	<bean id="monitor" class="ch02.sensor.Monitor">
+		<property name="sensor" />
+		<property name="config" />
+	</bean>
+</beans>

@@ -6,11 +6,11 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 public class MainByXml {
 	public static void main(String[] args) {
 		ApplicationContext ctx = new GenericXmlApplicationContext("classpath:ch02/service/config.xml");
-		
+
 		UserRepository ur = (UserRepository) ctx.getBean("userRepository");
 		User u = ur.findUserById("madvirus");
 		System.out.println(u);
-		
+
 		AuthenticationService authSvc = ctx.getBean(AuthenticationService.class);
 		runAuthAndCatchAuthEx(authSvc, "bkchoi", "1");
 		runAuthAndCatchAuthEx(authSvc, "bkchoi", "2");
@@ -19,13 +19,19 @@ public class MainByXml {
 
 		try {
 			authSvc.authenticate("bkchoi2", "12341");
-		} catch (AuthException e) {}
+		} catch (UserNotFoundException e) {}
 		
+		PasswordChangeService pwChgSvc = ctx.getBean(PasswordChangeService.class);
+		pwChgSvc.changePassword("bkchoi", "1234", "5678");
+		runAuthAndCatchAuthEx(authSvc, "bkchoi", "1234");
+		authSvc.authenticate("bkchoi", "5678");
+
 	}
 
 	private static void runAuthAndCatchAuthEx(AuthenticationService authSvc, String userId, String password) {
 		try {
 			authSvc.authenticate(userId, password);
-		} catch (AuthException e) {}
+		} catch (AuthException e) {
+		}
 	}
 }
