@@ -27,7 +27,7 @@ public class User {
 			throw new IllegalArgumentException("illegal password");
 		}
 		password = afterPw;
-		System.out.println("passwd ¼öÁ¤ : " + this);
+		System.out.println("passwd ë³€ê²½ : " + this);
 	}
 	
 	

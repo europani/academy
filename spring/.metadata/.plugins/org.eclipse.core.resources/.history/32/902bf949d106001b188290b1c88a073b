@@ -1,0 +1,45 @@
+package ch03.shop;
+
+import javax.inject.Qualifier;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import ch02.erp.ErpClient;
+import ch02.erp.ErpClientFactory;
+import ch02.erp.ErpOrderData;
+import ch02.search.SearchClientFactory;
+
+public class OrderService {
+
+	private ErpClientFactory erpClientFactory;
+	private SearchClientFactory searchClientFactory;
+
+	@Autowired
+	public void setErpClientFactory(ErpClientFactory erpClientFactory) {
+		this.erpClientFactory = erpClientFactory;
+	}
+
+	@Autowired
+	public void setSearchClientFactory(@Qualifier("order") SearchClientFactory searchClientFactory) {
+		this.searchClientFactory = searchClientFactory;
+	}
+
+	public void order(OrderInfo oi) {
+		sendOrderInfoToErp(oi);
+		addOrderInfoToSearch(oi);
+}
+
+	private void addOrderInfoToSearch(OrderInfo oi) {
+		ErpClient erpClient = erpClientFactory.create();
+		erpClient.connent();
+		erpClient.sendPhrchaseInfo(toErpOrderData(oi));
+	}
+
+	private ErpOrderData toErpOrderData(OrderInfo oi) {
+		return new ErpOrderData();
+	}
+
+	private void sendOrderInfoToErp(OrderInfo oi) {
+		// TODO Auto-generated method stub
+		
+	}

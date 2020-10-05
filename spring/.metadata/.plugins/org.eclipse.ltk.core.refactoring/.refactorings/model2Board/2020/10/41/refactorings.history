@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;mybatis-config.xml&apos; to &apos;appServlet&apos;&#x0D;&#x0A;- Original project: &apos;model2Board&apos;&#x0D;&#x0A;- Destination element: &apos;appServlet&apos;&#x0D;&#x0A;- Original element: &apos;mybatis-config.xml&apos;" description="Copy file" element1="src/mybatis/mybatis-config.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1601783227779" target="/easycook/src/main/webapp/WEB-INF/spring/appServlet" units="0" version="1.0"/>
+</session>

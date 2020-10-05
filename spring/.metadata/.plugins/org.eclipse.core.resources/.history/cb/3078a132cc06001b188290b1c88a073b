@@ -1,0 +1,5 @@
+package ch03.xml.search;
+
+public class SearchServiceHealthChecker {
+
+}

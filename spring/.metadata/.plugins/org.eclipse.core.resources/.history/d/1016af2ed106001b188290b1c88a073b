@@ -1,0 +1,23 @@
+package ch03.shop;
+
+import javax.inject.Qualifier;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import ch02.erp.ErpClientFactory;
+import ch02.search.SearchClientFactory;
+
+public class OrderService {
+
+	private ErpClientFactory erpClientFactory;
+	private SearchClientFactory searchClientFactory;
+	
+	@Autowired
+	public void setErpClientFactory(ErpClientFactory erpClientFactory) {
+		this.erpClientFactory = erpClientFactory;
+	}
+	@Autowired
+	public void setSearchClientFactory(@Qualifier("order") SearchClientFactory searchClientFactory) {
+		this.searchClientFactory = searchClientFactory;
+	}
+}

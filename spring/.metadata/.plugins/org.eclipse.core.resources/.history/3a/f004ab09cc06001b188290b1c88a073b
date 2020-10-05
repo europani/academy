@@ -1,0 +1,7 @@
+package ch03.shop;
+
+import org.springframework.beans.factory.FactoryBean;
+
+public class SearchClientFactoryBean implements FactoryBean<T> {
+
+}
