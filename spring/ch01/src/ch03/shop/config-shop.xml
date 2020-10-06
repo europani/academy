@@ -10,7 +10,7 @@
 	<bean id="productService" class="ch03.shop.ProductService" />
 	<bean id="orderService" class="ch03.shop.OrderService" />
 	
-	<bean id="orderServiceClientFactory" class="ch02.search.SearchClientFactoryBean">
+	<bean id="orderSearchClientFactory" class="ch02.search.SearchClientFactoryBean">
 		<qualifier value="order" />
 		<property name="server" value="10.20.30.40" />
 		<property name="port" value="8888" />
@@ -26,7 +26,7 @@
 	<bean id="searchServiceHealthChecker" class="ch03.shop.SearchServiceHealthChecker">
 		<property name="factories">
 			<list>
-				<ref bean="orderServiceClientFactory"/>
+				<ref bean="orderSearchClientFactory"/>
 				<ref bean="productSearchClientFactory"/>
 			</list>
 		</property>
