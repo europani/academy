@@ -72,6 +72,7 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Users\mysky\Downloads\Spring_ShoppingMall-master"/>
 			<item value="C:\Program Files\Java\sts\easycook"/>
 			<item value="C:\Users\mysky\Downloads\easycook"/>
 			<item value="C:\Program Files\Java\Project\springtest2"/>

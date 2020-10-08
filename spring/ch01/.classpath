@@ -15,5 +15,6 @@
 	<classpathentry kind="lib" path="src/lib/javax.inject-1.jar"/>
 	<classpathentry kind="lib" path="src/lib/spring-aop-4.0.4.RELEASE.jar"/>
 	<classpathentry kind="lib" path="src/lib/aspectjweaver-1.7.4.jar"/>
+	<classpathentry kind="lib" path="src/lib/aopalliance-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
