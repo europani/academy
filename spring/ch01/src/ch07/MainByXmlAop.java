@@ -1,7 +1,9 @@
 package ch07;
 
-import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 
+import ch07.anno.QuickStartConfig;
 import ch07.board.NewArticleRequest;
 import ch07.board.ReadArticleService;
 import ch07.board.WriteArticleService;
@@ -12,7 +14,9 @@ import ch07.member.UpdateInfo;
 public class MainByXmlAop {
 
 	public static void main(String[] args) {
-		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath:ch07/acQuickStart2.xml");
+//		AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:ch07/acQuickStart.xml");
+//		AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:ch07/acQuickStart2.xml");
+		AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(QuickStartConfig.class);
 		WriteArticleService writeArticleService = ctx.getBean("writeArticleService", WriteArticleService.class);
 		writeArticleService.write(new NewArticleRequest("writer", "title", "content"));
 		
