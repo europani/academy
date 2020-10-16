@@ -25,7 +25,7 @@ public class HelloController {
 		writer.write("안녕하세요");
 		writer.flush();
 	}
-	@RequestMapping("/hello.do2")
+	@RequestMapping("/hello.nhn")
 	public String hello2(Model model) {
 		model.addAttribute("greeting", "반갑습니다");
 		return "hello";

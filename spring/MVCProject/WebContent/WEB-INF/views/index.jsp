@@ -14,11 +14,5 @@
 		<li><a href="hello.nhn">/hello.nhn</a> : 스프링MVC 일단 해보기 HelloController2</li>
 	</ul>
 </li>
-<li>
-	<ul>
-		<li><a href="event/list">/event/list</a>: Model 예시, EventController.list()</li>
-		<li><a href="event/list2">/event/list2</a>: ModelAndView 예시, EventController.list2()</li>
-	</ul>
-</li>
 </body>
 </html>

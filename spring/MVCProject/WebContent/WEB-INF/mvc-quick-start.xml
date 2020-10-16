@@ -13,4 +13,5 @@
 	</bean>
 	
 	<bean class="quickstart.HelloController" />
+	<mvc:annotation-driven />
 </beans>
