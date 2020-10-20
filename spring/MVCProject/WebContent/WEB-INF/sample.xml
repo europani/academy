@@ -16,5 +16,25 @@
 	<bean class="event.EventController" />
 	<!-- <bean class="event.EventCreationController" /> -->
 	
+	<bean id="memberService" class="member.MemberService" />
+	<bean class="member.RegistrationController">
+		<property name="memberService" ref="memberService" />
+	</bean>
+	
+	<bean class="member.MemberController">
+		<property name="memberService" ref="memberService" />
+	</bean>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message.error</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	
+	
+	
 	<mvc:annotation-driven />
 </beans>
