@@ -32,5 +32,28 @@ public class MemberService {
 		return memberMap.get(memberId);
 	}
 	
+	public void modifyMemberInfo(MemberModRequest modReq) {
+		MemberInfo mi = memberMap.get(modReq.getId());
+		if (mi == null) {
+			throw new MemberNotFoundException();
+		}
+		if (!mi.matchPassWord(modReq.getCurrentPassword())) {
+			throw new NotMatchPasswordException();
+		}
+		
+		mi.setEmail(modReq.getEmail());
+		mi.setName(modReq.getName());
+		mi.setAllowNoti(modReq.isAllowNoti());
+		mi.setAddress(modReq.getAddress());
+	}
+
+	public MemberInfo getMemberInfoByEmail(String email) {
+		for (MemberInfo mi : memberMap.values()) {
+			if (mi.getEmail().equals(email)) {
+				return mi;
+			}
+		}
+		return null;
+	}
 
 }
